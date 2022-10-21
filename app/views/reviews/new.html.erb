@@ -1,0 +1,20 @@
+<div>
+  <h2>口コミ投稿</h2>
+</div>
+<div>
+  <%= form_with model:@reviews do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%=f.label :store_name, "店名", class:"reviews_post" %>
+    <%= f.text_field :store_name, placeholder: "店名を入力", class:"reviews_post" %>
+    <%= f.label :store_address, "住所", class:"reviews_post" %>
+    <%= f.text_field :store_address, placeholder: "住所を入力", class:"reviews_post" %>
+    <%= f.label :instrument_name, "楽器名", class:"reviews_post" %>
+    <%= f.select :instrument_name, [["Piccolo", "Piccolo"], ["Flute", "Flute"], ["Oboe", "Oboe"], ["Clarinet", "Clarinet"],["Fagot", "Fagot"], ["Saxophone", "Saxophone"], ["Trumpet", "Trumpet"], ["Horn", "Horn"], ["Trombone", "Trombone"], ["Euphonium", "Euphonium"], ["Tuba", "Tuba"], ["その他(口コミに詳細を記載してください)", "Other"]], include_blank: "選択して下さい", class:"reviews_post" %>
+    <%= f.label :store_price, "料金", class:"reviews_post" %>
+    <%= f.number_field :store_price, min:0, placeholder: "かかった料金を入力", class:"reviews_post" %>
+    <%= f.label :store_reviews, "口コミ", class:"reviews_post" %>
+    <%= f.text_area :store_reviews, size: "60x5", placeholder: "口コミを入力", class:"reviews_post" %>
+    <%= f.submit "登録", class:"col-md-2 btn-primary mx-3"%>
+  <% end %>
+</div>
+

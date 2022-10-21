@@ -1,0 +1,18 @@
+<div class="top">
+</div>
+<div>
+  <% if user_signed_in? %>
+    <%= link_to "口コミを投稿する", reviews_new_path %>
+  <% else %>
+    口コミ投稿したい時
+    <%= link_to "アカウントお持ちの方はログインしてください", new_user_session_path, class: "header-nav" %>
+    <%= link_to "アカウントお持ちでない場合新規登録してください", new_user_registration_path, class: "header-nav" %>    
+  <% end %>
+  
+</div>
+<div>
+  <h3>評価の高い口コミTop5</h3>
+</div>
+<div>
+  <h3>最新口コミTop5</h3>
+</div>
