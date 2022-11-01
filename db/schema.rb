@@ -10,21 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_21_025800) do
+ActiveRecord::Schema.define(version: 2022_11_01_061430) do
 
   create_table "homes", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "maps", force: :cascade do |t|
+    t.text "name"
+    t.text "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "reviews", force: :cascade do |t|
-    t.string "store_name"
-    t.string "store_address"
     t.string "store_reviews"
     t.integer "store_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "instrument_name"
+    t.float "score"
+    t.string "name"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
