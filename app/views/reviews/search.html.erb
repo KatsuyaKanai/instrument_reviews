@@ -1,0 +1,25 @@
+<h3>検索結果 ○件見つかりました。</h3>
+<div class="search-result"> 
+  <table>
+    <thead>
+        <tr>
+          <th>店名</th>
+          <th>住所</th>
+          <th>楽器名</th>
+          <th>料金</th>
+          <th>評価</th>
+          <th>口コミ</th>
+        </tr>
+    </thead>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td><%= link_to "#{review.name}", controller: 'reviews', action: 'show', id: review.id %></td>
+        <td><%= review.address %></td>
+        <td><%= review.instrument_name %></td>
+        <td>¥<%= review.store_price %></td>
+        <td><%= review.score %></td>
+        <td><%= review.store_reviews %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

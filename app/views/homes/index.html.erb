@@ -1,15 +1,26 @@
 <div class="top">
-</div>
-<div>
-  <% if user_signed_in? %>
-    <%= link_to "口コミを投稿する", reviews_new_path %>
-  <% else %>
-    口コミ投稿したい時
-    <%= link_to "アカウントお持ちの方はログインしてください", new_user_session_path, class: "header-nav" %>
-    <%= link_to "アカウントお持ちでない場合新規登録してください", new_user_registration_path, class: "header-nav" %>    
-  <% end %>
-  
-</div>
-<div>
-  <h3>最新口コミTop5</h3>
+  <div>
+    <%= form_with url: search_path, method: :get, local: true do |form| %>
+      <%= form.text_field :search_reviews_address, value: @search_review, :placeholder => "エリア名を入力して下さい" %>
+    <!--
+    
+      <%= form.text_field :search_reviews_params, value: @reviews_name, :placeholder => "店名を入力してください" %>
+      <%= form.text_field :search_reviews_params, value: @reviews_instrument_name, :placeholder => "楽器名を選択してください" %>
+      -->
+      <%= form.submit "探す" %>
+    <% end %>
+  </div>
+  <div>
+    <% if user_signed_in? %>
+      <%= link_to "口コミを投稿する", reviews_new_path %>
+    <% else %>
+      口コミ投稿したい時
+      <%= link_to "アカウントお持ちの方はログインしてください", new_user_session_path, class: "header-nav" %>
+      <%= link_to "アカウントお持ちでない場合新規登録してください", new_user_registration_path, class: "header-nav" %>    
+    <% end %>
+    
+  </div>
+  <div>
+    <h3>最新口コミTop5</h3>
+  </div>
 </div>

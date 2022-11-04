@@ -1,5 +1,5 @@
 <div class="post-review">
-  <p>口コミが投稿されました。</p>
+  <%= flash[:notice] %>
 </div>
 <div class="update-content">
   <%= form_with model: @review do |f| %>

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # get 'reviews/edit'
   # get 'reviews/update'
   # get 'reviews/destroy'
+  get 'search', to: 'reviews#search'
   devise_for :users
     
 
