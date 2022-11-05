@@ -18,5 +18,15 @@
 
 body {
   min-height: 100vh;
+  
   font-family: sans-serif;
+}
+
+.notification:not(:last-child){
+  margin-bottom: 0;
+}
+
+a {
+  color: rgb(91, 13, 236);
+  text-decoration: none;
 }

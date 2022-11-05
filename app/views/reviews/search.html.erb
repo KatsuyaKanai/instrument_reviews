@@ -3,6 +3,7 @@
   <table>
     <thead>
         <tr>
+          <th>投稿者</th>
           <th>店名</th>
           <th>住所</th>
           <th>楽器名</th>
@@ -13,6 +14,7 @@
     </thead>
     <% @reviews.each do |review| %>
       <tr>
+        <td><%= review.user.name %></td>
         <td><%= link_to "#{review.name}", controller: 'reviews', action: 'show', id: review.id %></td>
         <td><%= review.address %></td>
         <td><%= review.instrument_name %></td>

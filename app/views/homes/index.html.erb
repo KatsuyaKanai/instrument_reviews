@@ -1,12 +1,8 @@
 <div class="top">
   <div>
     <%= form_with url: search_path, method: :get, local: true do |form| %>
-      <%= form.text_field :search_reviews_address, value: @search_review, :placeholder => "エリア名を入力して下さい" %>
-    <!--
-    
-      <%= form.text_field :search_reviews_params, value: @reviews_name, :placeholder => "店名を入力してください" %>
-      <%= form.text_field :search_reviews_params, value: @reviews_instrument_name, :placeholder => "楽器名を選択してください" %>
-      -->
+      <%= form.text_field :search_reviews_keyword, value: @search_review, :placeholder => "店名もしくは住所を入力して下さい" %>
+      <%= form.select :search_reviews_instrument_name, ['Flute, Piccolo', 'Oboe', 'Clarinet', 'Fagot', 'Saxophone', 'Trumpet', 'Horn', 'Trombone', 'Eupfonium', "Tuba", 'その他'], {include_blank: '楽器名を選択してください'}, class: 'sample' %>
       <%= form.submit "探す" %>
     <% end %>
   </div>
@@ -22,5 +18,33 @@
   </div>
   <div>
     <h3>最新口コミTop5</h3>
+      <div>
+        <div class="search-result"> 
+          <table>
+            <thead>
+                <tr>
+                 <th>投稿者</th>
+                  <th>店名</th>
+                  <th>住所</th>
+                  <th>楽器名</th>
+                  <th>料金</th>
+                  <th>評価</th>
+                  <th>口コミ</th>
+                </tr>
+            </thead>
+            <% @recent_reviews.each do |review| %>
+              <tr>
+                <td><%= review.user.name %></td>
+                <td><%= link_to "#{review.name}", controller: 'reviews', action: 'show', id: review.id %></td>
+                <td><%= review.address %></td>
+                <td><%= review.instrument_name %></td>
+                <td>¥<%= review.store_price %></td>
+                <td><%= review.score %></td>
+                <td><%= review.store_reviews %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
   </div>
 </div>

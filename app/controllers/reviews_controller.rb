@@ -13,6 +13,7 @@ class ReviewsController < ApplicationController
       flash[:notice] = "登録が完了しました。"
       redirect_to review_path(@review)
     else
+      flash[:notice] = "登録に失敗しました。"
       render action: :new
     end
   end
@@ -42,6 +43,6 @@ class ReviewsController < ApplicationController
     end
 
     def search_reviews_params
-      params.permit(:search_rerview_address, :search_review_name, :search_review_instrument_name)
+      params.permit(:search_reviews_keyword, :search_reviews_instrument_name)
     end
 end

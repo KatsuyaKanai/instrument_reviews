@@ -9,7 +9,7 @@
     <%= f.label :address, "住所", class:"reviews_post" %>
     <%= f.text_field :address, placeholder: "住所を入力", class:"reviews_post" %>
     <%= f.label :instrument_name, "楽器名", class:"reviews_post" %>
-    <%= f.select :instrument_name, [["Piccolo", "Piccolo"], ["Flute", "Flute"], ["Oboe", "Oboe"], ["Clarinet", "Clarinet"],["Fagot", "Fagot"], ["Saxophone", "Saxophone"], ["Trumpet", "Trumpet"], ["Horn", "Horn"], ["Trombone", "Trombone"], ["Euphonium", "Euphonium"], ["Tuba", "Tuba"], ["その他(口コミに詳細を記載してください)", "Other"]], include_blank: "選択して下さい", class:"reviews_post" %>
+    <%= f.select :instrument_name, [["Flute, Piccolo", "Flute, Piccolo"], ["Oboe", "Oboe"], ["Clarinet", "Clarinet"],["Fagot", "Fagot"], ["Saxophone", "Saxophone"], ["Trumpet", "Trumpet"], ["Horn", "Horn"], ["Trombone", "Trombone"], ["Euphonium", "Euphonium"], ["Tuba", "Tuba"], ["その他(口コミに詳細を記載してください)", "Other"]], include_blank: "選択して下さい", class:"reviews_post" %>
     <%= f.label :store_price, "料金", class:"reviews_post" %>
     <%= f.number_field :store_price, min:0, placeholder: "かかった料金を入力", class:"reviews_post" %>
     <%= f.label :store_reviews, "口コミ", class:"reviews_post" %>
