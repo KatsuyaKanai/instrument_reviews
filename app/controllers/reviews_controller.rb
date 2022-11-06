@@ -1,6 +1,8 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!, only: [:create]
   def index
-    @reviews = Review.all
+    @store = Store.find(params[:store_id])
+    @reviews = @store.reviews
   end
 
   def new
@@ -11,10 +13,9 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.user_id = current_user.id
     if @review.save
-      flash[:notice] = "登録が完了しました。"
       redirect_to store_reviews_path(@review.store)
     else
-      flash[:notice] = "登録に失敗しました。"
+      @store = Store.find(params[:id])
       render "stores/show"
     end
   end
@@ -40,7 +41,7 @@ class ReviewsController < ApplicationController
   
   private
     def review_params
-      params.require(:review).permit(:store_reviews, :score)
+      params.require(:review).permit(:store_id, :store_reviews, :score)
     end
 
     def search_reviews_params

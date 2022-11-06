@@ -11,11 +11,11 @@
           <div class="card-content">
             <div class="content average-score">
               <div class="star-rating mb-2">
-                <div class="star-rating-front" style="width: %">★★★★★</div>
+                <div class="star-rating-front" style="width:<%= @store.reviews_score_percentage %>%">★★★★★</div>
                 <div class="star-rating-back">★★★★★</div>
               </div>
               <div class="average-score-display ml-3 pt-2">
-                点（<%= @store.reviews.count %>件のレビュー）
+                <%= @store.avg_score %>点（<%= @store.reviews.count %>件のレビュー）
               </div>
             </div>
           </div>

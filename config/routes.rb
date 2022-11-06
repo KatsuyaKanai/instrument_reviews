@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
-  resources :stores do
-    resources :reviews
+  resources :stores, only: [:index, :show] do
+    resources :reviews, only: [:index, :create]
   end
   resources :maps
   get 'maps/index'

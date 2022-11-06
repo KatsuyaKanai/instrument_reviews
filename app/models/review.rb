@@ -2,8 +2,7 @@ class Review < ApplicationRecord
   belongs_to :user
   belongs_to :store
   has_many :homes
-  geocoded_by :address
-  after_validation :geocode, if: :address_changed?
+  
 
   validates :score, presence: true
 

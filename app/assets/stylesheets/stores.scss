@@ -2,16 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.rating-box .ratings .fa {
-  font-size: 30px;
+.star-rating {
+  position: relative;
+  width: 5em;
+  height: 1em;
+  font-size: 25px;
+}
+.star-rating-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
   color: #fc0;
-  cursor: pointer;
+}
+.star-rating-back {
+  color: #ccc;
 }
 
-.main-rating {
+.average-score {
   display: flex;
 }
-
-.rating-value-display {
-  font-size: 20px;
+.average-score-display {
+  font-size: 16px;
 }

@@ -1,50 +1,17 @@
-<div class="top">
-  <div>
-    <%= form_with url: search_path, method: :get, local: true do |form| %>
-      <%= form.text_field :search_reviews_keyword, value: @search_review, :placeholder => "店名もしくは住所を入力して下さい" %>
-      <%= form.select :search_reviews_instrument_name, ['Flute, Piccolo', 'Oboe', 'Clarinet', 'Fagot', 'Saxophone', 'Trumpet', 'Horn', 'Trombone', 'Eupfonium', "Tuba", 'その他'], {include_blank: '楽器名を選択してください'}, class: 'sample' %>
-      <%= form.submit "探す" %>
-    <% end %>
-  </div>
-  <div>
-    <% if user_signed_in? %>
-      <%= link_to "口コミを投稿する", reviews_new_path %>
-    <% else %>
-      口コミ投稿したい時
-      <%= link_to "アカウントお持ちの方はログインしてください", new_user_session_path, class: "header-nav" %>
-      <%= link_to "アカウントお持ちでない場合新規登録してください", new_user_registration_path, class: "header-nav" %>    
-    <% end %>
-    
-  </div>
-  <div>
-    <h3>最新口コミTop5</h3>
-      <div>
-        <div class="search-result"> 
-          <table>
-            <thead>
-                <tr>
-                 <th>投稿者</th>
-                  <th>店名</th>
-                  <th>住所</th>
-                  <th>楽器名</th>
-                  <th>料金</th>
-                  <th>評価</th>
-                  <th>口コミ</th>
-                </tr>
-            </thead>
-            <% @recent_reviews.each do |review| %>
-              <tr>
-                <td><%= review.user.name %></td>
-                <td><%= link_to "#{review.name}", controller: 'reviews', action: 'show', id: review.id %></td>
-                <td><%= review.address %></td>
-                <td><%= review.instrument_name %></td>
-                <td>¥<%= review.store_price %></td>
-                <td><%= review.score %></td>
-                <td><%= review.store_reviews %></td>
-              </tr>
-            <% end %>
-          </table>
-        </div>
+<section class="section mt-6">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-10">
+          <p class="is-size-1 has-text-weight-bold has-text-centered">レビューを自由に</p>
+          <br>
+          <div class="columns is-centered">
+            <div class="column is-3">
+              <%= link_to "ログイン", new_user_session_path, class: "button is-fullwidth" %>
+              <br>
+              <%= link_to "新規登録", new_user_registration_path, class: "button is-fullwidth" %>
+            </div>
+          </div>
       </div>
+    </div>
   </div>
-</div>
+</section>
