@@ -9,12 +9,13 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
+    @review.user_id = current_user.id
     if @review.save
       flash[:notice] = "登録が完了しました。"
-      redirect_to review_path(@review)
+      redirect_to store_reviews_path(@review.store)
     else
       flash[:notice] = "登録に失敗しました。"
-      render action: :new
+      render "stores/show"
     end
   end
 
@@ -39,7 +40,7 @@ class ReviewsController < ApplicationController
   
   private
     def review_params
-      params.permit(:user_id, :name, :address, :latitude, :longitude, :instrument_name, :store_price, :store_reviews, :score)
+      params.require(:review).permit(:store_reviews, :score)
     end
 
     def search_reviews_params

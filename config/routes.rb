@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  
+  resources :stores do
+    resources :reviews
+  end
   resources :maps
   get 'maps/index'
   get 'maps/new'
