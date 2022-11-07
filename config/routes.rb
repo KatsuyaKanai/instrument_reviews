@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
   
+  
   resources :stores do
     resources :reviews
   end
   post 'stores/new', to: 'stores#create'
-  resources :maps
-  get 'maps/index'
-  get 'maps/new'
-  get 'maps/show'
+ 
+  get 'reviews/search', to: 'reviews#search'
   resources :reviews
   post 'reviews/new', to: 'reviews#create'
   # get 'reviews/index'
@@ -17,7 +16,6 @@ Rails.application.routes.draw do
   # get 'reviews/edit'
   # get 'reviews/update'
   # get 'reviews/destroy'
-  get 'search', to: 'reviews#search'
   devise_for :users
     
 
@@ -30,6 +28,7 @@ Rails.application.routes.draw do
   get 'users/update'
   get 'users/destroy'
   get 'users/edit'
+  get 'search', to: 'stores#search'
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

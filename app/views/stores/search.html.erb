@@ -1,44 +1,20 @@
-<section class="section mt-6">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-5">
+<h3>検索結果</h3>
+<div class="search-result"> 
+    <table>
+        <thead>
+            <tr>
+            <th>ルーム名</th>
+            <th>住所</th>
+            <th>最寄駅</th>
+            </tr>
+        </thead>
+
         <% @stores.each do |store| %>
-          <div class="card mb-6">
-            <header class="card-header">
-              <p class="card-header-title">
-                <%= store.name %>
-              </p>
-              <p class="card-header-title">
-                <%= store.address %>
-              </p>
-              <p class="card-header-title">
-                <%= store.nearest_station %>
-              </p>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                <div class="content average-score">
-                  <div class="star-rating mb-2">
-                    <div class="star-rating-front" style="width: <%= store.reviews_score_percentage %>%">★★★★★</div>
-                    <div class="star-rating-back">★★★★★</div>
-                  </div>
-                  <div class="average-score-display ml-3 pt-2">
-                    <%= store.avg_score %>点（<%= store.reviews.count %>件のレビュー）
-                  </div>
-                </div>
-              </div>
-            </div>
-            <footer class="card-footer">
-              <%= link_to store_reviews_path(store), class: "button card-footer-item" do %>
-                レビューを見る
-              <% end %>
-              <%= link_to store_path(store), class: "button card-footer-item" do %>
-                レビューを書く
-              <% end %>
-            </footer>
-          </div>
+            <tr>
+            <td><%= link_to "#{store.name}", controller: 'stores', action: 'show', id: store.id  %></td>
+            <td><%= store.address %></td>
+            <td><%= store.nearest_station %></td>
+            </tr>
         <% end %>
-      </div>
-    </div>
-  </div>
-</section>
+    </table>
+</div>

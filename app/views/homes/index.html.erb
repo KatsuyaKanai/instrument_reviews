@@ -13,8 +13,11 @@
           </div>
           <div>
             <%= form_with url: search_path, method: :get, local: true do |form| %>
-              <%= form.label :search_word, "店名、都道府県、住所を入力してください", class:"reviews_post" %>
-              <%= form.text_field :search_word, value: @search_store, :placeholder => "店名もしくは住所を入力して下さい" %></br>
+              <%= form.label :search_word, "店名か都道府県を入力してください", class:"reviews_post" %>
+              <%= form.text_field :search_word, value: @search_store, :placeholder => "店名もしくは住所を入力して下さい" %>
+              <%= form.submit "探す" %>
+            <% end %>
+            <%= form_with url: reviews_search_path, method: :get, local: true do |form| %>
               <%= form.label :search_instrument_name, "楽器名をを入力してください", class:"reviews_post" %>
               <%= form.select :search_instrument_name, ['Flute, Piccolo', 'Oboe', 'Clarinet', 'Fagot', 'Saxophone', 'Trumpet', 'Horn', 'Trombone', 'Eupfonium', "Tuba", 'その他'], {include_blank: '楽器名を選択してください'}, class: 'sample' %>
               <%= form.submit "探す" %>

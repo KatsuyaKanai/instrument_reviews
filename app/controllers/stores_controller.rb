@@ -29,9 +29,20 @@ class StoresController < ApplicationController
   def destroy
   end
 
+  def search
+    @stores = Store.search(params[:search_word])
+    @search_store = params[:search_word]
+    render "stores/search"
+  end
+
+
   private
   def stores_params
-    params.permit(:store_id, :name, :address, :instrument_name, :nearest_station)
+    params.permit(:user_id, :store_id, :name, :address, :instrument_name, :nearest_station)
+  end
+
+  def search_word
+    params.permit(:name, :address)
   end
 
   
