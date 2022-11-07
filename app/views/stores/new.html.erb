@@ -1,2 +1,15 @@
-<h1>Stores#new</h1>
-<p>Find me in app/views/stores/new.html.erb</p>
+<div>
+  <h2>口コミを投稿したい店を入力してください</h2>
+</div>
+<div class="rating-box mb-3">
+  <%= form_with model:@stores, local: true do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.label :name, "店名", class:"reviews_post" %>
+    <%= f.text_field :name, placeholder: "店名を入力", class:"reviews_post" %>
+    <%= f.label :address, "都道府県", class:"reviews_post" %>
+    <%= f.collection_select(:address, Prefecture.all, :name, :name,{include_blank: "---"} ) %>
+    <%= f.label :nearest_station, "最寄駅", class:"reviews_post" %>
+    <%= f.text_field :nearest_station, placeholder: "最寄駅を入力", class:"reviews_post" %>
+    <%= f.submit "登録", class:"col-md-2 btn-primary mx-3"%>
+  <% end %>
+</div>

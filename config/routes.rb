@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   
-  resources :stores, only: [:index, :show] do
-    resources :reviews, only: [:index, :create]
+  resources :stores do
+    resources :reviews
   end
+  post 'stores/new', to: 'stores#create'
   resources :maps
   get 'maps/index'
   get 'maps/new'

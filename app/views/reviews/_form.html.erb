@@ -13,6 +13,10 @@
 
 <div class="rating-box mt-3">
   <%= form_with model: review, url: store_reviews_path(store),local: true do |f| %>
+    <%= f.label :instrument_name, "楽器名", class:"" %>
+    <%= f.select :instrument_name, [["Flute, Piccolo", "Flute, Piccolo"], ["Oboe", "Oboe"], ["Clarinet", "Clarinet"],["Fagot", "Fagot"], ["Saxophone", "Saxophone"], ["Trumpet", "Trumpet"], ["Horn", "Horn"], ["Trombone", "Trombone"], ["Euphonium", "Euphonium"], ["Tuba", "Tuba"], ["その他(口コミに詳細を記載してください)", "Other"]], include_blank: "選択して下さい", class:"" %></br>
+    <%= f.label :store_price, "料金", class:"" %>
+    <%= f.number_field :store_price, min:0, placeholder: "かかった料金を入力", class:"" %>
     <div class="main-rating">
       <div class="ratings mb-3">
       <span class="fa fa-star-o" id="star"></span>

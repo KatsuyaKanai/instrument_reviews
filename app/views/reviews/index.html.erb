@@ -7,6 +7,12 @@
             <p class="card-header-title">
               <%= @store.name %>
             </p>
+            <p class="card-header-title">
+              <%= @store.address %>
+            </p>
+            <p class="card-header-title">
+              <%= @store.nearest_station %>
+            </p>
           </header>
           <div class="card-content">
             <div class="content average-score">
@@ -23,13 +29,15 @@
         <table class="table is-fullwidth has-text-centered">
           <thead>
             <tr>
-              <th>ユーザー</th><th>点数</th><th>内容</th>
+              <th>ユーザー</th><th>楽器名</th><th>料金</th><th>点数</th><th>内容</th>
             </tr>
           </thead>
           <tbody>
             <% @reviews.each do |review| %>
               <tr>
                 <td><%= review.user.name %></td>
+                <td><%= review.instrument_name %></td>
+                <td><%= review.store_price %></td>
                 <td><%= review.score %></td>
                 <td><%= review.store_reviews %></td>
               </tr>

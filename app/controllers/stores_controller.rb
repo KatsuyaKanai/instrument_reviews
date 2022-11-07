@@ -5,9 +5,17 @@ class StoresController < ApplicationController
   end
 
   def new
+    @store = Store.new
   end
 
   def create
+    @store = Store.new(stores_params)
+    if @store.save
+      
+      redirect_to store_path(@store)
+    else
+      redirect_to new_store_parh
+    end
   end
 
   def show
@@ -20,4 +28,11 @@ class StoresController < ApplicationController
 
   def destroy
   end
+
+  private
+  def stores_params
+    params.permit(:store_id, :store_name, :instrument_name, :nearest_station)
+  end
+
+  
 end
