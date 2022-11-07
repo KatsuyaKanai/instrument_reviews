@@ -1,5 +1,5 @@
 class StoresController < ApplicationController
-  before_action :authenticate_user!, only: [:show]
+  before_action :authenticate_user!, only: [:show, :new]
   def index
     @stores = Store.all
   end
@@ -31,7 +31,7 @@ class StoresController < ApplicationController
 
   private
   def stores_params
-    params.permit(:store_id, :store_name, :instrument_name, :nearest_station)
+    params.permit(:store_id, :name, :address, :instrument_name, :nearest_station)
   end
 
   
