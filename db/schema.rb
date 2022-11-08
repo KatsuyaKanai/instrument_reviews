@@ -10,41 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_07_232343) do
-
-  create_table "Stores", force: :cascade do |t|
-    t.string "store_name"
-    t.string "address"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "nearest_station"
-    t.string "name"
-    t.integer "user_id"
-  end
+ActiveRecord::Schema.define(version: 2022_11_08_014907) do
 
   create_table "homes", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "maps", force: :cascade do |t|
-    t.text "name"
-    t.text "address"
-    t.float "latitude"
-    t.float "longitude"
+  create_table "reviews", force: :cascade do |t|
+    t.string "address"
+    t.string "store_reviews"
+    t.integer "store_price"
+    t.integer "store_id"
+    t.integer "user_id"
+    t.string "instrument_name"
+    t.float "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "reviews", force: :cascade do |t|
-    t.string "store_reviews"
-    t.integer "store_price"
+  create_table "stores", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "nearest_station"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "store_id"
-    t.float "score"
-    t.string "instrument_name"
-    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
