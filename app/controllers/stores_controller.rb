@@ -30,7 +30,7 @@ class StoresController < ApplicationController
   end
 
   def search
-    @stores = Store.search(params[:search_word])
+    @stores = Store.all.search(params[:search_word])
     @search_store = params[:search_word]
     render "stores/search"
   end
