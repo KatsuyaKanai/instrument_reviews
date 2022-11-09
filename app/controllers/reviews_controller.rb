@@ -45,6 +45,6 @@ class ReviewsController < ApplicationController
     end
 
     def search_reviews_params
-      params.permit(:search_reviews_keyword, :search_reviews_instrument_name)
+      params.permit(:search_instrument_name)
     end
 end

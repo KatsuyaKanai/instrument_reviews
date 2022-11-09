@@ -3,6 +3,10 @@ class Store < ApplicationRecord
   has_many :reviews
   belongs_to :user, optional: true
 
+  scope :latest, -> {order(created_at: :desc)}
+  scope :old, -> {order(created_at: :asc)}
+  scope :reviews_score, -> {order(reviews_score: :desc)}
+
   def avg_score
     unless self.reviews.empty?
       reviews.average(:score).round(1).to_f

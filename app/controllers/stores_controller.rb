@@ -1,7 +1,19 @@
 class StoresController < ApplicationController
   before_action :authenticate_user!, only: [:show, :new]
   def index
-    @stores = Store.all
+    
+  #@stores = Store.all
+  if params[:latest]
+    @stores = Store.latest
+  elsif params[:old]
+    @stores = Store.old
+  else params[:reviews_score]
+    @stores = Store.reviews_score
+  # else
+  #   @stores = Store.all
+  @stores = Store.all.search(search_params)
+  end
+
   end
 
   def new
@@ -29,11 +41,10 @@ class StoresController < ApplicationController
   def destroy
   end
 
-  def search
-    @stores = Store.all.search(params[:search_word])
-    @search_store = params[:search_word]
-    render "stores/search"
-  end
+   def search
+     @stores = Store.all.search(search_params)
+     render "stores/search"
+   end
 
 
   private
@@ -41,8 +52,8 @@ class StoresController < ApplicationController
     params.permit(:user_id, :store_id, :name, :address, :instrument_name, :nearest_station)
   end
 
-  def search_word
-    params.permit(:name, :address)
+  def search_params
+    params.permit(:search_word)
   end
 
   

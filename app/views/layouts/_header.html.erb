@@ -1,31 +1,49 @@
+<% if flash[:notice] %>
+      <div class="notification is-info">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="notification is-danger">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
 
-<div class= "header">
-  <div>
-    <h3>
-      <%= link_to "管楽器屋さん口コミサイト", homes_index_path, class: "header-nav" %>
-    </h3>
-  </div>
-  <div>
-    <%= link_to "Home", homes_index_path, class: "header-nav" %>
-  </div>
-  <div>
-    <% if user_signed_in? %>
-      <%= link_to "設定", users_edit_path, class: "header-nav" %>
-    <% else %>
-      <%= link_to "about", homes_about_path, class: "header-nav" %> 
-    <% end %>
-  </div>
-  <div>
-    <% if user_signed_in? %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header-nav" %>
-    <% else %>
-      <%= link_to "ログイン", new_user_session_path, class: "header-nav" %>
-      <%= link_to "新規登録", new_user_registration_path, class: "header-nav" %>    
-    <% end %>
-  </div>
-  <div>
-    <% if user_signed_in? %>
-      <%= link_to current_user.name + "さん", "/users/#{current_user.id}" %>
-    <% end %>
-  </div>
-</div>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <p class="navbar-item">
+          <%= link_to root_path do %>
+            <strong class="is-size-3" style="font-family: cursive; color: black;">Wind Musical Instrument Review Please</strong>
+          <% end %>
+        </p>
+        <div>
+          <%= link_to stores_path, class: "navbar-item" do %>
+            楽器店一覧
+          <% end %>
+        </div>
+        
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <% if user_signed_in? %>
+              <%= link_to users_index_path, class: "navbar-item" do %>
+                ようこそ <%= current_user.name %> さん
+              <% end %>
+            <% end %>
+            <div class="buttons">
+              <% if user_signed_in? %>
+                <%= link_to destroy_user_session_path, method: :delete, class: "button" do %>
+                  ログアウト
+                <% end %>
+              <% else %>
+                <%= link_to new_user_session_path, class: "button" do %>
+                  ログイン
+                <% end %>
+                <%= link_to new_user_registration_path, class: "button" do %>
+                  新規登録
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>

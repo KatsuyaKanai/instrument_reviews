@@ -2,28 +2,32 @@
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-10">
-          <p class="is-size-1 has-text-weight-bold has-text-centered">レビューを自由に</p>
+          <p class="is-size-1 has-text-weight-bold has-text-centered">レビューを自由に</p></br>
+           <p class="has-text-weight-bold has-text-centeres">
+            管楽器屋さん口コミサイトは、ユーザーの方の楽器修理、販売等の口コミの投稿により、様々な情報を参考にできるサイトです。プロの楽器演奏者、趣味で楽しむアマチュア楽器演奏者、学校の部活動の顧問の先生、皆様の口コミにより成り立っております。
+           </p>
           <br>
           <div class="columns is-centered">
             <div class="column is-3">
+            <% if user_signed_in? %>
+            <% else %>
               <%= link_to "ログイン", new_user_session_path, class: "button is-fullwidth" %>
               <br>
               <%= link_to "新規登録", new_user_registration_path, class: "button is-fullwidth" %>
+            <% end %>
             </div>
           </div>
           <div>
-            <%= form_with url: search_path, method: :get, local: true do |form| %>
-              <%= form.label :search_word, "店名か都道府県を入力してください", class:"reviews_post" %>
+            <%= form_with url: stores_path, method: :get, local: true do |form| %>
+              <%= form.label :search_word, "店名か都道府県を入力してください" %>
               <%= form.text_field :search_word, value: @search_store, :placeholder => "店名もしくは住所を入力して下さい" %>
               <%= form.submit "探す" %>
             <% end %>
-            <!--
             <%= form_with url: reviews_search_path, method: :get, local: true do |form| %>
-              <%= form.label :search_instrument_name, "楽器名をを入力してください", class:"reviews_post" %>
-              <%= form.select :search_instrument_name, ['Flute, Piccolo', 'Oboe', 'Clarinet', 'Fagot', 'Saxophone', 'Trumpet', 'Horn', 'Trombone', 'Eupfonium', "Tuba", 'その他'], {include_blank: '楽器名を選択してください'}, class: 'sample' %>
+              <%= form.label :search_instrument_name, "楽器名を入力してください", class:"reviews_post" %>
+              <%= form.collection_select(:search_instrument_name, Instrument.all, :name, :name,{include_blank: "---"}) %>
               <%= form.submit "探す" %>
             <% end %>
-            -->
           </div>
       </div>
     </div>

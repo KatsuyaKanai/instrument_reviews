@@ -15,8 +15,8 @@
     <% @reviews.each do |review| %>
       <tr>
         <td><%= review.user.name %></td>
-        <td><%= link_to "#{review.name}", controller: 'reviews', action: 'show', id: review.id %></td>
-        <td><%= review.address %></td>
+        <td><%= link_to "#{review.store.name}", controller: 'reviews', action: 'index', id: review.store.id %></td>
+        <td><%= review.store.address %></td>
         <td><%= review.instrument_name %></td>
         <td>¥<%= review.store_price %></td>
         <td><%= review.score %></td>
