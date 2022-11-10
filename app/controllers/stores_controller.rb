@@ -1,18 +1,23 @@
 class StoresController < ApplicationController
   before_action :authenticate_user!, only: [:show, :new]
+  before_action :set_q, only: [:index, :search]
+
   def index
-    
-  #@stores = Store.all
-  if params[:latest]
-    @stores = Store.latest
-  elsif params[:old]
-    @stores = Store.old
-  else params[:reviews_score]
-    @stores = Store.reviews_score
-  # else
-  #   @stores = Store.all
-  @stores = Store.all.search(search_params)
-  end
+    @reviews = Review.all
+    @stores = Store.all
+    @results = @q.result
+    @stores = @results
+  #   if params[:score]
+  #     @stores = Store.avg_score
+  #   elsif params[:review_id]
+  #     @stores = Store.many_reviews
+  #   elsif params[:reviews_score]
+  #     @stores = Store.reviews_score
+  #   else
+  #     @stores = Store.all
+  #   end
+  # @stores = Store.all.search(search_params)
+  
 
   end
 
@@ -42,12 +47,16 @@ class StoresController < ApplicationController
   end
 
    def search
-     @stores = Store.all.search(search_params)
-     render "stores/search"
+    
    end
 
 
   private
+  def set_q
+    @q = Store.ransack(params[:q])
+  end
+
+
   def stores_params
     params.permit(:user_id, :store_id, :name, :address, :instrument_name, :nearest_station)
   end
@@ -55,6 +64,8 @@ class StoresController < ApplicationController
   def search_params
     params.permit(:search_word)
   end
+
+  
 
   
 end

@@ -35,6 +35,7 @@ class ReviewsController < ApplicationController
 
   def search
     @reviews = Review.all.search(search_reviews_params)
+    @store = Store.all
     render "reviews/search"
   end
 

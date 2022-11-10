@@ -15,7 +15,7 @@
     <% @reviews.each do |review| %>
       <tr>
         <td><%= review.user.name %></td>
-        <td><%= link_to "#{review.store.name}", controller: 'reviews', action: 'index', id: review.store.id %></td>
+        <td><%= link_to "#{review.store.name}", store_reviews_path(@store) %></td>
         <td><%= review.store.address %></td>
         <td><%= review.instrument_name %></td>
         <td>¥<%= review.store_price %></td>

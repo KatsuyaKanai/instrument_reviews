@@ -3,9 +3,14 @@ class Store < ApplicationRecord
   has_many :reviews
   belongs_to :user, optional: true
 
-  scope :latest, -> {order(created_at: :desc)}
-  scope :old, -> {order(created_at: :asc)}
-  scope :reviews_score, -> {order(reviews_score: :desc)}
+  scope :store_reviews_count_desc, lambda{
+    includes(:review)
+      .order(Arel.sq('reviews.id COLLATE "C" DESC'))
+  }
+  scope :store_reviews_count_asc, lambda{
+    includes(:review)
+      .order(Arel.sq('reviews.id COLLATE "C" ASC'))
+  }
 
   def avg_score
     unless self.reviews.empty?

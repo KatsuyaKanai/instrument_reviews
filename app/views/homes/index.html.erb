@@ -18,11 +18,14 @@
             </div>
           </div>
           <div>
+          
+          
             <%= form_with url: stores_path, method: :get, local: true do |form| %>
               <%= form.label :search_word, "店名か都道府県を入力してください" %>
               <%= form.text_field :search_word, value: @search_store, :placeholder => "店名もしくは住所を入力して下さい" %>
               <%= form.submit "探す" %>
             <% end %>
+          
             <%= form_with url: reviews_search_path, method: :get, local: true do |form| %>
               <%= form.label :search_instrument_name, "楽器名を入力してください", class:"reviews_post" %>
               <%= form.collection_select(:search_instrument_name, Instrument.all, :name, :name,{include_blank: "---"}) %>

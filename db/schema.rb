@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_08_014907) do
-
-  create_table "Stores", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.string "nearest_station"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+ActiveRecord::Schema.define(version: 2022_11_09_232206) do
 
   create_table "homes", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -34,6 +25,15 @@ ActiveRecord::Schema.define(version: 2022_11_08_014907) do
     t.integer "user_id"
     t.string "instrument_name"
     t.float "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "nearest_station"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

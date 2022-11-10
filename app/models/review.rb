@@ -1,7 +1,7 @@
 class Review < ApplicationRecord
   belongs_to :user
   belongs_to :store
-  has_many :homes
+  
   
 
   validates :score, presence: true

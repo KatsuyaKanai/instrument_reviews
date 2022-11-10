@@ -29,7 +29,7 @@
         <table class="table is-fullwidth has-text-centered">
           <thead>
             <tr>
-              <th>ユーザー</th><th>楽器名</th><th>料金</th><th>点数</th><th>内容</th>
+              <th>ユーザー</th><th>楽器名</th><th>料金</th><th>点数</th><th>内容</th><th>口コミ投稿日</th>
             </tr>
           </thead>
           <tbody>
@@ -40,6 +40,7 @@
                 <td><%= review.store_price %></td>
                 <td><%= review.score %></td>
                 <td><%= review.store_reviews %></td>
+                <td><%= l review.created_at %></td>
               </tr>
             <% end %>
           </tbody>

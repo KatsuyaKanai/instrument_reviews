@@ -5,7 +5,11 @@ Rails.application.routes.draw do
     resources :reviews
   end
   post 'stores/new', to: 'stores#create'
- 
+  resources :stores do
+    collection do
+      get 'search'
+    end
+  end
   get 'reviews/search', to: 'reviews#search'
   resources :reviews
   post 'reviews/new', to: 'reviews#create'
@@ -28,7 +32,7 @@ Rails.application.routes.draw do
   get 'users/update'
   get 'users/destroy'
   get 'users/edit'
-  get 'search', to: 'stores#search'
+  # get 'search', to: 'stores#search'
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

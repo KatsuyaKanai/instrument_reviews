@@ -1,15 +1,19 @@
 <p>絞り込み検索</p>
-<%= form_with url: stores_path, method: :get, local: true do |form| %>
-  <%= form.label :search_word, "店名か都道府県を入力してください" %>
-  <%= form.text_field :search_word, value: @search_store, :placeholder => "店名もしくは住所を入力して下さい" %>
-  <%= form.submit "探す" %>
+<%= search_form_for @q, url: stores_path do |f| %>
+  <%= f.label :name_or_address_cont, "店名または都道府県を入力してください" %>
+  <%= f.search_field :name_or_address_cont %></br>
+  <%= f.submit '検索' %>
 <% end %>
 <%= link_to "口コミを投稿したい店がない場合", new_store_path %>
 <section class="section mt-6">
-<%= link_to '楽器店の投稿の新しい順', stores_path(latest: "true") %>|
-<%= link_to '楽器店の投稿の古い順', stores_path(old: "true") %>|
-
-<%= link_to '評価の高い順', stores_path(reviews_score: "true") %>
+<thead>
+  <tr>
+    <th><%= sort_link(@q, :avg_score_count, "口コミ評価が高い順") %>|</th>
+    <th><%= sort_link(@q, :@store_reviews_count, "レビューの多い順") %>|</th>
+    <th><%= sort_link(@q, :created_at, "登録日") %></th>
+    <th colspan = "3"></th>
+  </tr>
+</thead>
 
   <div class="container">
     <div class="columns is-centered">
@@ -17,15 +21,23 @@
         <% @stores.each do |store| %>
           <div class="card mb-6">
             <header class="card-header">
-              <p class="card-header-title">
-                <%= store.name %>
-              </p>
-              <p class="card-header-title">
-                <%= store.address %>
-              </p>
-              <p class="card-header-title">
-                <%= store.nearest_station %>
-              </p>
+            <%# <table>
+              <thead>
+                <tr class="card-header">
+                  <th class="card-header-title">店名</th>
+                  <th class="card-header-title">都道府県</th>
+                  <th class="card-header-title">最寄駅</th>
+                </tr>
+              </thead> %>
+                  <p class="card-header-title">
+                    <%= store.name %>
+                  </p>
+                  <p class="card-header-title">
+                    <%= store.address %>
+                  </p>
+                  <p class="card-header-title">
+                    <%= store.nearest_station %>
+                  </p>
             </header>
             <div class="card-content">
               <div class="content">
