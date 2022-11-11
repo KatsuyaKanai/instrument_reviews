@@ -3,14 +3,14 @@ class Store < ApplicationRecord
   has_many :reviews
   belongs_to :user, optional: true
 
-  scope :store_reviews_count_desc, lambda{
-    includes(:review)
-      .order(Arel.sq('reviews.id COLLATE "C" DESC'))
-  }
-  scope :store_reviews_count_asc, lambda{
-    includes(:review)
-      .order(Arel.sq('reviews.id COLLATE "C" ASC'))
-  }
+  # scope :store_reviews_count_desc, lambda{
+  #   includes(:review)
+  #     .order(Arel.sq('reviews.id COLLATE "C" DESC'))
+  # }
+  # scope :store_reviews_count_asc, lambda{
+  #   includes(:review)
+  #     .order(Arel.sq('reviews.id COLLATE "C" ASC'))
+  # }
 
   def avg_score
     unless self.reviews.empty?

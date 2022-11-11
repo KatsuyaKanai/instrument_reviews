@@ -7,6 +7,15 @@
 <%= link_to "口コミを投稿したい店がない場合", new_store_path %>
 <section class="section mt-6">
 <p><%= @stores.count %>件見つかりました</p>
+<!--ソート機能https://qiita.com/akkie/items/9d09d21a0e8ee47a1691
+-->
+<select class="ui fluid dropdown" onChange="location.href=value;">
+  <option value="">並び替え</option>
+  <option value="<%= sort_by_sort_url(sort_url(@q, :created_at), 'created_at+desc')%>">新着順</option>
+  <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_score_percentage), 'reviews_score_percentage+desc')%>">評価が高い順</option>
+  <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_count), 'reviews_count+desc')%>">レビューが多い順</option>
+</select>
+
 <thead>
   <tr>
   <!--

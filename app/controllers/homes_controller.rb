@@ -19,7 +19,7 @@ class HomesController < ApplicationController
     @reviews = @search_reviews.result
     @recent_reviews = Review.all
                             .order(created_at: :desc)
-                            .limit(5)
+                            .limit(3)
     
   end
 
