@@ -40,7 +40,7 @@
                 <td><%= review.store_price %></td>
                 <td><%= review.score %></td>
                 <td><%= review.store_reviews %></td>
-                <td><%= l review.created_at %></td>
+                <td><%= l review.created_at,format: :short %></td>
               </tr>
             <% end %>
           </tbody>

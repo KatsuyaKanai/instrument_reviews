@@ -1,17 +1,20 @@
 <p>絞り込み検索</p>
 <%= search_form_for @q, url: stores_path do |f| %>
   <%= f.label :name_or_address_cont, "店名または都道府県を入力してください" %>
-  <%= f.search_field :name_or_address_cont %></br>
+  <%= f.search_field :name_or_address_cont %>
   <%= f.submit '検索' %>
 <% end %>
 <%= link_to "口コミを投稿したい店がない場合", new_store_path %>
 <section class="section mt-6">
+<p><%= @stores.count %>件見つかりました</p>
 <thead>
   <tr>
-    <th><%= sort_link(@q, :avg_score_count, "口コミ評価が高い順") %>|</th>
-    <th><%= sort_link(@q, :review_id_count, "レビューの多い順") %>|</th>
+  <!--
+    <th><%= sort_link(@q, :@store_avg_score_count, "口コミ評価が高い順") %>|</th>
+    <th><%= sort_link(@q, :review_ids_count, "レビューの多い順") %>|</th>
     <th><%= sort_link(@q, :created_at, "登録日") %></th>
     <th colspan = "3"></th>
+  -->
   </tr>
 </thead>
 

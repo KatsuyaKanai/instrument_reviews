@@ -10,7 +10,8 @@ module InstrumentsReviews
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
-    
+    config.time_zone = 'Tokyo'
+    config.i18n.default_locale = :ja
 
     config.generators do |g|
       g.test_framework :rspec,

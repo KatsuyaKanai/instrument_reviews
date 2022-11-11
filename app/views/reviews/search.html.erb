@@ -1,4 +1,4 @@
-<h3>検索結果 ○件見つかりました。</h3>
+<h3>検索結果 <%= @reviews.count %>件見つかりました。</h3>
 <div class="search-result"> 
   <table>
     <thead>
@@ -10,6 +10,7 @@
           <th>料金</th>
           <th>評価</th>
           <th>口コミ</th>
+          <th>投稿日時</th>
         </tr>
     </thead>
     <% @reviews.each do |review| %>
@@ -18,9 +19,10 @@
         <td><%= link_to "#{review.store.name}", store_reviews_path(review.store_id) %></td>
         <td><%= review.store.address %></td>
         <td><%= review.instrument_name %></td>
-        <td>¥<%= review.store_price %></td>
+        <td>¥<%= review.store_price %>円</td>
         <td><%= review.score %></td>
         <td><%= review.store_reviews %></td>
+        <td><%= l review.created_at, format: :short %></td>
       </tr>
     <% end %>
   </table>

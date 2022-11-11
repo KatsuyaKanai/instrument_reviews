@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
+  before_action :set_q_reviews, only: [:index, :search]
   def index
     @store = Store.find(params[:store_id])
     @reviews = @store.reviews
@@ -34,6 +35,9 @@ class ReviewsController < ApplicationController
   end
 
   def search
+    
+    # @results = @search_reviews.result
+    # @reviews = @results
     @reviews = Review.all.search(search_reviews_params)
     @store = Store.all
     render "reviews/search"
@@ -47,5 +51,9 @@ class ReviewsController < ApplicationController
 
     def search_reviews_params
       params.permit(:search_instrument_name)
+    end
+
+    def set_q_reviews
+      @search_reviews = Review.ransack(params[:search_reviews])
     end
 end

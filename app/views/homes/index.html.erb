@@ -2,10 +2,14 @@
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-10">
-          <p class="is-size-1 has-text-weight-bold has-text-centered">レビューを自由に</p></br>
+        <h1 class="title">
+          <p class="is-size-1 has-text-weight-bold has-text-centered">Wind Musical Instrument Review Please</p></br>
+        </h1>
+        <h2 class="subtitle">
            <p class="has-text-weight-bold has-text-centeres">
             管楽器屋さん口コミサイトは、ユーザーの方の楽器修理、販売等の口コミの投稿により、様々な情報を参考にできるサイトです。プロの楽器演奏者、趣味で楽しむアマチュア楽器演奏者、学校の部活動の顧問の先生、皆様の口コミにより成り立っております。
            </p>
+        </h2>
           <br>
           <div class="columns is-centered">
             <div class="column is-3">
@@ -18,12 +22,11 @@
             </div>
           </div>
           <div>
-          
-          
-            <%= form_with url: stores_path, method: :get, local: true do |form| %>
-              <%= form.label :search_word, "店名か都道府県を入力してください" %>
-              <%= form.text_field :search_word, value: @search_store, :placeholder => "店名もしくは住所を入力して下さい" %>
-              <%= form.submit "探す" %>
+
+            <%= search_form_for @q, url: stores_path, method: :get, local: true do |f| %>
+              <%= f.label :name_or_address_cont, "店名または都道府県を入力してください" %>
+              <%= f.search_field :name_or_address_cont %>
+              <%= f.submit '検索' %>
             <% end %>
           
             <%= form_with url: reviews_search_path, method: :get, local: true do |form| %>
@@ -36,3 +39,36 @@
     </div>
   </div>
 </section>
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-20">
+      <h1>最近の投稿</h1>
+      <table class="table is-fullwidth has-text-centered">
+        <thead>
+            <tr>
+              <th>投稿者</th>
+              <th>店名</th>
+              <th>住所</th>
+              <th>楽器名</th>
+              <th>料金</th>
+              <th>評価</th>
+              <th>口コミ</th>
+              <th>投稿日時</th>
+            </tr>
+        </thead>
+        <% @recent_reviews.each do |review| %>
+          <tr>
+            <td><%= review.user.name %></td>
+            <td><%= link_to "#{review.store.name}", store_reviews_path(review.store_id) %></td>
+            <td><%= review.store.address %></td>
+            <td><%= review.instrument_name %></td>
+            <td>¥<%= review.store_price %>円</td>
+            <td><%= review.score %></td>
+            <td><%= review.store_reviews %></td>
+            <td><%= l review.created_at, format: :short %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,33 @@
-<h1>Users#index</h1>
-<%= link_to users_edit_path do %>
- ユーザーデータの編集をする
-<% end %>
+<h1><%= current_user.name %>さんの投稿一覧</h1>
+
+<div class="use^post"> 
+  <table>
+    <thead>
+        <tr>
+          <th>店名</th>
+          <th>住所</th>
+          <th>楽器名</th>
+          <th>料金</th>
+          <th>評価</th>
+          <th>口コミ</th>
+          <th>投稿日時</th>
+        </tr>
+    </thead>
+    <% @myreviews.each do |myreview| %>
+      <tr>
+        <td><%= link_to "#{myreview.store.name}", store_reviews_path(myreview.store_id) %></td>
+        <td><%= myreview.store.address %></td>
+        <td><%= myreview.instrument_name %></td>
+        <td><%= myreview.store_price %>円</td>
+        <td><%= myreview.score %></td>
+        <td><%= myreview.store_reviews %></td>
+        <td><%= l myreview.created_at, format: :short %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div class="edit-title">
+  <%= link_to users_edit_path do %>
+  ユーザーデータの編集をする
+  <% end %>
+</div>
