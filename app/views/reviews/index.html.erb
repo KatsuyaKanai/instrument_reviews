@@ -26,6 +26,54 @@
             </div>
           </div>
         </div>
+        <% @reviews.each do |review| %>
+          <div class="container">
+            <!--
+            <div class="columns card__wrapper">
+              <div class="column is-5">
+                <div class="card mb-6">
+                  <header class="card-header">
+                    <p class="card-header-title">
+                       <div class="content top-page-score has-text-entered">
+                      <div class="star-rating mb-2">
+                        <div class="star-rating-front" style="width: <%= review.score %>%">★★★★★</div>
+                        <div class="star-rating-back">★★★★★</div>
+                      </div>
+                      <div class="average-score-display ml-3 pt-2">
+                        <%= review.score %>点
+                      </div>
+                    </div>
+                    </p>
+                  </header>
+                  <div class="card-content">
+                    <div class="content">
+                      <%= review.store_reviews %>
+                    </div>
+                    <div class="content has-text-left">  
+                      ¥<%= review.store_price %>円
+                    </div>
+                  </div>
+                  <footer class="card-footer">
+                    <p class="card-footer-item">
+                      <%= review.user.name %>
+                    </p>
+                    <p class="card-footer-item">
+                      <%= review.instrument_name %>
+                    </p>
+                    <p class="card-footer-item">
+                      <%= l review.created_at, format: :short %>
+                    </p>
+                  </footer>
+                        
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        <% end %>
+        -->
+        
         <table class="table is-fullwidth has-text-centered">
           <thead>
             <tr>
@@ -45,6 +93,7 @@
             <% end %>
           </tbody>
         </table>
+        
       </div>
     </div>
   </div>
