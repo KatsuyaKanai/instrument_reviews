@@ -23,117 +23,81 @@
           </div>
           <section class="section">
             <div class="columns is-centered has-text-white ">
-
-              <%= search_form_for @q, url: stores_path, method: :get, local: true do |f| %>
-                <%= f.label :name_or_address_cont, "店名または都道府県を入力してください" %>
-                <%= f.search_field :name_or_address_cont %>
-                <%= f.submit '検索' %>
-              <% end %>
-            
-              <%= form_with url: reviews_search_path, method: :get, local: true do |form| %>
-                <%= form.label :search_instrument_name, "楽器名を選択してください", class:"reviews_post" %>
-                <%= form.collection_select(:search_instrument_name, Instrument.all, :name, :name,{include_blank: "---"}) %>
-                <%= form.submit "探す" %>
-              <% end %>
+              <div class="column">
+                <%= search_form_for @q, url: stores_path, method: :get, local: true do |f| %>
+                  <%= f.label :name_or_address_cont, "店名または都道府県を入力してください" %>
+                  <%= f.search_field :name_or_address_cont %>
+                  <%= f.submit '検索' %>
+                <% end %>
+              </div>
+              <div class="column">
+                <%= form_with url: reviews_search_path, method: :get, local: true do |form| %>
+                  <%= form.label :search_instrument_name, "楽器名を選択してください", class:"reviews_post" %>
+                  <%= form.collection_select(:search_instrument_name, Instrument.all, :name, :name,{include_blank: "---"}) %>
+                  <%= form.submit "探す" %>
+                <% end %>
+              </div>
             </div>
           </section>
       </div>
     </div>
   </div>
 </section>
-
-<section class="section" style="background: #dfe;>
-
-  <div class="columns is-centered">
-    <div class="column is-10">
-      <h2 class="subtitle">
-        <p class="has-text-weight-bold has-text-centered">
-          最近の投稿
-        </p>
-      </h2>
+<h1 class="title mt-3">
+  <p class="has-text-weight-bold has-text-centered">
+    最近の投稿
+  </p>
+</h1>
+<section class="section" style="background: #dfe;">
+  <div class="container">
+    <div class="columns">
       <% @recent_reviews.each do |review| %>
-        <div class="container">
-          
-          <div class="columns">
-            <div class="column is-5">
-              <div class="card mb-6">
-                <header class="card-header">
-                  <p class="card-header-title">
-                    <%= link_to "#{review.store.name}", store_reviews_path(review.store_id) %>
-                  </p>
-                  <p class="card-header-title">
-                    <%= review.store.address %>
-                  </p>
-                </header>
-                <div class="card-content">
-                  <div class="content">
-                    <%= review.store_reviews %>
-                  </div>
-                  <div class="content has-text-left">  
-                    ¥<%= review.store_price %>円
-                  </div>
-                  <div class="content top-page-score has-text-entered">
-                    <div class="star-rating mb-2">
-                      <div class="star-rating-front" style="width: <%= review.score %>%">
-                        ★★★★★
-                      </div>
-                      <div class="star-rating-back">
-                        ★★★★★
-                      </div>
+        <div class="column is-4">
+          <div class="card mb-6">
+              <header class="card-header">
+                <p class="card-header-title">
+                  <%= link_to "#{review.store.name}", store_reviews_path(review.store_id) %>
+                </p>
+                <p class="card-header-title">
+                  <%= review.store.address %>
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content top-page-score has-text-entered">
+                  <div class="star-rating mb-2">
+                  <div class="star-rating-front" style="width: <%= review.score*20 %>%">
+                      ★★★★★
                     </div>
-                    <div class="average-score-display ml-3 pt-2">
-                      <%= review.score %>点
+                    <div class="star-rating-back">
+                      ★★★★★
                     </div>
+                  </div>
+                  <div class="average-score-display ml-3 pt-2">
+                    <%= review.score %>点
                   </div>
                 </div>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <%= review.user.name %>
-                  </p>
-                  <p class="card-footer-item">
-                    <%= review.instrument_name %>
-                  </p>
-                  <p class="card-footer-item">
-                    <%= l review.created_at, format: :short %>
-                  </p>
-                </footer>
-                      
+                <div class="content">
+                  <%= review.store_reviews %>
+                </div>
+                <div class="content has-text-left">  
+                  ¥<%= review.store_price %>円
+                </div> 
               </div>
-
-            </div>
-
+              <footer class="card-footer">
+                <p class="card-footer-item">
+                  <%= review.user.name %>
+                </p>
+                <p class="card-footer-item">
+                  <%= review.instrument_name %>
+                </p>
+                <p class="card-footer-item">
+                  <%= l review.created_at, format: :short %>
+                </p>
+              </footer>              
           </div>
         </div>
       <% end %>
-      <!--
-        <table class="table is-fullwidth has-text-centered">
-          <thead>
-              <tr>
-                <th>投稿者</th>
-                <th>店名</th>
-                <th>住所</th>
-                <th>楽器名</th>
-                <th>料金</th>
-                <th>評価</th>
-                <th>口コミ</th>
-                <th>投稿日時</th>
-              </tr>
-          </thead>
-          <% @recent_reviews.each do |review| %>
-            <tr>
-              <td><%= review.user.name %></td>
-              <td><%= link_to "#{review.store.name}", store_reviews_path(review.store_id) %></td>
-              <td><%= review.store.address %></td>
-              <td><%= review.instrument_name %></td>
-              <td>¥<%= review.store_price %>円</td>
-              <td><%= review.score %></td>
-              <td><%= review.store_reviews %></td>
-              <td><%= l review.created_at, format: :short %></td>
-            </tr>
-          <% end %>
-        </table>
-      -->
-    </div>
-  </div>
-
+   </div>
+ </div>
 </section>
+
