@@ -10,16 +10,10 @@ Rails.application.routes.draw do
       get 'search'
     end
   end
+  # patch 'stores/:id/reviews', to: 'reviews#update'
   get 'reviews/search', to: 'reviews#search'
-  resources :reviews
   post 'reviews/new', to: 'reviews#create'
-  # get 'reviews/index'
-  # get 'reviews/new'
-  # post 'reviews/new' => 'reviews/:id', to: 'reviews#show'
-  # get 'reviews/:id', to: 'reviews#show'
-  # get 'reviews/edit'
-  # get 'reviews/update'
-  # get 'reviews/destroy'
+  delete 'review' => 'reviews#destroy'
   devise_for :users
     
 

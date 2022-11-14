@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   before_action :set_q_reviews, only: [:index, :search]
   def index
     @store = Store.find(params[:store_id])
-    @reviews = @store.reviews
+    @reviews = @store.reviews.order(updated_at: :desc)
   end
 
   def new
@@ -26,12 +26,21 @@ class ReviewsController < ApplicationController
   end
 
   def edit
+    @store = Store.find(params[:store_id])
+    @review = Review.find(params[:id])
   end
 
   def update
+    @review = Review.find(params[:id])
+    @review.update(edit_review_params)
+    redirect_to store_reviews_path(@review.store_id)
   end
 
   def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+    flash[:notice] = '口コミが削除されました。'
+    redirect_to store_reviews_path(@review.store_id)
   end
 
   def search
@@ -49,6 +58,9 @@ class ReviewsController < ApplicationController
       params.require(:review).permit(:store_id, :instrument_name, :store_price, :store_reviews, :score)
     end
 
+    def edit_review_params
+      params.require(:review).permit(:store_id, :instrument_name, :store_price, :store_reviews, :score)
+    end
     def search_reviews_params
       params.permit(:search_instrument_name)
     end

@@ -1,5 +1,61 @@
-<h1><%= current_user.name %>さんの投稿一覧</h1>
-
+<h1 class="title mt-3">
+  <p class="has-text-weight-bold has-text-centered">
+    <%= current_user.name %>さんの投稿一覧
+  </p>
+</h1>
+<section class="section" style="background: #dfe;">
+  <div class="container">
+    <div class="columns is-centerd">
+      <div class="column">
+        <% @myreviews.each do |myreview| %>
+          <div class="card mb-6">
+            <header class="card-header">
+              <p class="card-header-title">
+                <%= link_to "#{myreview.store.name}", store_reviews_path(myreview.store_id) %>
+              </p>
+              <p class="card-header-title">
+                <%= myreview.store.address %>
+              </p>
+              <p class="card-header-title">
+                <%= myreview.store.nearest_station %>
+              </p>
+            </header>
+            <div class="card-content">
+              <div class="content top-page-score">
+                <div class="star-rating mb-2">
+                  <div class="star-rating-front" style="width: <%= myreview.score*20 %>%">
+                    ★★★★★
+                  </div>
+                  <div class="star-rating-back">
+                    ★★★★★
+                  </div>
+                </div>
+                <div class="average-score-display ml-3 pt-2">
+                  <%= myreview.score %>点
+                </div>
+              </div>
+              <div class="content">
+                <%= myreview.store_reviews %>
+              </div>
+              <div class="content has-text-right">  
+                ¥<%= myreview.store_price %>円
+              </div> 
+            </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">
+                <%= myreview.instrument_name %>
+              </p>
+              <p class="card-footer-item">
+                <%= l myreview.created_at, format: :short %>
+              </p>
+            </footer>              
+          </div>  
+        <% end %>
+      </div>
+   </div>
+ </div>
+</section>
+<!--
 <div class="use^post"> 
   <table>
     <thead>
@@ -31,3 +87,4 @@
   ユーザーデータの編集をする
   <% end %>
 </div>
+-->

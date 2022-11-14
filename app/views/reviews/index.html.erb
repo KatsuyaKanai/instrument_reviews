@@ -1,7 +1,7 @@
 <section class="section mt-6">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column">
+      <div class="column is-10">
         <div class="card mb-6">
           <header class="card-header">
             <p class="card-header-title">
@@ -25,6 +25,14 @@
               </div>
             </div>
           </div>
+          <footer class="card-footer">
+            <%= link_to store_path(@store), class: "button card-footer-item" do %>
+              レビューを書く
+            <% end %>
+            <%= link_to stores_path, class: "button card-footer-item" do %>
+              店名一覧にもどる
+            <% end %>
+          </footer>
         </div>
       </div>
     </div>
@@ -32,17 +40,17 @@
 </section>
 <h1 class="title">
   <p class="has-text-weight-bold has-text-centered">
-    口コミ
+    レビュー一覧
   </p>
 </h1>
-<section class="section" style="background: white;>
+<section class="section" style="background: white;">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-10">
         <% @reviews.each do |review| %>
-          <div class="card mb-6">
+          <div class="card mt-6">
             <div class="card-content">
-              <div class="content top-page-score">
+              <div class="content top-page-score has-text-right">
                 <div class="star-rating mb-2">
                   <div class="star-rating-front" style="width: <%= review.score*20 %>%">
                     ★★★★★
@@ -58,7 +66,7 @@
               <div class="content">
                 <%= review.store_reviews %>
               </div>
-              <div class="content">
+              <div class="content has-text-right">
                 ¥<%= review.store_price %>円
               </div>
             </div>
@@ -69,19 +77,25 @@
               <p class="card-footer-item">
                 <%= review.instrument_name %>
               </p>
-              <p class="card-footer-item">
-                <%= l review.created_at, format: :short %>
-              </p>
+              <% if "updated" %>
+                <p class="card-footer-item">
+                  <%= l review.updated_at, format: :short %>
+                </p>
+              <% else %>
+                <p class="card-footer-item">
+                  <%= l review.created_at, format: :short %>
+                </p>
+              <% end %>
             </footer>
+          </div>
+          <div class="has-text-right p-3">
+            <% if review.user_id == current_user.id %>
+              <td><%= link_to "編集", edit_store_review_path(review.store_id, review.id) %></td>
+              <td><%= link_to "削除", "reviews/#{review.id}", method: :delete, data: { confirm: '口コミを削除しますか？'} %></td>
+            <% end %>
           </div>
         <% end %>
       </div> 
     </div>
   </div>
 </section>
-<%= link_to stores_path, class: "button card-footer-item" do %>
-  他のレビューを見る
-<% end %>
-<%= link_to root_path, class: "button card-footer-item" do %>
-  Topページに戻る
-<% end %>
