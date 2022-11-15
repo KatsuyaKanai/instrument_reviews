@@ -15,13 +15,19 @@
           <strong class="is-size-3" style="font-family: cursive; color: white;">Wind Musical Instrument Review Please</strong>
         <% end %>
       </p>
-      <div class="navbar-item">
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="true" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
         <%= link_to stores_path, class: "navbar-item has-text-white" do %>
           楽器店一覧
         <% end %>
       </div>
-      
-      <div class="navbar-end">
+      <div class="navbar-end has-text-right">
         <div class="navbar-item has-text-white">
           <% if user_signed_in? %>
             <%= link_to users_index_path, class: "navbar-item has-text-white" do %>
