@@ -47,7 +47,7 @@ class ReviewsController < ApplicationController
     
     # @results = @search_reviews.result
     # @reviews = @results
-    @reviews = Review.all.search(search_reviews_params)
+    @reviews = Review.all.search(search_reviews_params).order(updated_at: :desc)
     @store = Store.all
     render "reviews/search"
   end

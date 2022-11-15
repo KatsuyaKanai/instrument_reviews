@@ -1,5 +1,5 @@
-<section class="section mt-6">
-  <div class="container">
+<section class="section" style="background:  #dfe;">
+  <div class="container mt-6">
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="card mb-6">
@@ -46,13 +46,11 @@
       </div>
     </div>
   </div>
-</section>
-<h1 class="title">
-  <p class="has-text-weight-bold has-text-centered">
-    レビュー一覧
-  </p>
-</h1>
-<section class="section" style="background: white;">
+  <h1 class="title">
+    <p class="has-text-weight-bold has-text-centered">
+      レビュー一覧
+    </p>
+  </h1>
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">
@@ -119,9 +117,11 @@
             </footer>
           </div>
           <div class="has-text-right p-3">
-            <% if review.user_id == current_user.id %>
-              <td><%= link_to "編集", edit_store_review_path(review.store_id, review.id) %></td>
-              <td><%= link_to "削除", "reviews/#{review.id}", method: :delete, data: { confirm: '口コミを削除しますか？'} %></td>
+            <% if user_signed_in? %>
+              <% if review.user_id == current_user.id %>
+                <td><%= link_to "編集", edit_store_review_path(review.store_id, review.id) %></td>
+                <td><%= link_to "削除", "reviews/#{review.id}", method: :delete, data: { confirm: '口コミを削除しますか？'} %></td>
+              <% end %>
             <% end %>
           </div>
         <% end %>
