@@ -1,16 +1,25 @@
 <section class="section mt-6">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-10">
+      <div class="column is-8">
         <div class="card mb-6">
           <header class="card-header">
             <p class="card-header-title">
+              <span class="icon">
+                <i class="fas fa-building"></i>
+              </span>
               <%= @store.name %>
             </p>
             <p class="card-header-title">
+              <span class="icon">
+                <i class="fas fa-location-arrow"></i>
+              </span>
               <%= @store.address %>
             </p>
             <p class="card-header-title">
+              <span class="icon">
+                <i class="fas fa-train"></i>
+              </span>
               <%= @store.nearest_station %>
             </p>
           </header>
@@ -46,10 +55,16 @@
 <section class="section" style="background: white;">
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-10">
+      <div class="column is-8">
         <% @reviews.each do |review| %>
-          <div class="card mt-6">
+          <div class="card mt-3">
             <div class="card-content">
+              <div class="content">
+                <span class="icon">
+                  <i class="fas fa-tag"></i>
+                </span>
+                <%= review.reviews_title %>
+              </div>
               <div class="content top-page-score has-text-right">
                 <div class="star-rating mb-2">
                   <div class="star-rating-front" style="width: <%= review.score*20 %>%">
@@ -64,6 +79,9 @@
                 </div>
               </div>
               <div class="content">
+                <span class="icon">
+                  <i class="fas fa-comment"></i>
+                </span>
                 <%= review.store_reviews %>
               </div>
               <div class="content has-text-right">
@@ -72,17 +90,29 @@
             </div>
             <footer class="card-footer">
               <p class="card-footer-item">
+                <span class="icon">
+                  <i class="fas fa-user"></i>
+                </span>
                 <%= review.user.name %>
               </p>
               <p class="card-footer-item">
+                <span class="icon">
+                  <i class="fas fa-music"></i>
+                </span>
                 <%= review.instrument_name %>
               </p>
               <% if "updated" %>
                 <p class="card-footer-item">
+                  <span class="icon">
+                    <i class="fas fa-calendar"></i>
+                  </span>
                   <%= l review.updated_at, format: :short %>
                 </p>
               <% else %>
                 <p class="card-footer-item">
+                  <span class="icon">
+                    <i class="fa fa-calendar-check-o"></i>
+                  </span>
                   <%= l review.created_at, format: :short %>
                 </p>
               <% end %>

@@ -1,4 +1,4 @@
-<p class="is-size-4 mb-3">レビューを書く</p>
+<p class="is-size-4 mb-3 has-text-centered">レビューを書く</p>
 
 <% if review.errors.any? %>
   <div class="notification is-danger">
@@ -11,19 +11,30 @@
   </div>
 <% end %>
 
-<div class="rating-box mt-3">
+<div class="rating-box mt-3 has-text-centered">
   <%= form_with model: review, url: store_reviews_path(store),local: true do |f| %>
+    <span class="icon">
+      <i class="fas fa-tag"></i>
+    </span>
+    <%= f.label :reviews_title, "タイトル", class:"" %>
+    <%= f.collection_select(:reviews_title, Title.all, :name, :name,{include_blank: "---"}) %></br>
+    <span class="icon">
+      <i class="fas fa-music"></i>
+    </span>
     <%= f.label :instrument_name, "楽器名", class:"" %>
-    <%= f.collection_select(:instrument_name, Instrument.all, :name, :name,{include_blank: "---"} ) %></br>
+    <%= f.collection_select(:instrument_name, Instrument.all, :name, :name,{include_blank: "---"}) %></br>
+    <span class="icon">
+      <i class="fa fa-money"></i>
+    </span>
     <%= f.label :store_price, "料金", class:"" %>
     <%= f.number_field :store_price, min:0, placeholder: "かかった料金を入力", class:"" %>
-    <div class="main-rating">
-      <div class="ratings mb-3">
-      <span class="fa fa-star-o" id="star"></span>
-      <span class="fa fa-star-o" id="star"></span>
-      <span class="fa fa-star-o" id="star"></span>
-      <span class="fa fa-star-o" id="star"></span>
-      <span class="fa fa-star-o" id="star"></span>
+    <div class="main-rating star mt-2">
+      <div class="ratings mb-2">
+        <span class="fa fa-star-o" id="star"></span>
+        <span class="fa fa-star-o" id="star"></span>
+        <span class="fa fa-star-o" id="star"></span>
+        <span class="fa fa-star-o" id="star"></span>
+        <span class="fa fa-star-o" id="star"></span>
       </div>
       <div class="ml-3 rating-value-display">
         <span id="rating-value-display">0</span>/5

@@ -55,11 +55,11 @@ class ReviewsController < ApplicationController
   
   private
     def review_params
-      params.require(:review).permit(:store_id, :instrument_name, :store_price, :store_reviews, :score)
+      params.require(:review).permit(:store_id, :reviews_title, :instrument_name, :store_price, :store_reviews, :score)
     end
 
     def edit_review_params
-      params.require(:review).permit(:store_id, :instrument_name, :store_price, :store_reviews, :score)
+      params.require(:review).permit(:store_id, :reviews_title, :instrument_name, :store_price, :store_reviews, :score)
     end
     def search_reviews_params
       params.permit(:search_instrument_name)

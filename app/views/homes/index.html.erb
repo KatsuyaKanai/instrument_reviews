@@ -32,7 +32,7 @@
               </div>
               <div class="column">
                 <%= form_with url: reviews_search_path, method: :get, local: true do |form| %>
-                  <%= form.label :search_instrument_name, "楽器名を選択してください", class:"reviews_post" %>
+                  <%= form.label :search_instrument_name, "楽器名を選択してください", class:"reviews_post" %></br>
                   <%= form.collection_select(:search_instrument_name, Instrument.all, :name, :name,{include_blank: "---"}) %>
                   <%= form.submit "探す" %>
                 <% end %>
@@ -43,12 +43,12 @@
     </div>
   </div>
 </section>
-<h1 class="title mt-3">
-  <p class="has-text-weight-bold has-text-centered">
-    最近の投稿
-  </p>
-</h1>
 <section class="section" style="background: #dfe;">
+  <h1 class="title">
+    <p class="has-text-weight-bold has-text-centered">
+      最近の投稿
+    </p>
+  </h1>
   <div class="container">
     <div class="columns">
       <% @recent_reviews.each do |review| %>
@@ -56,13 +56,25 @@
           <div class="card mb-6">
               <header class="card-header">
                 <p class="card-header-title">
+                  <span class="icon">
+                    <i class="fas fa-building"></i>
+                  </span>
                   <%= link_to "#{review.store.name}", store_reviews_path(review.store_id) %>
                 </p>
                 <p class="card-header-title">
+                  <span class="icon">
+                    <i class="fas fa-location-arrow"></i>
+                  </span>
                   <%= review.store.address %>
                 </p>
               </header>
               <div class="card-content">
+                <div class="content">
+                  <span class="icon">
+                    <i class="fas fa-tag"></i>
+                  </span>
+                  <%= review.reviews_title %>
+                </div>
                 <div class="content top-page-score">
                   <div class="star-rating mb-2">
                     <div class="star-rating-front" style="width: <%= review.score*20 %>%">
@@ -77,6 +89,9 @@
                   </div>
                 </div>
                 <div class="content">
+                  <span class="icon">
+                    <i class="fas fa-commenting"></i>
+                  </span>
                   <%= review.store_reviews %>
                 </div>
                 <div class="content has-text-right">  
@@ -85,12 +100,21 @@
               </div>
               <footer class="card-footer">
                 <p class="card-footer-item">
+                  <span class="icon">
+                    <i class="fas fa-user"></i>
+                  </span>
                   <%= review.user.name %>
                 </p>
                 <p class="card-footer-item">
+                  <span class="icon">
+                    <i class="fas fa-music"></i>
+                  </span>
                   <%= review.instrument_name %>
                 </p>
                 <p class="card-footer-item">
+                  <span class="icon">
+                    <i class="fas fa-calendar"></i>
+                  </span>
                   <%= l review.created_at, format: :short %>
                 </p>
               </footer>              

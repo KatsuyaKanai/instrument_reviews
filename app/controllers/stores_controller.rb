@@ -6,7 +6,7 @@ class StoresController < ApplicationController
     @reviews = Review.all
     @stores = Store.all
     @results = @q.result
-    @stores = @results
+    @stores = @results.distinct
   #   if params[:score]
   #     @stores = Store.avg_score
   #   elsif params[:review_id]

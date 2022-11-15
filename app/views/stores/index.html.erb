@@ -1,55 +1,46 @@
-<p>絞り込み検索</p>
-<%= search_form_for @q, url: stores_path do |f| %>
-  <%= f.label :name_or_address_cont, "店名または都道府県を入力してください" %>
-  <%= f.search_field :name_or_address_cont %>
-  <%= f.submit '検索' %>
-<% end %>
-<%= link_to "口コミを投稿したい店がない場合", new_store_path %>
-<section class="section mt-6">
-<p><%= @stores.count %>件見つかりました</p>
-<!--ソート機能https://qiita.com/akkie/items/9d09d21a0e8ee47a1691
--->
-<select class="ui fluid dropdown" onChange="location.href=value;">
-  <option value="">並び替え</option>
-  <option value="<%= sort_by_sort_url(sort_url(@q, :created_at), 'created_at+desc')%>">新着順</option>
-  <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_score_percentage), 'reviews_score_percentage+desc')%>">評価が高い順</option>
-  <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_count), 'reviews_count+desc')%>">レビューが多い順</option>
-</select>
-
-<thead>
-  <tr>
-  <!--
-    <th><%= sort_link(@q, :@store_avg_score_count, "口コミ評価が高い順") %>|</th>
-    <th><%= sort_link(@q, :review_ids_count, "レビューの多い順") %>|</th>
-    <th><%= sort_link(@q, :created_at, "登録日") %></th>
-    <th colspan = "3"></th>
+<section class="section" style="background: #dfe;">
+  <p>絞り込み検索</p>
+  <%= search_form_for @q, url: stores_path, class:"mb-3" do |f| %>
+    <%= f.label :name_or_address_cont, "店名または都道府県を入力してください" %>
+    <%= f.search_field :name_or_address_cont %>
+    <%= f.submit '検索' %>
+  <% end %>
+  <div class="mb-3">
+    <%= link_to "口コミを投稿したい店がない場合", new_store_path %>
+  </div>
+  <p><%= @stores.count %>件見つかりました</p>
+  <!--ソート機能https://qiita.com/akkie/items/9d09d21a0e8ee47a1691
   -->
-  </tr>
-</thead>
-
+  <select class="ui fluid dropdown" onChange="location.href=value;">
+    <option value="">並び替え</option>
+    <option value="<%= sort_by_sort_url(sort_url(@q, :created_at), 'created_at+desc')%>">店の登録の新着順</option>
+    <option value="<%= sort_by_sort_url(sort_url(@q, :avg_score), 'avg_score+desc')%>">評価が高い順</option>
+    <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_count), 'reviews_count+desc')%>">レビューが多い順</option>
+  </select>
   <div class="container">
     <div class="columns is-centered">
-      <div class="column is-5">
+      <div class="column is-8">
         <% @stores.each do |store| %>
           <div class="card mb-6">
             <header class="card-header">
-            <%# <table>
-              <thead>
-                <tr class="card-header">
-                  <th class="card-header-title">店名</th>
-                  <th class="card-header-title">都道府県</th>
-                  <th class="card-header-title">最寄駅</th>
-                </tr>
-              </thead> %>
-                  <p class="card-header-title">
-                    <%= store.name %>
-                  </p>
-                  <p class="card-header-title">
-                    <%= store.address %>
-                  </p>
-                  <p class="card-header-title">
-                    <%= store.nearest_station %>
-                  </p>
+              <p class="card-header-title">
+                <span class="icon">
+                  <i class="fas fa-city"></i>
+                </span>
+                <%= store.name %>
+              </p>
+              <p class="card-header-title">
+                <span class="icon">
+                  <i class="fas fa-location-arrow"></i>
+                </span>
+                <%= store.address %>
+              </p>
+              <p class="card-header-title">
+                <span class="icon">
+                  <i class="fas fa-train"></i>
+                </span>
+                <%= store.nearest_station %>
+              </p>
             </header>
             <div class="card-content">
               <div class="content">

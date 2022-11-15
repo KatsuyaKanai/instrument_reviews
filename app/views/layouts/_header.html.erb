@@ -8,42 +8,44 @@
     <p class="alert"><%= alert %></p>
   </div>
 <% end %>
-
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <p class="navbar-item">
-      <%= link_to root_path do %>
-        <strong class="is-size-3" style="font-family: cursive; color: black;">Wind Musical Instrument Review Please</strong>
-      <% end %>
-    </p>
-    <div class="navbar-item">
-      <%= link_to stores_path, class: "navbar-item" do %>
-        楽器店一覧
-      <% end %>
-    </div>
-    
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <% if user_signed_in? %>
-          <%= link_to users_index_path, class: "navbar-item" do %>
-            ようこそ <%= current_user.name %> さん
-          <% end %>
+  <nav class="navbar has-background-black" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <p class="navbar-item">
+        <%= link_to root_path do %>
+          <strong class="is-size-3" style="font-family: cursive; color: white;">Wind Musical Instrument Review Please</strong>
         <% end %>
-        <div class="buttons">
+      </p>
+      <div class="navbar-item">
+        <%= link_to stores_path, class: "navbar-item has-text-white" do %>
+          楽器店一覧
+        <% end %>
+      </div>
+      
+      <div class="navbar-end">
+        <div class="navbar-item has-text-white">
           <% if user_signed_in? %>
-            <%= link_to destroy_user_session_path, method: :delete, class: "button" do %>
-              ログアウト
-            <% end %>
-          <% else %>
-            <%= link_to new_user_session_path, class: "button" do %>
-              ログイン
-            <% end %>
-            <%= link_to new_user_registration_path, class: "button" do %>
-              新規登録
+            <%= link_to users_index_path, class: "navbar-item has-text-white" do %>
+              ようこそ <%= current_user.name %> さん
             <% end %>
           <% end %>
+          <div class="has-text-right">
+            <div class="buttons"> 
+              <% if user_signed_in? %>
+                <%= link_to destroy_user_session_path, method: :delete, class: "button" do %>
+                  ログアウト
+                <% end %>
+              <% else %>
+                <%= link_to new_user_session_path, class: "button" do %>
+                  ログイン
+                <% end %>
+                <%= link_to new_user_registration_path, class: "button" do %>
+                  新規登録
+                <% end %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</nav>
+  </nav>
+

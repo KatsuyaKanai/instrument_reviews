@@ -3,14 +3,15 @@ class Store < ApplicationRecord
   has_many :reviews
   belongs_to :user, optional: true
 
-  # scope :store_reviews_count_desc, lambda{
-  #   includes(:review)
-  #     .order(Arel.sq('reviews.id COLLATE "C" DESC'))
-  # }
-  # scope :store_reviews_count_asc, lambda{
-  #   includes(:review)
-  #     .order(Arel.sq('reviews.id COLLATE "C" ASC'))
-  # }
+  # ransacker :avg_score do
+  #   query = '(SELECT COUNT(reviews.score / reviews.id) From reviews where reviews.store_id = stores.id GROUP BY reviews.store_id)'
+  #   Arel.sql(query)
+  # end
+
+  ransacker :reviews_count do
+    query = '(SELECT COUNT(reviews.id) From reviews where reviews.store_id = stores.id GROUP BY reviews.store_id)'
+    Arel.sql(query)
+  end
 
   def avg_score
     unless self.reviews.empty?
