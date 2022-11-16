@@ -14,7 +14,7 @@
   <select class="ui fluid dropdown" onChange="location.href=value;">
     <option value="">並び替え</option>
     <option value="<%= sort_by_sort_url(sort_url(@q, :created_at), 'created_at+desc')%>">店の登録の新着順</option>
-    <option value="<%= sort_by_sort_url(sort_url(@q, :avg_score), 'avg_score+desc')%>">評価が高い順</option>
+    <option value="<%= sort_by_sort_url(sort_url(@q, :score), 'reviews_avg_score+desc')%>">評価が高い順</option>
     <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_count), 'reviews_count+desc')%>">レビューが多い順</option>
   </select>
   <div class="container">

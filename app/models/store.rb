@@ -3,13 +3,13 @@ class Store < ApplicationRecord
   has_many :reviews
   belongs_to :user, optional: true
 
-  # ransacker :avg_score do
-  #   query = '(SELECT COUNT(reviews.score / reviews.id) From reviews where reviews.store_id = stores.id GROUP BY reviews.store_id)'
-  #   Arel.sql(query)
-  # end
-
   ransacker :reviews_count do
     query = '(SELECT COUNT(reviews.id) From reviews where reviews.store_id = stores.id GROUP BY reviews.store_id)'
+    Arel.sql(query)
+  end
+
+  ransacker :score do
+    query = '(SELECT COUNT(store.reviews_score_percentage) From stores where reviews.store_id = stores.id GROUP BY reviews.store_id)'
     Arel.sql(query)
   end
 
@@ -28,7 +28,4 @@ class Store < ApplicationRecord
     end
   end
 
-  def self.search(search_store)
-    Store.where(["name like? OR address like?", "%#{search_store[:search_word]}%", "%#{search_store[:search_word]}%"])
-  end
 end

@@ -31,11 +31,18 @@
                 <% end %>
               </div>
               <div class="column">
+                <%= search_form_for @search_reviews, url: reviews_search_path, method: :get, local: true do |f| %>
+                  <%= f.label :instrument_name_eq, "楽器名を選択してください", class:"reviews_post" %></br>
+                  <%= f.collection_select :instrument_name_eq, Instrument.all, :name, :name,{include_blank: "---"} %>
+                  <%= f.submit "探す" %>
+                <% end %>
+              <!--ransackを使わない検索フォーム
                 <%= form_with url: reviews_search_path, method: :get, local: true do |form| %>
                   <%= form.label :search_instrument_name, "楽器名を選択してください", class:"reviews_post" %></br>
                   <%= form.collection_select(:search_instrument_name, Instrument.all, :name, :name,{include_blank: "---"}) %>
                   <%= form.submit "探す" %>
                 <% end %>
+              -->
               </div>
             </div>
           </section>
