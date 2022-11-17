@@ -45,7 +45,7 @@
     <%= f.hidden_field :score, id: "rating-value" %>
     <%= f.text_area :store_reviews, class:"textarea" %>
     <%= f.submit "編集する", class: "button mt-3"%>
-    <%= link_to "口コミ一覧に戻る", store_review_path(store), class: "button light ml-3 mt-3" %>
+    <%= link_to "戻る", :back, class: "button light ml-3 mt-3" %>
   <% end %>
 </div>
 

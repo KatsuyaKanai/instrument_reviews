@@ -1,4 +1,10 @@
-<section class="section" style="background: #dfe;">  
+<% content_for(:title, @current_user.name) %>
+<section class="section">  
+<div class="has-text-right">
+  <%= link_to users_edit_path do %>
+  ユーザーデータの編集をする
+  <% end %>
+</div>
   <h1 class="title">
     <p class="has-text-weight-bold has-text-centered">
       <%= current_user.name %>さんの投稿一覧
@@ -8,7 +14,7 @@
     <div class="columns is-centerd">
       <div class="column">
         <% @myreviews.each do |myreview| %>
-          <div class="card mb-6">
+          <div class="card">
             <header class="card-header">
               <p class="card-header-title">
                 <span class="icon">
@@ -74,7 +80,18 @@
               </p>
             </footer>              
           </div>  
+          <div class="has-text-right p-3">
+            <td>
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              <%= link_to "編集", edit_store_review_path(myreview.store_id, myreview.id) %>
+            </td>
+            <td>
+              <i class="fa fa-trash" aria-hidden="true"></i>
+              <%= link_to "削除", "reviews/#{myreview.id}", method: :delete, data: { confirm: '口コミを削除しますか？'} %>
+            </td>
+          </div>
         <% end %>
+        
       </div>
    </div>
  </div>

@@ -1,5 +1,5 @@
 
-<section class="section" style="background: #dfe;">
+<section class="section">
 <h1 class="title">
   <p class="has-text-weight-bold has-text-centered">
     検索結果 <%= @reviews.count %>件見つかりました
@@ -91,19 +91,21 @@
             </footer>
           </div>
           <div class="has-text-right p-3">
-            <% if review.user_id == current_user.id %>
-              <td>
-                <span class="icon">
-                  <i class="fa fa-pencil-square-o"></i>
-                </span>
-                <%= link_to "編集", edit_store_review_path(review.store_id, review.id) %>
-              </td>
-              <td>
-                <span class="icon">
-                  <i class="fa fa-times"></i>
-                </span>
-                <%= link_to "削除", "reviews/#{review.id}", method: :delete, data: { confirm: '口コミを削除しますか？'} %>
-              </td>
+            <% if user_signed_in? %>
+              <% if review.user_id == current_user.id %>
+                <td>
+                  <span class="icon">
+                    <i class="fa fa-pencil-square-o"></i>
+                  </span>
+                  <%= link_to "編集", edit_store_review_path(review.store_id, review.id) %>
+                </td>
+                <td>
+                  <span class="icon">
+                    <i class="fa fa-times"></i>
+                  </span>
+                  <%= link_to "削除", "reviews/#{review.id}", method: :delete, data: { confirm: '口コミを削除しますか？'} %>
+                </td>
+              <% end %>
             <% end %>
           </div>
         <% end %>

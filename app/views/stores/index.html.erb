@@ -1,71 +1,89 @@
-<section class="section" style="background: #dfe;">
-  <p>絞り込み検索</p>
-  <%= search_form_for @q, url: stores_path, class:"mb-3" do |f| %>
-    <%= f.label :name_or_address_cont, "店名または都道府県を入力してください" %>
-    <%= f.search_field :name_or_address_cont %>
-    <%= f.submit '検索' %>
-  <% end %>
-  <div class="mb-3">
-    <%= link_to "口コミを投稿したい店がない場合", new_store_path %>
-  </div>
-  <p><%= @stores.count %>件見つかりました</p>
-  <!--ソート機能https://qiita.com/akkie/items/9d09d21a0e8ee47a1691
-  -->
-  <select class="ui fluid dropdown" onChange="location.href=value;">
-    <option value="">並び替え</option>
-    <option value="<%= sort_by_sort_url(sort_url(@q, :created_at), 'created_at+desc')%>">店の登録の新着順</option>
-    <option value="<%= sort_by_sort_url(sort_url(@q, :score), 'reviews_avg_score+desc')%>">評価が高い順</option>
-    <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_count), 'reviews_count+desc')%>">レビューが多い順</option>
-  </select>
+<div class="wrapper">
+<section class="section">
+  
+  
   <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <% @stores.each do |store| %>
-          <div class="card mb-6">
-            <header class="card-header">
-              <p class="card-header-title">
-                <span class="icon">
-                  <i class="fas fa-city"></i>
-                </span>
-                <%= store.name %>
-              </p>
-              <p class="card-header-title">
-                <span class="icon">
-                  <i class="fas fa-location-arrow"></i>
-                </span>
-                <%= store.address %>
-              </p>
-              <p class="card-header-title">
-                <span class="icon">
-                  <i class="fas fa-train"></i>
-                </span>
-                <%= store.nearest_station %>
-              </p>
-            </header>
-            <div class="card-content">
-              <div class="content">
-                <div class="content average-score">
-                  <div class="star-rating mb-2">
-                    <div class="star-rating-front" style="width: <%= store.reviews_score_percentage %>%">★★★★★</div>
-                    <div class="star-rating-back">★★★★★</div>
-                  </div>
-                  <div class="average-score-display ml-3 pt-2">
-                    <%= store.avg_score %>点（<%= store.reviews.count %>件のレビュー）
+    <div class="side-content">
+      <form class="level-right">
+        <div class="has-text-centered">  
+          <p class="mb-3 level-item has-text-weight-bold">絞り込み検索</p>
+            <div class="box m-3">
+              <%= search_form_for @q, url: stores_path, class:"m-3 level-item" do |f| %>
+                <%= f.label :name_or_address_cont, "店名または都道府県を入力してください" %></br>
+                <%= f.search_field :name_or_address_cont %></br>
+                <%= f.submit '検索' %>
+              <% end %>
+            </div>
+          <div class="m-3 level-item">
+            <%= link_to "口コミを投稿したい店がない場合", new_store_path %>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="main-content">
+      <div class="has-text-centered">
+        <p class="is-size-4"><%= @stores.count %>件見つかりました</p>
+        <!--ソート機能https://qiita.com/akkie/items/9d09d21a0e8ee47a1691
+        -->
+        <select class="ui fluid dropdown" onChange="location.href=value;">
+          <option value="">並び替え</option>
+          <option value="<%= sort_by_sort_url(sort_url(@q, :created_at), 'created_at+desc')%>">店の登録の新着順</option>
+          <option value="<%= sort_by_sort_url(sort_url(@q, :score), 'reviews_avg_score+desc')%>">評価が高い順</option>
+          <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_count), 'reviews_count+desc')%>">レビューが多い順</option>
+        </select>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <% @stores.each do |store| %>
+            <div class="card mb-6">
+              <header class="card-header">
+                <p class="card-header-title">
+                  <span class="icon">
+                    <i class="fas fa-city"></i>
+                  </span>
+                  <%= store.name %>
+                </p>
+                <p class="card-header-title">
+                  <span class="icon">
+                    <i class="fas fa-location-arrow"></i>
+                  </span>
+                  <%= store.address %>
+                </p>
+                <p class="card-header-title">
+                  <span class="icon">
+                    <i class="fas fa-train"></i>
+                  </span>
+                  <%= store.nearest_station %>
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  <div class="content average-score">
+                    <div class="star-rating mb-2">
+                      <div class="star-rating-front" style="width: <%= store.reviews_score_percentage %>%">★★★★★</div>
+                      <div class="star-rating-back">★★★★★</div>
+                    </div>
+                    <div class="average-score-display ml-3 pt-2">
+                      <%= store.avg_score %>点（<%= store.reviews.count %>件のレビュー）
+                    </div>
                   </div>
                 </div>
               </div>
+              <footer class="card-footer">
+                <%= link_to store_reviews_path(store), class: "button card-footer-item" do %>
+                  レビューを見る
+                <% end %>
+                <%= link_to store_path(store), class: "button card-footer-item" do %>
+                  レビューを書く
+                <% end %>
+              </footer>
             </div>
-            <footer class="card-footer">
-              <%= link_to store_reviews_path(store), class: "button card-footer-item" do %>
-                レビューを見る
-              <% end %>
-              <%= link_to store_path(store), class: "button card-footer-item" do %>
-                レビューを書く
-              <% end %>
-            </footer>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
+  
+  
 </section>
+</div>
