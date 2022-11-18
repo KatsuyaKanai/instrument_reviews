@@ -2,7 +2,11 @@ class Review < ApplicationRecord
   belongs_to :user
   belongs_to :store
 
+  validates :reviews_title, presence: true
+  validates :instrument_name, presence: true
+  validates :store_price, presence: true
   validates :score, presence: true
+  validates :store_reviews, presence: true
   
   # ransacker :reviews_count do
   #   query = '(SELECT COUNT(reviews.id) FROM likes where reviews.id = stores.id GROUP BY reviews.id)'

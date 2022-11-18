@@ -3,6 +3,10 @@ class Store < ApplicationRecord
   has_many :reviews
   belongs_to :user, optional: true
 
+  validates :name, presence: true
+  validates :address, presence: true
+  validates :nearest_station, presence: true
+
   ransacker :reviews_count do
     query = '(SELECT COUNT(reviews.id) From reviews where reviews.store_id = stores.id GROUP BY reviews.store_id)'
     Arel.sql(query)

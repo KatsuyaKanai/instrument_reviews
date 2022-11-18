@@ -1,39 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-  describe "GET /index" do
-    it "returns http success" do
-      get "/users/index"
-      expect(response).to have_http_status(:success)
+  describe "ユーザの新規登録"
+    it "名前、メールアドレス、パスワードがある場合有効である" do
+      user = User.new(
+        name: "testman",
+        email: "testman@example.com",
+        password: "testmanpassword"
+      )
+      expect(user).to be_valid
     end
-  end
 
-  describe "GET /new" do
-    it "returns http success" do
-      get "/users/new"
-      expect(response).to have_http_status(:success)
+    it "名前がない場合無効である" do
+      user = User.new(
+        name: nil,
+        email: "testman@example.com",
+        password: "testmanpassword"
+      )
+      user.valid?
+      expect(user.errors[:name]).to include("を入力してください")
     end
-  end
-
-  describe "GET /show" do
-    it "returns http success" do
-      get "/users/show"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET /update" do
-    it "returns http success" do
-      get "/users/update"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET /destroy" do
-    it "returns http success" do
-      get "/users/destroy"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
+  it "メールアドレスがない場合無効である"
+  it "重複したメールアドレスの場合無効である"
+  it "パスワードがない場合無効である"
 end

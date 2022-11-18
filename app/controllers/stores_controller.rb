@@ -31,7 +31,7 @@ class StoresController < ApplicationController
       
       redirect_to store_path(@store)
     else
-      redirect_to new_store_parh
+      render new_store_path
     end
   end
 

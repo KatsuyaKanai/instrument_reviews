@@ -1,39 +1,27 @@
+<!--
+<% content_for(:title, "Stores") %>
+-->
 <div class="wrapper">
 <section class="section">
   
   
   <div class="container">
-    <div class="side-content">
-      <form class="level-right">
-        <div class="has-text-centered">  
-          <p class="mb-3 level-item has-text-weight-bold">絞り込み検索</p>
-            <div class="box m-3">
-              <%= search_form_for @q, url: stores_path, class:"m-3 level-item" do |f| %>
-                <%= f.label :name_or_address_cont, "店名または都道府県を入力してください" %></br>
-                <%= f.search_field :name_or_address_cont %></br>
-                <%= f.submit '検索' %>
-              <% end %>
-            </div>
-          <div class="m-3 level-item">
-            <%= link_to "口コミを投稿したい店がない場合", new_store_path %>
-          </div>
-        </div>
-      </form>
-    </div>
+    
     <div class="main-content">
-      <div class="has-text-centered">
-        <p class="is-size-4"><%= @stores.count %>件見つかりました</p>
-        <!--ソート機能https://qiita.com/akkie/items/9d09d21a0e8ee47a1691
-        -->
-        <select class="ui fluid dropdown" onChange="location.href=value;">
-          <option value="">並び替え</option>
-          <option value="<%= sort_by_sort_url(sort_url(@q, :created_at), 'created_at+desc')%>">店の登録の新着順</option>
-          <option value="<%= sort_by_sort_url(sort_url(@q, :score), 'reviews_avg_score+desc')%>">評価が高い順</option>
-          <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_count), 'reviews_count+desc')%>">レビューが多い順</option>
-        </select>
-      </div>
+      
       <div class="columns is-centered">
         <div class="column is-8">
+          <div class="has-text-centered mb-3">
+            <p class="is-size-4"><%= @stores.count %>件見つかりました</p>
+            <!--ソート機能https://qiita.com/akkie/items/9d09d21a0e8ee47a1691
+            -->
+            <select class="ui fluid dropdown" onChange="location.href=value;">
+              <option value="">並び替え</option>
+              <option value="<%= sort_by_sort_url(sort_url(@q, :created_at), 'created_at+desc')%>">店の登録の新着順</option>
+              <option value="<%= sort_by_sort_url(sort_url(@q, :score), 'reviews_avg_score+desc')%>">評価が高い順</option>
+              <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_count), 'reviews_count+desc')%>">レビューが多い順</option>
+            </select>
+          </div>
           <% @stores.each do |store| %>
             <div class="card mb-6">
               <header class="card-header">
@@ -79,6 +67,23 @@
               </footer>
             </div>
           <% end %>
+        </div>
+        <div class="side-content">
+          <form class="level-right box">
+            <div class="has-text-centered">  
+              <p class="level-item has-text-weight-bold mt-3">絞り込み検索</p>
+                <div class="box m-3">
+                  <%= search_form_for @q, url: stores_path, class:"m-3 level-item" do |f| %>
+                    <%= f.label :name_or_address_cont, "店名または都道府県を入力してください" %></br>
+                    <%= f.search_field :name_or_address_cont %></br>
+                    <%= f.submit '検索' %>
+                  <% end %>
+                </div>
+              <div class="m-3 level-item">
+                <%= link_to "口コミを投稿したい店がない場合", new_store_path %>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

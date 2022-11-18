@@ -16,7 +16,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to store_reviews_path(@review.store)
     else
-      @store = Store.find(params[:id])
+      @store = Store.find(params[:store_id])
       render "stores/show"
     end
   end
