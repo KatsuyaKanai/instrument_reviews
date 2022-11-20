@@ -46,9 +46,6 @@ class ReviewsController < ApplicationController
   def search
     @q = Review.ransack(params[:q])
     @reviews = @q.result.order(updated_at: :desc)
-    # @reviews = Review.all.search(search_reviews_params).order(updated_at: :desc)
-    # @store = Store.all
-    # render "reviews/search"
   end
 
   

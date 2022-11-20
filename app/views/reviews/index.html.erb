@@ -53,22 +53,6 @@
     </p>
   </h1>
   <div class="container">
-  <!--
-    <div class="side-content">
-      <form class="level-right box">
-        <div class="has-text-centered">  
-          <p class="level-item has-text-weight-bold mt-3">楽器別れビュー検索</p>
-            <div class="box m-3">
-              <%= search_form_for @q, class:"m-3 level-item" do |f| %>
-                <%= f.label :name_or_address_cont, "楽器名を選択してください" %></br>
-                <%= f.collection_select :instrument_name_eq, Instrument.all, :name, :name,{include_blank: "---"} %>
-                <%= f.submit "検索" %>
-              <% end %>
-            </div>
-        </div>
-      </form>
-    </div>
-  -->
     <div class="columns is-centered">
       <div class="column is-8">
         <% @reviews.each do |review| %>

@@ -7,18 +7,6 @@ class StoresController < ApplicationController
     @stores = Store.all
     @results = @q.result
     @stores = @results.distinct
-  #   if params[:score]
-  #     @stores = Store.avg_score
-  #   elsif params[:review_id]
-  #     @stores = Store.many_reviews
-  #   elsif params[:reviews_score]
-  #     @stores = Store.reviews_score
-  #   else
-  #     @stores = Store.all
-  #   end
-  # @stores = Store.all.search(search_params)
-  
-
   end
 
   def new
@@ -46,16 +34,13 @@ class StoresController < ApplicationController
   def destroy
   end
 
-   def search
-    
-   end
-
+  def search
+  end
 
   private
   def set_q
     @q = Store.ransack(params[:q])
   end
-
 
   def stores_params
     params.permit(:user_id, :store_id, :name, :address, :instrument_name, :nearest_station)
@@ -64,8 +49,5 @@ class StoresController < ApplicationController
   def search_params
     params.permit(:search_word)
   end
-
-  
-
   
 end
