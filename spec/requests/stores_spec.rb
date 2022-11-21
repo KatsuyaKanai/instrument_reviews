@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "Stores", type: :request do
-    let(:store) { create(:store) }
-    let(:store2) { create(:store) }
-    let(:review) { create(:review, stores: [store]) }
-    let(:review2) { create(:review2, stores: [store]) }
+  let(:store) { create(:store) }
+  let(:store2) { create(:store) }
+  let(:review) { create(:review, stores: [store]) }
+  let(:review2) { create(:review2, stores: [store]) }
 
   before do
     @user = FactoryBot.create(:user)
@@ -49,7 +49,7 @@ RSpec.describe "Stores", type: :request do
       get stores_path(store_id)
     end
     
-    it "ログインしていなければログイン画面に遷移すること"
+   
 
     it "stores_path(:store_id)にパスできること"
 
@@ -58,7 +58,7 @@ RSpec.describe "Stores", type: :request do
   end
 
   describe "stores#new" do
-    it "ログインしていなければログイン画面に遷移すること"
+    
 
 
     it "storeの新規登録画面にアクセスできること" do

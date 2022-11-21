@@ -20,7 +20,18 @@ class HomesController < ApplicationController
     @recent_reviews = Review.all
                             .order(created_at: :desc)
                             .limit(3)
-    
+    @highty_rate_review = Store.left_joins(:reviews)
+                               .distinct
+                               .sort_by do |review|
+                                  hoges = @reviews
+                                  if hoges.present?
+                                    hoges.map(&:score).sum / hoges.size
+                                  else
+                                    0
+                                  end
+                                end
+                               .reverse
+                               
   end
 
   def show
