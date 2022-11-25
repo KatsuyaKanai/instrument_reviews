@@ -1,2 +1,95 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<% content_for(:title, @user.name) %>
+
+<section class="section">
+  <h1 class="title">
+    <p class="has-text-weight-bold has-text-centered">
+      <%= @user.name %>さんの投稿一覧
+    </p>
+  </h1>
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column">
+        <% @reviews.each do |review| %>
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                <span class="icon">
+                  <i class="fas fa-building"></i>
+                </span>
+                <%= link_to "#{review.store.name}", store_reviews_path(review.store_id) %>
+              </p>
+              <p class="card-header-title">
+                <span class="icon">
+                  <i class="fas fa-location-arrow"></i>
+                </span>
+                <%= review.store.address %>
+              </p>
+              <p class="card-header-title">
+                <span class="icon">
+                  <i class="fas fa-train"></i>
+                </span>
+                <%= review.store.nearest_station %>
+              </p>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                <span class="icon">
+                  <i class="fas fa-tag"></i>
+                </span>
+                <%= review.reviews_title %>
+              </div>
+              <div class="content top-page-score">
+                <div class="star-rating mb-2">
+                  <div class="star-rating-front" style="width: <%= review.score*20 %>%">
+                    ★★★★★
+                  </div>
+                  <div class="star-rating-back">
+                    ★★★★★
+                  </div>
+                </div>
+                <div class="average-score-display ml-3 pt-2">
+                  <%= review.score %>点
+                </div>
+              </div>
+              <div class="content">
+                <span class="icon">
+                  <i class="fas fa-comment"></i>
+                </span>
+                <%= review.store_reviews %>
+              </div>
+              <div class="content has-text-right">  
+                ¥<%= review.store_price %>円
+              </div> 
+            </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">
+                <span class="icon">
+                  <i class="fas fa-music"></i>
+                </span>
+                <%= review.instrument_name %>
+              </p>
+              <p class="card-footer-item">
+                <span class="icon">
+                  <i class="fas fa-calendar"></i>
+                </span>
+                <%= l review.created_at, format: :short %>
+              </p>
+            </footer>              
+          </div>  
+          <div class="has-text-right p-3">
+            <% if review.user_id == current_user.id %>
+              <td>
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                <%= link_to "編集", edit_store_review_path(review.store_id, review.id) %>
+              </td>
+              <td>
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                <%= link_to "削除", "reviews/#{review.id}", method: :delete, data: { confirm: '口コミを削除しますか？'} %>
+              </td>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

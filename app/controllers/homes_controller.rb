@@ -11,8 +11,10 @@ class HomesController < ApplicationController
     @search_reviews = Review.ransack(params[:search_reviews])
     @reviews = @search_reviews.result
   end
+  
 
   def index
+    @user = User.all
     @q = Store.ransack(params[:q])
     @search_reviews = Review.ransack(params[:search_reviews])
     @stores = @q.result
@@ -22,16 +24,16 @@ class HomesController < ApplicationController
                             .limit(3)
     @highty_rate_review = Store.left_joins(:reviews)
                                .distinct
+                               .limit(3)
                                .sort_by do |review|
                                   hoges = @reviews
                                   if hoges.present?
-                                    hoges.map(&:score).sum / hoges.size
+                                    hoges.average(:score).round(1).to_f
+                                    # .map(&:score).sum / hoges.size
                                   else
                                     0
                                   end
                                 end
-                               .reverse
-                               
   end
 
   def show

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :home
+  has_many :homes
   has_many :reviews
   has_many :stores
 

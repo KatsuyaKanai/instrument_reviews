@@ -33,7 +33,7 @@
               <div class="column">
                 <%= search_form_for @search_reviews, url: reviews_search_path, method: :get, local: true do |f| %>
                   <%= f.label :instrument_name_eq, "楽器名を選択してください", class:"reviews_post" %></br>
-                  <%= f.collection_select :instrument_name_eq, Instrument.all, :name, :name,{include_blank: "---"} %>
+                  <%= f.collection_select :instrument_name_eq, Instrument.all, :name, :name,{include_blank: "選択なし(全てのレビューを表示)"} %>
                   <%= f.submit "探す" %>
                 <% end %>
               <!--ransackを使わない検索フォーム
@@ -104,14 +104,23 @@
                 <div class="content has-text-right">  
                   ¥<%= review.store_price %>円
                 </div> 
+                <div class="content">
+                  <% if review.user == nil %>
+                    <span class="icon">
+                      <i class="fas fa-user"></i>
+                    </span>
+                    退会したユーザー
+                  <% else %>
+                    <span class="icon">
+                      <i class="fas fa-user"></i>
+                    </span>
+                    <%= link_to user_path(review.user_id) do %>
+                      <%= review.user.name %>
+                    <% end %>
+                  <% end %>
+                </div>
               </div>
               <footer class="card-footer">
-                <p class="card-footer-item">
-                  <span class="icon">
-                    <i class="fas fa-user"></i>
-                  </span>
-                  <%= review.user.name %>
-                </p>
                 <p class="card-footer-item">
                   <span class="icon">
                     <i class="fas fa-music"></i>

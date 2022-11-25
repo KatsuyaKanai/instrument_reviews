@@ -14,16 +14,18 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.user_id = current_user.id
     if @review.save
+      flash[:notice] = 'レビューが投稿されました'
       redirect_to store_reviews_path(@review.store)
     else
       @store = Store.find(params[:store_id])
+      flash[:alert] = "レビューの投稿に失敗しました"
       render "stores/show"
     end
   end
 
-  def show
-    @review = Review.find(params[:id])
-  end
+  # def show
+  #   @review = Review.find(params[:id])
+  # end
 
   def edit
     @store = Store.find(params[:store_id])
@@ -33,13 +35,14 @@ class ReviewsController < ApplicationController
   def update
     @review = Review.find(params[:id])
     @review.update(edit_review_params)
+    flash[:notice] = "レビューを編集しました" 
     redirect_to store_reviews_path(@review.store_id)
   end
 
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
-    flash[:notice] = '口コミが削除されました。'
+    flash[:alert] = '口コミが削除されました'
     redirect_to store_reviews_path(@review.store_id)
   end
 

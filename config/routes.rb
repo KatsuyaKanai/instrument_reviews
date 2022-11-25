@@ -19,13 +19,12 @@ Rails.application.routes.draw do
 
   root to: 'homes#index'
   get 'homes/index'
-  get 'homes/about', to: 'homes#show'
-  get 'users/index'
-  get 'users/new'
-  get 'users/:id', to: 'users#show'
-  get 'users/update'
-  get 'users/destroy'
-  get 'users/edit'
+  resources :users
+  # get 'users/index'
+  # get 'users/:id', to: 'users#show'
+  # get 'users/update'
+  # get 'users/destroy'
+  # get 'users/edit'
   # get 'search', to: 'stores#search'
 
 

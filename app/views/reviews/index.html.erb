@@ -86,14 +86,23 @@
               <div class="content has-text-right">
                 ¥<%= review.store_price %>円
               </div>
-            </div>
+              <div class="content">
+                <% if review.user == nil %>
+                  <span class="icon">
+                    <i class="fas fa-user"></i>
+                  </span>
+                  退会したユーザー
+                <% else %>
+                  <span class="icon">
+                    <i class="fas fa-user"></i>
+                  </span>
+                  <%= link_to user_path(review.user_id) do %>
+                    <%= review.user.name %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>  
             <footer class="card-footer">
-              <p class="card-footer-item">
-                <span class="icon">
-                  <i class="fas fa-user"></i>
-                </span>
-                <%= review.user.name %>
-              </p>
               <p class="card-footer-item">
                 <span class="icon">
                   <i class="fas fa-music"></i>
