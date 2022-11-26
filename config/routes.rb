@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   # patch 'stores/:id/reviews', to: 'reviews#update'
   get 'reviews/search', to: 'reviews#search'
   post 'reviews/new', to: 'reviews#create'
-  delete 'review' => 'reviews#destroy'
+  # get 'stores/review' => 'reviews#destroy'
   devise_for :users
     
 
