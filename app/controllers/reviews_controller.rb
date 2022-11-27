@@ -4,6 +4,9 @@ class ReviewsController < ApplicationController
   def index
     @store = Store.find(params[:store_id])
     @reviews = @store.reviews.order(updated_at: :desc)
+    #review#indexのソート機能
+    # selection = params[:keyword]
+    # @reviews = @store.reviews.sort(selection)
   end
 
   def new
@@ -43,7 +46,7 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @review.destroy
     flash[:alert] = '口コミが削除されました'
-    redirect_to store_reviews_path(@review.store_id)
+    redirect_back fallback_location: store_reviews_path(@review.store_id)
   end
 
   def search

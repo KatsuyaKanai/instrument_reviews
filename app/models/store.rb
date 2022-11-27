@@ -12,6 +12,10 @@ class Store < ApplicationRecord
     Arel.sql(query)
   end
 
+  ransacker :reviews_avg_score do
+    query = '(SELECT AVG(reviews.score) From reviews where reviews.store_id = stores.id GROUP BY reviews.store_id)'
+    Arel.sql(query)
+  end
   #レビューの評価が高い順にソートができてない
   # ransacker :review_score do
   #   query = '(SELECT COUNT(avg_score)'

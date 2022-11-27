@@ -16,3 +16,20 @@
 // const imagePath = (name) => images(name, true)
 
 console.log('Hello World from Webpacker')
+
+
+
+//= require jquery
+//= require jquery_ujs
+
+
+import Rails from "@rails/ujs"
+
+import * as ActiveStorage from "@rails/activestorage"
+import "channels"
+
+Rails.start()
+Turbolinks.start()
+ActiveStorage.start()
+
+

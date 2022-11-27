@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   root to: 'homes#index'
   get 'homes/index'
+  #post '/homes/guest_sign_in', to: 'homes#guest_sign_in'
   resources :users
   # get 'users/index'
   # get 'users/:id', to: 'users#show'

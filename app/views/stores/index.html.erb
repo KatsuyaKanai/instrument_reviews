@@ -13,7 +13,7 @@
                 <option value="">並び替え</option>
                 <option value="<%= sort_by_sort_url(sort_url(@q, :created_at), 'created_at+desc')%>">店の登録の新着順</option>
                 <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_created_at), 'reviews_created_at+desc')%>">レビューの新着順</option>
-                <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_score), 'reviews_score+desc')%>">評価が高い順</option>
+                <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_avg_score), 'reviews_avg_score+desc')%>">評価が高い順</option>
                 <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_count), 'reviews_count+desc')%>">レビューが多い順</option>
               </select>
             </div>

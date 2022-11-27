@@ -23,17 +23,9 @@ class HomesController < ApplicationController
                             .order(created_at: :desc)
                             .limit(3)
     @highty_rate_review = Store.left_joins(:reviews)
+                               .order(score: :desc)
                                .distinct
                                .limit(3)
-                               .sort_by do |review|
-                                  hoges = @reviews
-                                  if hoges.present?
-                                    hoges.average(:score).round(1).to_f
-                                    # .map(&:score).sum / hoges.size
-                                  else
-                                    0
-                                  end
-                                end
   end
 
   def show

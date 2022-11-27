@@ -111,7 +111,7 @@
               </td>
               <td>
                 <i class="fa fa-trash" aria-hidden="true"></i>
-                <%= link_to "削除", "reviews/#{myreview.id}", method: :delete, data: { confirm: '口コミを削除しますか？'} %>
+                <%= link_to "削除", store_review_path(myreview.store_id, myreview.id), method: :delete, data: { confirm: '口コミを削除しますか？'} %>
               </td>
             </div>
           <% end %>

@@ -112,7 +112,7 @@
                   <span class="icon">
                     <i class="fa fa-times"></i>
                   </span>
-                  <%= link_to "削除", "reviews/#{review.id}", method: :delete, data: { confirm: '口コミを削除しますか？'} %>
+                  <%= link_to "削除", store_review_path(review.store_id, review.id), method: :delete, data: { confirm: '口コミを削除しますか？'} %>
                 </td>
               <% end %>
             <% end %>
