@@ -77,15 +77,17 @@
             </footer>              
           </div>  
           <div class="has-text-right p-3">
-            <% if review.user_id == current_user.id %>
-              <td>
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                <%= link_to "編集", edit_store_review_path(review.store_id, review.id) %>
-              </td>
-              <td>
-                <i class="fa fa-trash" aria-hidden="true"></i>
-                <%= link_to "削除", store_review_path(review.store_id, review.id), method: :delete, data: { confirm: '口コミを削除しますか？'} %>
-              </td>
+            <% if user_signed_in? %>
+              <% if review.user_id == current_user.id %>
+                <td>
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <%= link_to "編集", edit_store_review_path(review.store_id, review.id) %>
+                </td>
+                <td>
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <%= link_to "削除", store_review_path(review.store_id, review.id), method: :delete, data: { confirm: '口コミを削除しますか？'} %>
+                </td>
+              <% end %>
             <% end %>
           </div>
         <% end %>

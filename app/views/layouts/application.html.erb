@@ -11,9 +11,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
   </head>
 
-  <body>
+  <body class="Site">
     <%= render "layouts/header" %>
-    <%= yield %>
+    <main class="Site-content">
+      <%= yield %>
+    </main>
     <%= render "layouts/footer" %>
 
     

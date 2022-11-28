@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   post 'reviews/new', to: 'reviews#create'
   # get 'stores/review' => 'reviews#destroy'
   devise_for :users
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#new_guest'
+  end
     
 
   root to: 'homes#index'

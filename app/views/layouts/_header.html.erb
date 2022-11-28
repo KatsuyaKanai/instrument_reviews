@@ -36,7 +36,7 @@
           <% end %>
           <div class="buttons"> 
             <% if user_signed_in? %>
-              <%= link_to destroy_user_session_path, method: :delete, class: "button" do %>
+              <%= link_to destroy_user_session_path, class: "button" do %>
                 ログアウト
               <% end %>
             <% else %>
@@ -45,6 +45,9 @@
               <% end %>
               <%= link_to new_user_registration_path, class: "button" do %>
                 新規登録
+              <% end %>
+              <%= link_to users_guest_sign_in_path, method: :post, class: "button" do %>
+                ゲストログイン
               <% end %>
             <% end %>
           </div>
