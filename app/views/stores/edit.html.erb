@@ -1,9 +1,9 @@
-<% content_for(:title, "店の新規登録") %>
+<% content_for(:title, "店の編集") %>
 <section class="section">
   <div class="container mt-3">
     <h1 class="title">
       <p class="has-text-weight-bold has-text-centered">
-        口コミを投稿したい店を入力してください
+        店情報の編集をしてください
       </p>
     </h1>
     <div class="columns is-centered">
@@ -18,25 +18,25 @@
                 </span>
                 <%= f.hidden_field :user_id, value: current_user.id %>
                 <%= f.label :name, "店名" %>
-                <%= f.text_field :name, placeholder: "店名を入力" %>
+                <%= f.text_field :name, value: @store.name %>
               </div>
               <div class="content mb-3 has-text-centered">
                 <span class="icon">
                   <i class="fa fa-location-arrow"></i>
                 </span>
                 <%= f.label :address, "都道府県" %>
-                <%= f.collection_select(:address, Prefecture.all, :name, :name,{include_blank: "---"} ) %>
+                <%= f.collection_select(:address, Prefecture.all, :name, :name,{include_blank: @store.address} ) %>
               </div>
               <div class="content has-text-centered">
                 <span class="icon">
                   <i class="fa fa-train"></i>
                 </span>
                 <%= f.label :nearest_station, "最寄駅" %>
-                <%= f.text_field :nearest_station, placeholder: "最寄駅を入力", id: 'store_nearest_station' %>
+                <%= f.text_field :nearest_station, value: @store.nearest_station, id: 'store_nearest_station' %>
               </div>
             </div>
             <footer class="card-footer"> 
-              <%= f.submit "登録", class: "button card-footer-item p-0" %>
+              <%= f.submit "更新する", class: "button card-footer-item p-0" %>
               <%= link_to "戻る", :back, class: "button card-footer-item" %>
             </footer>
           </div>

@@ -18,7 +18,7 @@
               </select>
             </div>
             <% @stores.each do |store| %>
-              <div class="card mb-6">
+              <div class="card">
                 <header class="card-header">
                   <p class="card-header-title">
                     <span class="icon">
@@ -60,6 +60,20 @@
                     レビューを書く
                   <% end %>
                 </footer>
+              </div>
+              <div class="has-text-right p-3 mb-4">
+                <% if user_signed_in? %>
+                  <% if store.user_id == current_user.id %>
+                    <td>
+                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                      <%= link_to "店の情報の編集", edit_store_path(store.id) %>
+                    </td>
+                    <td>
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                      <%= link_to "この店を削除", "/stores/#{store.id}", data: { confirm: 'この店情報を削除しますか？'}, method: :delete %>
+                    </td>
+                  <% end %>
+                <% end %>
               </div>
             <% end %>
           </div>

@@ -42,7 +42,7 @@ RSpec.describe "Stores", type: :system do
             fill_in "nearest_station", with: "test_station"
             click_button "登録"
             expect(page).to have_content "test"
-            expect(page).to have_content "test_address"
+            expect(page).to have_content "東京都"
             expect(page).to have_content "test_station"
             expect(current_path).to eq '/stores/:store_id'       
           end

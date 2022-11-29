@@ -2,19 +2,18 @@
 
 <%= render "shared/errors", object: review %>
 
-
 <div class="rating-box mt-3 has-text-centered">
-  <%= form_with model: [@store, @review], url: store_review_path(store),local: true do |f| %>
+  <%= form_with model: [@store, @review], url: store_review_path(store), local: true do |f| %>
     <span class="icon">
-      <i class="fas fa-tag"></i>
+      <i class="fa fa-tag"></i>
     </span>
     <%= f.label :reviews_title, "タイトル", class:"" %>
-    <%= f.collection_select(:reviews_title, Title.all, :name, :name,{include_blank: "---"}) %></br>
+    <%= f.collection_select(:reviews_title, Title.all, :name, :name,{include_blank: "---"}) %><br>
     <span class="icon">
-      <i class="fas fa-music"></i>
+      <i class="fa fa-music"></i>
     </span>
     <%= f.label :instrument_name, "楽器名", class:"" %>
-    <%= f.collection_select(:instrument_name, Instrument.all, :name, :name,{include_blank: "---"} ) %></br>
+    <%= f.collection_select(:instrument_name, Instrument.all, :name, :name,{include_blank: "---"} ) %><br>
     <span class="icon">
       <i class="fa fa-money"></i>
     </span>
@@ -37,7 +36,7 @@
     <%= f.hidden_field :score, id: "rating-value" %>
     <%= f.text_area :store_reviews, class:"textarea" %>
     <%= f.submit "編集する", class: "button mt-3"%>
-    <%= link_to "戻る", :back, class: "button light ml-3 mt-3" %>
+    <%= link_to "レビュー一覧に戻る", store_reviews_path(store.id, review.id), class: "button light ml-3 mt-3" %>
   <% end %>
 </div>
 

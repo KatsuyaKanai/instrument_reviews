@@ -29,9 +29,21 @@ class StoresController < ApplicationController
   end
 
   def edit
+    @store = Store.find(params[:id])
+  end
+
+  def update
+    @store = Store.find(params[:id])
+    @store.update(edit_store_params)
+    flash[:notice] = "店情報を編集しました" 
+    redirect_to stores_path
   end
 
   def destroy
+    @store = Store.find(params[:id])
+    @store.destroy
+    flash[:alert] = '店情報が削除されました'
+    redirect_to stores_path
   end
 
   def search
@@ -44,6 +56,10 @@ class StoresController < ApplicationController
 
   def stores_params
     params.permit(:user_id, :store_id, :name, :address, :instrument_name, :nearest_station)
+  end
+
+  def edit_store_params
+    params.permit(:iser_id, :name, :address, :nearest_station)
   end
 
   def search_params

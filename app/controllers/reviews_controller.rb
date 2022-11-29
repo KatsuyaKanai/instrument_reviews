@@ -37,9 +37,15 @@ class ReviewsController < ApplicationController
 
   def update
     @review = Review.find(params[:id])
+    @store = Store.find(params[:store_id])
     @review.update(edit_review_params)
-    flash[:notice] = "レビューを編集しました" 
-    redirect_to store_reviews_path(@review.store_id)
+    if @review.valid?
+      flash[:notice] = "レビューを編集しました" 
+      redirect_to store_reviews_path(@review.store_id)
+    else
+      flash[:alert] = "編集に失敗しました"
+      render :edit
+    end
   end
 
   def destroy
@@ -61,7 +67,7 @@ class ReviewsController < ApplicationController
     end
 
     def edit_review_params
-      params.require(:review).permit(:store_id, :reviews_title, :instrument_name, :store_price, :store_reviews, :score)
+      params.require(:review).permit(:id, :store_id, :reviews_title, :instrument_name, :store_price, :store_reviews, :score)
     end
     def search_reviews_params
       params.permit(:search_instrument_name)
