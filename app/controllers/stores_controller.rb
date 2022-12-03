@@ -16,7 +16,6 @@ class StoresController < ApplicationController
   def create
     @store = Store.new(stores_params)
     if @store.save
-      
       redirect_to store_path(@store)
     else
       render new_store_path

@@ -24,6 +24,10 @@ RSpec.describe "Reviews", type: :request do
   end
   #⬇︎system_specに記入？
   describe "reviews#search" do
+    it "楽器名で検索できること" do
+    end
+    it "楽器名で一致しない結果が返ってこないこと" do
+    end
     
   end
 

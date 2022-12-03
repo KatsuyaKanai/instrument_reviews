@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :store do
-    name { "testshop" }
+    sequence(:name, "testshop_1")
     address { "test-prefecture" }
-    nearest_station { "test-station" }    
+    nearest_station { "test-station" }
+    user_id { "1" }
   end
 end

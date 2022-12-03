@@ -51,7 +51,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
-    flash[:alert] = '口コミが削除されました'
+    flash[:alert] = 'レビューが削除されました'
     redirect_back fallback_location: store_reviews_path(@review.store_id)
   end
 

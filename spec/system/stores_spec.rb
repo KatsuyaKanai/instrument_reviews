@@ -34,7 +34,7 @@ RSpec.describe "Stores", type: :system do
     before do
       sign_in(user)
     end
-    describe '楽器店の新規登録' do
+    describe 'Stores#new' do
       context 'フォームの入力値が正常' do
         scenario '楽器店の新規登録が成功する' do
           visit stores_path
@@ -106,7 +106,7 @@ RSpec.describe "Stores", type: :system do
         end
       end
     end
-    describe "楽器店の編集" do
+    describe "Stores#edit" do
       describe "楽器店の登録者の場合" do
         before do
           visit stores_path
@@ -156,7 +156,7 @@ RSpec.describe "Stores", type: :system do
             expect(page).to have_content "編集に失敗しました"
           end
         end
-        context "楽器店の削除" do
+        context "Stores#destroy" do
           scenario "楽器店を削除する" do
             click_on :delete_button
             page.driver.browser.switch_to.alert.accept
@@ -170,7 +170,7 @@ RSpec.describe "Stores", type: :system do
           end
         end
       end
-      describe "楽器店の登録者でない場合" do
+      context "楽器店の登録者でない場合" do
         before do
           sign_in(user2)
         end
@@ -180,7 +180,7 @@ RSpec.describe "Stores", type: :system do
         end
       end
     end
-    describe "store#show" do
+    describe "Store#show" do
       before do
         visit stores_path
       end
