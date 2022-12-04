@@ -5,8 +5,6 @@ RSpec.describe "Stores", type: :system do
   let(:user2) { create(:user, id: "2", email: "testuser2@example.com") }
   let!(:store) { create(:store, user_id: "1") }
   let(:store2) { create(:store) }
-  let(:review) { create(:review, user_id: "1", store: [store]) }
-  let(:review2) { create(:review2, user_id: "2", store: [store]) }
 
   scenario 'ホームにアクセスする' do
     visit stores_path
@@ -202,6 +200,30 @@ RSpec.describe "Stores", type: :system do
         expect(current_path).to eq store_reviews_path(store)
       end
     end  
+  end
+  describe "Stores#search" do
+    context "楽器店の検索" do
+      scenario "店名で一致するデータが表示される" do
+        visit root_path
+        fill_in 'q[name_or_address_cont]', with:'test'
+        click_on '検索'
+        expect(page).to have_content "1件見つかりました"
+        expect(page).to have_content "test"
+      end
+      scenario "都道府県で一致するデータが表示される" do
+        visit root_path
+        fill_in 'q[name_or_address_cont]', with:'東京都'
+        click_on '検索'
+        expect(page).to have_content "1件見つかりました"
+        expect(page).to have_content "東京都"
+      end
+      scenario "店名または都道府県で一致しないデータが表示されない" do
+        visit root_path
+        fill_in 'q[name_or_address_cont]', with:'埼玉県'
+        click_on '検索'
+        expect(page).to have_content "0件見つかりました"
+      end
+    end
   end
 
 end

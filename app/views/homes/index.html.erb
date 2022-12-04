@@ -37,13 +37,6 @@
                   <%= f.collection_select :instrument_name_eq, Instrument.all, :name, :name,{include_blank: "選択なし(全てのレビューを表示)"} %>
                   <%= f.submit "探す" %>
                 <% end %>
-              <!--ransackを使わない検索フォーム
-                <%= form_with url: reviews_search_path, method: :get, local: true do |form| %>
-                  <%= form.label :search_instrument_name, "楽器名を選択してください", class:"reviews_post" %></br>
-                  <%= form.collection_select(:search_instrument_name, Instrument.all, :name, :name,{include_blank: "---"}) %>
-                  <%= form.submit "探す" %>
-                <% end %>
-              -->
               </div>
             </div>
           </section>

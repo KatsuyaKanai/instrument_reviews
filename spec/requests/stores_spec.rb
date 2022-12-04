@@ -1,18 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "Stores", type: :request do
-  let(:user) { create(:user) }
-  let(:user2) { create(:user)}
-  let!(:store) { create(:store) }
-  let(:store2) { create(:store) }
-  let!(:many_stores) { create_list(:store, 5)}
-  let(:review) { create(:review, stores: [store]) }
-  let(:review2) { create(:review, stores: [store]) }
-  let!(:many_reviews) { create_list(:review, 5, store: [store]) }
+  let!(:user) { create(:user, id: 1, name: "testman") }
+  let!(:user2) { create(:user, id: 2, email: "testuser2@example.com") }
+  let(:user3) { create(:user, id:3, email: "testuser3@example.com") }
+  let!(:store) { create(:store, user_id: 1) }
+  let(:store2) { create(:store, id: 2, name: "test_store2") }
+  let!(:review) { create(:review, reviews_title: "その他", score: 4, store_price: 9999, instrument_name: "Horn", store_reviews: "test") }
+  let!(:review2) { create(:review, user_id:2, reviews_title: "楽器修理", score: 5, store_price: 8888, instrument_name: "Fagot", store_reviews: "test") }
 
-  before do
-    @user = FactoryBot.create(:user)
-  end
 
   describe "stores#index" do
     before do
@@ -43,24 +39,30 @@ RSpec.describe "Stores", type: :request do
       expect(response.body).to include store.avg_score.to_s
     end
 
+    #↓system_spec?
     it "レビューの平均点がレビューのスコアで変わること" do
+      review3 = Review.new(reviews_title: "消耗品購入", score: 1, store_price: 7777, instrument_name: "Flute", store_reviews: "test3")
     end
     
   end
 
   describe "stores#show" do
     before do
+      sign_in(user)
       get store_path(store)
     end
     
-   
-
-    it "stores_path(:store_id)にパスできること" do
+    it "リクエストが200がかえってくること" do
+      expect(response).to have_http_status(200)
     end
 
-    it "storeのが表示されること" do
+    it "storeの情報が表示されること" do
+      expect(response.body).to include store.name
+      expect(response.body).to include store.address
+      expect(response.body).to include store.nearest_station
+      expect(response.body).to include store.reviews.count.to_s
+      expect(response.body).to include store.avg_score.to_s
     end
-    
   end
 
   describe "stores#new" do
@@ -68,7 +70,7 @@ RSpec.describe "Stores", type: :request do
 
 
     it "storeの新規登録画面にアクセスできること" do
-      sign_in @user
+      sign_in(user)
       get new_store_path
       expect(response).to have_http_status(200)
     end
@@ -79,11 +81,6 @@ RSpec.describe "Stores", type: :request do
   end
 
   describe "stores#search" do
-    it "店名または都道府県でstoreの全データから検索できること" do 
-    end
-    
-    it "店名または都道府県と合致しないstoreが検索されないこと" do
-    end
     
     it "楽器店の登録順でソートできること" do
     end
