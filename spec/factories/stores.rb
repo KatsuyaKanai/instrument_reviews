@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :store do
-    sequence(:name, "testshop_1")
+    name { "teststore" }
     address { "東京都" }
     nearest_station { "test-station" }
     user_id { "1" }

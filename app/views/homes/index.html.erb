@@ -129,7 +129,7 @@
                 </p>
               </footer>
           </div>
-          <div class="has-text-right p-3">
+          <div class="has-text-right p-3" id="top_review">
             <% if user_signed_in? %>
               <% if review.user_id == current_user.id %>
                 <td>
@@ -144,17 +144,15 @@
             <% end %>
           </div>
         </div>
-        
       <% end %>
-      
-   </div>
- </div>
+    </div>
+  </div>
 </section>
 
 <section class="section">
   <h1 class="title">
     <p class="has-text-weight-bold has-text-centered">
-      評価が高い店ベスト3
+      評価が高い店
     </p>
   </h1>
   <div class="container">

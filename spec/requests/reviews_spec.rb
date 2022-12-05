@@ -10,10 +10,6 @@ RSpec.describe "Reviews", type: :request do
   let!(:review) { create(:review, reviews_title: "その他", score: 4, store_price: 9999, instrument_name: "Horn", store_reviews: "test") }
   let!(:review2) { create(:review, user_id:2, reviews_title: "楽器修理", score: 5, store_price: 8888, instrument_name: "Fagot", store_reviews: "test") }
   let(:review3) { create(:review, store_id: 2, reviews_title: "消耗品購入", score: 5, store_price: 8888, instrument_name: "Trumpet", store_reviews: "test3") }
-    # let(:store) { create(:store) }
-    # let(:store2) { create(:store) }
-    # let(:review) { create(:review, stores: [store]) }
-    # let(:review2) { create(:review2, stores: [store]) }
 
   before do
     sign_in(user)
@@ -76,10 +72,6 @@ RSpec.describe "Reviews", type: :request do
       expect(response.body).to include review.score.to_s
       expect(response.body).to include review.instrument_name
       expect(response.body).to include review.user.name
-      expect(response.body).not_to include review2.reviews_title
-      expect(response.body).not_to include review2.score.to_s
-      expect(response.body).not_to include review2.instrument_name
-      expect(response.body).not_to include review2.user.name
     end
   end
 

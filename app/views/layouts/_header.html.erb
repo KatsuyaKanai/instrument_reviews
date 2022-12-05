@@ -25,12 +25,12 @@
   
     <div id="navbarBasicExample" class="navbar-menu" v-bind:class="{'is-active': isOpen}">
       <div class="navbar-end">
-          <%= link_to stores_path, class: "navbar-item has-text-black" do %>
+          <%= link_to stores_path, class: "navbar-item has-text-black", id: "store_index" do %>
             楽器店一覧
           <% end %>
         <div class="navbar-item">
           <% if user_signed_in? %>
-            <%= link_to users_path, class: "navbar-item has-text-black" do %>
+            <%= link_to users_path, class: "navbar-item has-text-black", id: "user_name" do %>
               ようこそ <%= current_user.name %> さん
             <% end %>
           <% end %>

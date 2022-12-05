@@ -9,7 +9,7 @@
               <p class="is-size-4"><%= @stores.count %>件見つかりました</p>
               <!--ソート機能https://qiita.com/akkie/items/9d09d21a0e8ee47a1691
               -->
-              <select class="ui fluid dropdown" onChange="location.href=value;">
+              <select class="ui fluid dropdown" name= "stores_sort" onChange="location.href=value;">
                 <option value="">並び替え</option>
                 <option value="<%= sort_by_sort_url(sort_url(@q, :created_at), 'created_at+desc')%>">店の登録の新着順</option>
                 <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_created_at), 'reviews_created_at+desc')%>">レビューの新着順</option>
@@ -17,65 +17,67 @@
                 <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_count), 'reviews_count+desc')%>">レビューが多い順</option>
               </select>
             </div>
-            <% @stores.each do |store| %>
-              <div class="card">
-                <header class="card-header">
-                  <p class="card-header-title">
-                    <span class="icon">
-                      <i class="fas fa-city"></i>
-                    </span>
-                    <%= store.name %>
-                  </p>
-                  <p class="card-header-title">
-                    <span class="icon">
-                      <i class="fas fa-location-arrow"></i>
-                    </span>
-                    <%= store.address %>
-                  </p>
-                  <p class="card-header-title">
-                    <span class="icon">
-                      <i class="fas fa-train"></i>
-                    </span>
-                    <%= store.nearest_station %>
-                  </p>
-                </header>
-                <div class="card-content">
-                  <div class="content">
-                    <div class="content average-score">
-                      <div class="star-rating mb-2">
-                        <div class="star-rating-front" style="width: <%= store.reviews_score_percentage %>%">★★★★★</div>
-                        <div class="star-rating-back">★★★★★</div>
-                      </div>
-                      <div class="average-score-display ml-3 pt-2">
-                        <%= store.avg_score %>点（<%= store.reviews.count %>件のレビュー）
+            <ul class="stores">
+              <% @stores.each do |store| %>
+                <div class="card">
+                  <header class="card-header">
+                    <p class="card-header-title store-name">
+                      <span class="icon">
+                        <i class="fas fa-city"></i>
+                      </span>
+                      <%= store.name %>
+                    </p>
+                    <p class="card-header-title">
+                      <span class="icon">
+                        <i class="fas fa-location-arrow"></i>
+                      </span>
+                      <%= store.address %>
+                    </p>
+                    <p class="card-header-title">
+                      <span class="icon">
+                        <i class="fas fa-train"></i>
+                      </span>
+                      <%= store.nearest_station %>
+                    </p>
+                  </header>
+                  <div class="card-content">
+                    <div class="content">
+                      <div class="content average-score">
+                        <div class="star-rating mb-2">
+                          <div class="star-rating-front" style="width: <%= store.reviews_score_percentage %>%">★★★★★</div>
+                          <div class="star-rating-back">★★★★★</div>
+                        </div>
+                        <div class="average-score-display ml-3 pt-2">
+                          <%= store.avg_score %>点（<%= store.reviews.count %>件のレビュー）
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <footer class="card-footer">
+                    <%= link_to store_reviews_path(store), class: "button card-footer-item" do %>
+                      レビューを見る
+                    <% end %>
+                    <%= link_to store_path(store), class: "button card-footer-item" do %>
+                      レビューを書く
+                    <% end %>
+                  </footer>
                 </div>
-                <footer class="card-footer">
-                  <%= link_to store_reviews_path(store), class: "button card-footer-item" do %>
-                    レビューを見る
+                <div class="has-text-right p-3 mb-4">
+                  <% if user_signed_in? %>
+                    <% if store.user_id == current_user.id %>
+                      <td>
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <%= link_to "店の情報の編集", edit_store_path(store.id) %>
+                      </td>
+                      <td>
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        <%= link_to "この店を削除", "/stores/#{store.id}", data: { confirm: 'この店情報を削除しますか？'}, method: :delete, id: "delete_button" %>
+                      </td>
+                    <% end %>
                   <% end %>
-                  <%= link_to store_path(store), class: "button card-footer-item" do %>
-                    レビューを書く
-                  <% end %>
-                </footer>
-              </div>
-              <div class="has-text-right p-3 mb-4">
-                <% if user_signed_in? %>
-                  <% if store.user_id == current_user.id %>
-                    <td>
-                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                      <%= link_to "店の情報の編集", edit_store_path(store.id) %>
-                    </td>
-                    <td>
-                      <i class="fa fa-trash" aria-hidden="true"></i>
-                      <%= link_to "この店を削除", "/stores/#{store.id}", data: { confirm: 'この店情報を削除しますか？'}, method: :delete, id: "delete_button" %>
-                    </td>
-                  <% end %>
-                <% end %>
-              </div>
-            <% end %>
+                </div>
+              <% end %>
+            </ul>
           </div>
           <div class="side-content">
             <form class="level-right box">
