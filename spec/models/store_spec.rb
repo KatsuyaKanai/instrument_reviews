@@ -25,9 +25,4 @@ RSpec.describe Store, type: :model do
       expect(store.errors[:nearest_station]).to include("を入力してください")
     end
   end
-  describe "検索" do
-    it "店名または都道府県でstoreの全データから検索できること"
-      
-    it "店名または都道府県と合致しないstoreのデータがが検索されないこと"
-  end
 end

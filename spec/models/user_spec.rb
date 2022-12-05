@@ -7,7 +7,6 @@ RSpec.describe User, type: :model do
   end
   
   describe "ユーザの新規登録"
-  
     it "名前、メールアドレス、パスワードがある場合有効である" do
       user = FactoryBot.build(:user)
       expect(user).to be_valid
@@ -45,11 +44,10 @@ RSpec.describe User, type: :model do
       expect(user.errors[:password]).to include("は6文字以上で入力してください")
     end
 
-
     it "パスワードが確認用パスワードと一致しない場合、無効である" do
       user = FactoryBot.build(:user, password_confirmation: "testmanpassword123")
       user.valid?
       expect(user.errors[:password_confirmation]).to include("とパスワードの入力が一致しません")
     end
-
+  end
 end
