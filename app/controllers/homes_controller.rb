@@ -27,8 +27,4 @@ class HomesController < ApplicationController
                                .distinct
                                .limit(3)
   end
-
-  def show
-  end
-
 end

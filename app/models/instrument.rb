@@ -1,6 +1,5 @@
 class Instrument < ActiveHash::Base
 
-
   self.data = [
       {id: 1, name: 'Flute,Piccolo'}, {id: 2, name: 'Oboe'}, {id: 3, name: 'Clarinet'},
       {id: 4, name: 'Fagot'}, {id: 5, name: 'Saxophone'}, {id: 6, name: 'Trumpet'},

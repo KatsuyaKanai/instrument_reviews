@@ -1,12 +1,9 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
-  #before_action :set_q_reviews, only: [:index, :search]
+
   def index
     @store = Store.find(params[:store_id])
     @reviews = @store.reviews.order(updated_at: :desc)
-    #review#indexのソート機能
-    # selection = params[:keyword]
-    # @reviews = @store.reviews.sort(selection)
   end
 
   def new
@@ -25,10 +22,6 @@ class ReviewsController < ApplicationController
       render "stores/show"
     end
   end
-
-  # def show
-  #   @review = Review.find(params[:id])
-  # end
 
   def edit
     @store = Store.find(params[:store_id])

@@ -32,11 +32,4 @@ RSpec.describe Review, type: :model do
       expect(review.errors[:store_reviews]).to include("を入力してください")
     end
   end
-  describe "楽器名検索" do
-    it "楽器名の検索ができること" do
-    end
-
-    it "楽器名検索で違う楽器が検索できないこと" do
-    end
-  end
 end

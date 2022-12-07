@@ -69,5 +69,4 @@ class StoresController < ApplicationController
   def search_params
     params.permit(:search_word)
   end
-  
 end
