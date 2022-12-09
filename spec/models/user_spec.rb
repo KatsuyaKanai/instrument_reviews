@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
     expect(FactoryBot.build(:user)).to be_valid
   end
   
-  describe "ユーザの新規登録"
+  describe "ユーザの新規登録" do
     it "名前、メールアドレス、パスワードがある場合有効である" do
       user = FactoryBot.build(:user)
       expect(user).to be_valid

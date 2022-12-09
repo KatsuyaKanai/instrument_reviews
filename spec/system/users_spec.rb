@@ -11,7 +11,6 @@ RSpec.describe "User", type: :system do
   let!(:review2) { create(:review, user_id: 2, reviews_title: "楽器修理", score: 5, store_price: 8888, instrument_name: "Fagot", store_reviews: "test") }
   let!(:review3) { create(:review, user_id: 1, store_id: 2, reviews_title: "その他", score: 3, store_price: 9999, instrument_name: "Horn", store_reviews: "test") }
 
-
   describe 'User CRUD' do
     describe 'ログイン前' do
       describe 'ユーザー新規登録' do
@@ -61,6 +60,7 @@ RSpec.describe "User", type: :system do
         visit root_path
         click_link user.name, match: :first
       end
+
       context "card内のユーザー名をクリックした時" do
         scenario "そのユーザーのレビュー一覧が見れる" do
           expect(current_path).to eq user_path(user)
@@ -75,6 +75,7 @@ RSpec.describe "User", type: :system do
       before do
         sign_in(user)
       end
+
       describe "User#index" do
         context "headerのユーザー名をクリックすると" do
           scenario "ユーザのアドレス、投稿情報が表示される" do
@@ -89,6 +90,7 @@ RSpec.describe "User", type: :system do
             expect(page).not_to have_content review2.reviews_title
           end
         end
+
         describe 'User#edit' do
           before do
             visit root_path

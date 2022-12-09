@@ -35,7 +35,7 @@ class StoresController < ApplicationController
     @store = Store.find(params[:id])
     @store.update(edit_store_params)
     if @store.valid?
-      flash[:notice] = "店情報を編集しました" 
+      flash[:notice] = "店情報を編集しました"
       redirect_to stores_path
     else
       flash[:alert] = "編集に失敗しました"
@@ -54,6 +54,7 @@ class StoresController < ApplicationController
   end
 
   private
+
   def set_q
     @q = Store.ransack(params[:q])
   end

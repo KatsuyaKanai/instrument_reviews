@@ -3,18 +3,19 @@ require 'rails_helper'
 RSpec.describe "Reviews", type: :system do
   let!(:user) { create(:user, id: 1, name: "testman") }
   let!(:user2) { create(:user, id: 2, email: "testuser2@example.com") }
-  let(:user3) { create(:user, id:3, email: "testuser3@example.com") }
+  let(:user3) { create(:user, id: 3, email: "testuser3@example.com") }
   let!(:store) { create(:store, user_id: 1) }
   let(:store2) { create(:store, id: 2, name: "test_store2") }
   let!(:review) { create(:review, reviews_title: "その他", score: 4, store_price: 9999, instrument_name: "Horn", store_reviews: "test") }
-  let!(:review2) { create(:review, user_id:2, reviews_title: "楽器修理", score: 5, store_price: 8888, instrument_name: "Fagot", store_reviews: "test") }
+  let!(:review2) { create(:review, user_id: 2, reviews_title: "楽器修理", score: 5, store_price: 8888, instrument_name: "Fagot", store_reviews: "test") }
 
   describe "reviews#index" do
     before do
       sign_in(user)
-      #@review = FactoryBot.create(:review)
+      # @review = FactoryBot.create(:review)
       visit stores_path
     end
+
     scenario "楽器店のレビューをみる" do
       click_link "レビューを見る"
       expect(current_path).to eq store_reviews_path(store)
@@ -127,7 +128,7 @@ RSpec.describe "Reviews", type: :system do
           expect(page).to have_content "料金を入力してください"
         end
 
-        #星評価はeditで値を持ってきて、未入力でも値が入っている？のでeditで星評価が未選択であることがない？
+        # 星評価はeditで値を持ってきて、未入力でも値が入っている？のでeditで星評価が未選択であることがない状態になっている？
         # scenario "星評価が未選択の時" do
         #   click_link "レビューを見る"
         #   expect(current_path).to eq store_reviews_path(store)
@@ -185,12 +186,13 @@ RSpec.describe "Reviews", type: :system do
       end
     end
   end
-  
+
   describe "reviews#new" do
     before do
       sign_in(user)
       visit stores_path
     end
+
     context "レビューの投稿が成功" do
       scenario "入力欄に正しく入力しレビューの投稿が成功する" do
         click_link "レビューを書く"
@@ -275,7 +277,6 @@ RSpec.describe "Reviews", type: :system do
         expect(page).to have_content "料金を入力してください"
       end
 
-      #星評価の制御ができてない、今は違うidを指定中
       scenario "星評価が空欄だとレビューの投稿が失敗する" do
         click_link "レビューを書く"
         expect(current_path).to eq store_path(store)
@@ -313,13 +314,15 @@ RSpec.describe "Reviews", type: :system do
       end
     end
   end
+
   describe "Reviews#search" do
     before do
       many_reviews = create_list(:review, 5)
       visit root_path
     end
+
     context "レビューの検索" do
-      #↓なぜ@reviewが通るかよくわからない
+      # ↓なぜ@reviewが通るかよくわからない
       scenario "topから楽器名を選択して一致するデータが表示される" do
         select review.instrument_name, from: 'q[instrument_name_eq]'
         click_on '探す'

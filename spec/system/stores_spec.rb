@@ -8,7 +8,6 @@ RSpec.describe "Stores", type: :system do
   let!(:review) { create(:review, user_id: 1, reviews_title: "その他", score: 4, store_price: 9999, instrument_name: "Horn", store_reviews: "test") }
   let!(:review2) { create(:review, user_id: 2, reviews_title: "楽器修理", score: 5, store_price: 8888, instrument_name: "Fagot", store_reviews: "test") }
 
-
   scenario 'ホームにアクセスする' do
     visit stores_path
     within("#title") do
@@ -26,8 +25,8 @@ RSpec.describe "Stores", type: :system do
 
   context "stores#show" do
     scenario "ログインしていなければログイン画面に遷移すること" do
-     visit store_path(store)
-     expect(current_path).to eq user_session_path
+      visit store_path(store)
+      expect(current_path).to eq user_session_path
     end
   end
 
@@ -35,6 +34,7 @@ RSpec.describe "Stores", type: :system do
     before do
       sign_in(user)
     end
+
     describe 'Stores#new' do
       context 'フォームの入力値が正常' do
         scenario '楽器店の新規登録が成功する' do
@@ -47,7 +47,7 @@ RSpec.describe "Stores", type: :system do
           expect(page).to have_content "test"
           expect(page).to have_content "東京都"
           expect(page).to have_content "test_station"
-          expect(page).to have_content "レビューを書く"      
+          expect(page).to have_content "レビューを書く"
         end
       end
 
@@ -107,11 +107,13 @@ RSpec.describe "Stores", type: :system do
         end
       end
     end
+
     describe "Stores#edit" do
       describe "楽器店の登録者の場合" do
         before do
           visit stores_path
         end
+
         context "楽器店の編集が成功する" do
           scenario "フォームの入力が正常" do
             click_link "店の情報の編集"
@@ -125,6 +127,7 @@ RSpec.describe "Stores", type: :system do
             expect(page).to have_content "店情報を編集しました"
           end
         end
+
         context "楽器店の編集が失敗する" do
           scenario "楽器店名が空欄" do
             click_link "店の情報の編集"
@@ -157,6 +160,7 @@ RSpec.describe "Stores", type: :system do
             expect(page).to have_content "編集に失敗しました"
           end
         end
+
         context "Stores#destroy" do
           scenario "楽器店を削除する" do
             click_on :delete_button
@@ -171,20 +175,24 @@ RSpec.describe "Stores", type: :system do
           end
         end
       end
+
       context "楽器店の登録者でない場合" do
         before do
           sign_in(user2)
         end
+
         scenario "楽器店の編集、削除のリンクがない" do
           expect(page).not_to have_content "店情報の編集"
           expect(page).not_to have_content "楽器店を削除する"
         end
       end
     end
+
     describe "Store#show" do
       before do
         visit stores_path
       end
+
       scenario "楽器店のレビュー投稿画面に移動する" do
         click_link "レビューを書く", match: :first
         expect(page).to have_content store.name
@@ -192,7 +200,7 @@ RSpec.describe "Stores", type: :system do
         expect(page).to have_content store.nearest_station
         expect(page).to have_content "レビューを書く"
       end
-      #review_spec?
+      # review_spec?
       scenario "楽器店のレビュー一覧に戻る" do
         click_link "レビューを書く", match: :first
         expect(current_path).to eq store_path(store)
@@ -202,13 +210,14 @@ RSpec.describe "Stores", type: :system do
         expect(page).to have_content store.nearest_station
         expect(current_path).to eq store_reviews_path(store)
       end
-    end  
+    end
   end
+
   describe "Stores#search" do
     context "楽器店の検索" do
       scenario "店名で一致するデータが表示される" do
         visit root_path
-        fill_in 'q[name_or_address_cont]', with:'test'
+        fill_in 'q[name_or_address_cont]', with: 'test'
         click_on '検索'
         expect(page).to have_content "#{@store}件見つかりました"
         expect(page).to have_content "test"
@@ -216,7 +225,7 @@ RSpec.describe "Stores", type: :system do
 
       scenario "都道府県で一致するデータが表示される" do
         visit root_path
-        fill_in 'q[name_or_address_cont]', with:'東京都'
+        fill_in 'q[name_or_address_cont]', with: '東京都'
         click_on '検索'
         expect(page).to have_content "#{@store}件見つかりました"
         expect(page).to have_content "東京都"
@@ -224,7 +233,7 @@ RSpec.describe "Stores", type: :system do
 
       scenario "店名または都道府県で一致しないデータが表示されない" do
         visit root_path
-        fill_in 'q[name_or_address_cont]', with:'埼玉県'
+        fill_in 'q[name_or_address_cont]', with: '埼玉県'
         click_on '検索'
         expect(page).to have_content "0件見つかりました"
       end
@@ -233,7 +242,7 @@ RSpec.describe "Stores", type: :system do
     context "stores_pathから楽器店の検索" do
       scenario "店名で一致するデータが表示される" do
         visit stores_path
-        fill_in 'q[name_or_address_cont]', with:'test'
+        fill_in 'q[name_or_address_cont]', with: 'test'
         click_on '検索'
         expect(page).to have_content "#{@store}件見つかりました"
         expect(page).to have_content "test"
@@ -241,7 +250,7 @@ RSpec.describe "Stores", type: :system do
 
       scenario "都道府県で一致するデータが表示される" do
         visit stores_path
-        fill_in 'q[name_or_address_cont]', with:'東京都'
+        fill_in 'q[name_or_address_cont]', with: '東京都'
         click_on '検索'
         expect(page).to have_content "#{@store}件見つかりました"
         expect(page).to have_content "東京都"
@@ -249,7 +258,7 @@ RSpec.describe "Stores", type: :system do
 
       scenario "店名または都道府県で一致しないデータが表示されない" do
         visit stores_path
-        fill_in 'q[name_or_address_cont]', with:'埼玉県'
+        fill_in 'q[name_or_address_cont]', with: '埼玉県'
         click_on '検索'
         expect(page).to have_content "0件見つかりました"
       end
@@ -260,7 +269,8 @@ RSpec.describe "Stores", type: :system do
         many_reviews = create_list(:review, 5, store_id: 2, score: 5)
         visit stores_path
       end
-      #ソート前の表示の並びもテストしたい
+      # ソート前の表示の並びもテストしたい
+
       scenario "店の登録の新着順でソートできる" do
         select "店の登録の新着順", from: 'stores_sort'
         within '.stores' do
@@ -284,7 +294,7 @@ RSpec.describe "Stores", type: :system do
           expect(store_names).to eq %w(teststore_2 teststore)
         end
       end
-      
+
       scenario "レビューが多い順でソートできる" do
         select "レビューが多い順", from: 'stores_sort'
         within '.stores' do

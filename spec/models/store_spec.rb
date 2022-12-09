@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Store, type: :model do
-  let(:store) { create(:store) }
-  let(:store2) { create(:store) }
-  let(:review) { create(:review, stores: [store]) }
-  let(:review2) { create(:review2, stores: [store]) }
 
   describe "stores#create" do
     it "店名がない場合無効である" do

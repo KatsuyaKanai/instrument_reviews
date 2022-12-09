@@ -1,14 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "Reviews", type: :request do
-  
   let!(:user) { create(:user, id: 1, name: "testman") }
   let!(:user2) { create(:user, id: 2, email: "testuser2@example.com") }
-  let(:user3) { create(:user, id:3, email: "testuser3@example.com") }
+  let(:user3) { create(:user, id: 3, email: "testuser3@example.com") }
   let!(:store) { create(:store, user_id: 1) }
   let!(:store2) { create(:store, id: 2, name: "test_store2") }
   let!(:review) { create(:review, reviews_title: "その他", score: 4, store_price: 9999, instrument_name: "Horn", store_reviews: "test") }
-  let!(:review2) { create(:review, user_id:2, reviews_title: "楽器修理", score: 5, store_price: 8888, instrument_name: "Fagot", store_reviews: "test") }
+  let!(:review2) { create(:review, user_id: 2, reviews_title: "楽器修理", score: 5, store_price: 8888, instrument_name: "Fagot", store_reviews: "test") }
   let(:review3) { create(:review, store_id: 2, reviews_title: "消耗品購入", score: 5, store_price: 8888, instrument_name: "Trumpet", store_reviews: "test3") }
 
   before do
@@ -40,7 +39,7 @@ RSpec.describe "Reviews", type: :request do
     end
   end
 
-  #↓store#newと同じになってる
+  # ↓store#newと同じになってる
   describe "reviews#new" do
     before do
       get store_path(store)
@@ -76,19 +75,16 @@ RSpec.describe "Reviews", type: :request do
   end
 
   describe "reviews#destroy" do
-
     before do
       delete store_review_path(store, review)
     end
-    #全レビューが削除されている、system_specに書かれている
+    # 全レビューが削除されている、system_specに書かれている
+
     it 'レビューが削除される' do
       expect(response.body).not_to include review.reviews_title
       expect(response.body).not_to include review.score.to_s
       expect(response.body).not_to include review.instrument_name
       expect(response.body).not_to include review.user.name
     end
-
-
   end
-
 end

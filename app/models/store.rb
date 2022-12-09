@@ -1,5 +1,4 @@
 class Store < ApplicationRecord
-
   has_many :reviews, dependent: :destroy
   belongs_to :user, optional: true
 
@@ -18,18 +17,18 @@ class Store < ApplicationRecord
   end
 
   def avg_score
-    unless self.reviews.empty?
+    if reviews.empty?
+      0.0
+    else
       reviews.average(:score).round(1).to_f
-    else
-      0.0
-    end
-  end
-  def reviews_score_percentage
-    unless self.reviews.empty?
-      reviews.average(:score).round(1).to_f*100/5
-    else
-      0.0
     end
   end
 
+  def reviews_score_percentage
+    if reviews.empty?
+      0.0
+    else
+      reviews.average(:score).round(1).to_f * 100 / 5
+    end
+  end
 end

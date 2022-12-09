@@ -3,12 +3,11 @@ require 'rails_helper'
 RSpec.describe "Stores", type: :request do
   let!(:user) { create(:user, id: 1, name: "testman") }
   let!(:user2) { create(:user, id: 2, email: "testuser2@example.com") }
-  let(:user3) { create(:user, id:3, email: "testuser3@example.com") }
+  let(:user3) { create(:user, id: 3, email: "testuser3@example.com") }
   let!(:store) { create(:store, user_id: 1) }
   let!(:store2) { create(:store, id: 2, name: "test_store2") }
   let!(:review) { create(:review, reviews_title: "その他", score: 4, store_price: 9999, instrument_name: "Horn", store_reviews: "test") }
-  let!(:review2) { create(:review, user_id:2, reviews_title: "楽器修理", score: 5, store_price: 8888, instrument_name: "Fagot", store_reviews: "test") }
-
+  let!(:review2) { create(:review, user_id: 2, reviews_title: "楽器修理", score: 5, store_price: 8888, instrument_name: "Fagot", store_reviews: "test") }
 
   describe "stores#index" do
     before do
@@ -45,15 +44,16 @@ RSpec.describe "Stores", type: :request do
     end
   end
 
-   #↓system_spec?
+  # ↓system_spec?
   describe "storeのavg_score" do
-    let!(:review3) { create(:review, store_id: 1, reviews_title: "消耗品購入", score: 1, store_price: 7777, instrument_name: "Flute", store_reviews: "test3")}
+    let!(:review3) { create(:review, store_id: 1, reviews_title: "消耗品購入", score: 1, store_price: 7777, instrument_name: "Flute", store_reviews: "test3") }
+
     before do
       get stores_path
     end
 
     it "レビューの平均点がレビューのスコアで変わること" do
-      expect(store.avg_score.to_s).to eq "3.3" 
+      expect(store.avg_score.to_s).to eq "3.3"
     end
   end
 
@@ -62,7 +62,7 @@ RSpec.describe "Stores", type: :request do
       sign_in(user)
       get store_path(store)
     end
-    
+
     it "リクエストが200がかえってくること" do
       expect(response).to have_http_status(200)
     end
@@ -77,12 +77,11 @@ RSpec.describe "Stores", type: :request do
   end
 
   describe "stores#new" do
-
     it "storeの新規登録画面にアクセスできること" do
       sign_in(user)
       get new_store_path
       expect(response).to have_http_status(200)
     end
-    #⬆︎system_specに書く？
+    # ⬆︎system_specに書く？
   end
 end

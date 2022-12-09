@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Homes", type: :system do
   let!(:user) { create(:user, id: 1, name: "testman") }
   let!(:user2) { create(:user, id: 2, name: "testman2", email: "testuser2@example.com") }
-  let!(:user3) { create(:user, id:3, name: "testman3", email: "testuser3@example.com") }
+  let!(:user3) { create(:user, id: 3, name: "testman3", email: "testuser3@example.com") }
   let!(:store) { create(:store, user_id: 1) }
   let!(:store2) { create(:store, id: 2, user_id: 2, name: "test_store2") }
   let!(:store3) { create(:store, id: 3, user_id: 2, name: "test_store3") }
@@ -93,12 +93,11 @@ RSpec.describe "Homes", type: :system do
         sign_in(user3)
         visit root_path
       end
+
       scenario "他者のレビューを編集、削除できない(リンクがない)" do
         expect(page).not_to have_content "編集"
         expect(page).not_to have_content "削除"
       end
     end
   end
-
-
 end
