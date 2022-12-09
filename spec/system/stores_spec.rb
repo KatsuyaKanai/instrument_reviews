@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.describe "Stores", type: :system do
   let!(:user) { create(:user, id: 1) }
   let!(:user2) { create(:user, id: 2, email: "testuser2@example.com") }
-  let!(:store) { create(:store, user_id: 1) }
+  let!(:store) { create(:store, user_id: 1, created_at: 1.hour.ago) }
   let!(:store2) { create(:store, user_id: 2, name: "teststore_2") }
-  let!(:review) { create(:review, user_id: 1, reviews_title: "その他", score: 4, store_price: 9999, instrument_name: "Horn", store_reviews: "test") }
-  let!(:review2) { create(:review, user_id: 2, reviews_title: "楽器修理", score: 5, store_price: 8888, instrument_name: "Fagot", store_reviews: "test") }
+  let!(:review) { create(:review, user_id: 1, reviews_title: "その他", score: 4, store_price: 9999, instrument_name: "Horn", store_reviews: "test", created_at: 1.hour.ago) }
+  let!(:review2) { create(:review, user_id: 2, store_id: 2, reviews_title: "楽器修理", score: 5, store_price: 8888, instrument_name: "Fagot", store_reviews: "test2") }
+  let!(:review3) { create(:review, user_id: 2, store_id: 2, reviews_title: "消耗品購入", score: 4, store_price: 7777, instrument_name: "Tuba", store_reviews: "test3", created_at: 1.hour.ago) }
 
   scenario 'ホームにアクセスする' do
     visit stores_path
@@ -266,7 +267,6 @@ RSpec.describe "Stores", type: :system do
 
     context "楽器店のソート機能" do
       before do
-        many_reviews = create_list(:review, 5, store_id: 2, score: 5)
         visit stores_path
       end
       # ソート前の表示の並びもテストしたい

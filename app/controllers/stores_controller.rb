@@ -50,9 +50,6 @@ class StoresController < ApplicationController
     redirect_to stores_path
   end
 
-  def search
-  end
-
   private
 
   def set_q
@@ -65,9 +62,5 @@ class StoresController < ApplicationController
 
   def edit_store_params
     params.require(:store).permit(:user_id, :name, :address, :nearest_station)
-  end
-
-  def search_params
-    params.permit(:search_word)
   end
 end

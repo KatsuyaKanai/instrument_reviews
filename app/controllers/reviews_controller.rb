@@ -2,7 +2,6 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def index
-
     @store = Store.find(params[:store_id])
     @reviews = @store.reviews.order(updated_at: :desc)
   end
@@ -34,7 +33,7 @@ class ReviewsController < ApplicationController
     @store = Store.find(params[:store_id])
     @review.update(edit_review_params)
     if @review.valid?
-      flash[:notice] = "レビューを編集しました" 
+      flash[:notice] = "レビューを編集しました"
       redirect_to store_reviews_path(@review.store_id)
     else
       flash[:alert] = "編集に失敗しました"
@@ -49,26 +48,27 @@ class ReviewsController < ApplicationController
     redirect_back fallback_location: store_reviews_path(@review.store_id)
   end
 
-  def search
-    @q = Review.includes(:store, :user).ransack(params[:q])
-    @reviews = @q.result.order(updated_at: :desc)
-  end
+  # def search
+  #   @q = Review.includes(:store, :user).ransack(params[:q])
+  #   @reviews = @q.result.order(updated_at: :desc)
+  # end
 
   private
-    def review_params
-      params.require(:review).permit(:store_id, :reviews_title, :instrument_name, :store_price, :store_reviews, :score)
-    end
 
-    def edit_review_params
-      params.require(:review).permit(:id, :store_id, :reviews_title, :instrument_name, :store_price, :store_reviews, :score)
-    end
-    
-    # def search_reviews_params
-    #   params.permit(:search_instrument_name)
-    # end
+  def review_params
+    params.require(:review).permit(:store_id, :reviews_title, :instrument_name, :store_price, :store_reviews, :score)
+  end
 
-    #なぜransackで検索できているか不明点
-    # def set_q_reviews
-    #   @search_reviews = Review.ransack(params[:search_reviews])
-    # end
+  def edit_review_params
+    params.require(:review).permit(:id, :store_id, :reviews_title, :instrument_name, :store_price, :store_reviews, :score)
+  end
+
+  # def search_reviews_params
+  #   params.permit(:search_instrument_name)
+  # end
+
+  # なぜransackで検索できているか不明点
+  # def set_q_reviews
+  #   @search_reviews = Review.ransack(params[:search_reviews])
+  # end
 end

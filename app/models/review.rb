@@ -11,6 +11,4 @@ class Review < ApplicationRecord
   def self.search(search_review)
     Review.where(["instrument_name like?", "%#{search_review[:search_instrument_name]}%"])
   end
-
-  
 end

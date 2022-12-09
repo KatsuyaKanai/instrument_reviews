@@ -7,7 +7,7 @@ RSpec.describe "Homes", type: :request do
   let!(:store) { create(:store, user_id: 1) }
   let!(:store2) { create(:store, id: 2, user_id: 2, name: "test_store2") }
   let!(:store3) { create(:store, id: 3, user_id: 2, name: "test_store3") }
-  let!(:store4) { create(:store, id: 4, name: "test_store4")}
+  let!(:store4) { create(:store, id: 4, name: "test_store4") }
   let!(:review) { create(:review, reviews_title: "その他", score: 4, store_price: 9999, instrument_name: "Horn", store_reviews: "test") }
   let!(:review2) { create(:review, user_id: 2, reviews_title: "楽器修理", score: 5, store_price: 8888, instrument_name: "Fagot", store_reviews: "test") }
   let!(:review3) { create(:review, user_id: 2, store_id: 2, reviews_title: "消耗品購入", score: 5, store_price: 8888, instrument_name: "Trumpet", store_reviews: "test3") }

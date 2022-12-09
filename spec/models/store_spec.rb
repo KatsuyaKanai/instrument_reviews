@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Store, type: :model do
-
   describe "stores#create" do
     it "店名がない場合無効である" do
       store = FactoryBot.build(:store, name: nil)

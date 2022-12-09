@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def index
     @reviews = Review.includes(:store)
-    #reviews = @reviews
+    # reviews = @reviews
     @myreviews = current_user.reviews.all.order(updated_at: :desc)
   end
 

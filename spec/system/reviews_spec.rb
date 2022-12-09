@@ -12,7 +12,6 @@ RSpec.describe "Reviews", type: :system do
   describe "reviews#index" do
     before do
       sign_in(user)
-      # @review = FactoryBot.create(:review)
       visit stores_path
     end
 
@@ -317,7 +316,6 @@ RSpec.describe "Reviews", type: :system do
 
   describe "Reviews#search" do
     before do
-      many_reviews = create_list(:review, 5)
       visit root_path
     end
 

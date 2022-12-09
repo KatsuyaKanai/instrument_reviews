@@ -17,21 +17,21 @@ class HomesController < ApplicationController
     @search_reviews = Review.ransack(params[:search_reviews])
     @stores = @q.result
     @reviews = @search_reviews.result
-    @recent_reviews = Review.includes(:user)
-      .order(created_at: :desc)
-      .limit(3)
-    @high_rate_store = Store
-      .includes(:reviews)
-      .distinct
-      .sort_by do |store|
+    @recent_reviews = Review.includes(:user).
+      order(created_at: :desc).
+      limit(3)
+    @high_rate_store = Store.
+      includes(:reviews).
+      distinct.
+      sort_by do |store|
         hoges = store.reviews
         if hoges.present?
           hoges.map(&:score).sum / hoges.size
         else
           0
         end
-      end
-      .reverse
-      .first(3)
+      end.
+      reverse.
+      first(3)
   end
 end
