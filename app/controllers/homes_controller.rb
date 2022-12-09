@@ -17,12 +17,11 @@ class HomesController < ApplicationController
     @search_reviews = Review.ransack(params[:search_reviews])
     @stores = @q.result
     @reviews = @search_reviews.result
-    @recent_reviews = Review.all
+    @recent_reviews = Review.includes(:user)
       .order(created_at: :desc)
       .limit(3)
-    @review = Review.all
     @high_rate_store = Store
-      .left_joins(:reviews)
+      .includes(:reviews)
       .distinct
       .sort_by do |store|
         hoges = store.reviews

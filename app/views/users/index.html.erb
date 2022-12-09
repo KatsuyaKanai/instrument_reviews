@@ -1,43 +1,46 @@
 <% content_for(:title, @current_user.name) %>
-
 <section class="section">
-  <div class="card mb-3">
-    <div class="columns has-text-centered">
-      <div class="column">
-        <h1 class="title">
-          <p class="has-text-weight-bold has-text-centered p-3">
-            アカウント情報
-          </p>
-        </h1>
-        <div class="content">
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
-          メールアドレス <%= current_user.email %>
+  <div class="container mb-3">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered">
+        <div class="card p-5">
+          <h1 class="title">
+            <p class="has-text-weight-bold has-text-centered p-3">
+              アカウント情報
+            </p>
+          </h1>
+          <div class="content">
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+            メールアドレス <%= current_user.email %>
+          </div>
+          <div class="card_footer">
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+            パスワード ********
+          </div>
         </div>
-        <div class="card_footer">
-          <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
-          </span>
-          パスワード ********
+        <div class="has-text-right m-3" id="userdata_edit">
+          <%= link_to edit_user_registration_path do %>
+            ユーザーデータの編集をする
+          <% end %>
         </div>
       </div>
     </div>
+    
   </div>
-  <div class="has-text-right mb-6" id="userdata_edit">
-    <%= link_to edit_user_registration_path do %>
-      ユーザーデータの編集をする
-    <% end %>
-  </div>
+    
     <h1 class="title">
       <p class="has-text-weight-bold has-text-centered">
         <%= current_user.name %>さんの投稿一覧
       </p>
     </h1>
-    <div class="container">
+    <div class="container mb-3">
       <div class="columns is-centered">
-        <div class="column">
-          <% @myreviews.each do |myreview| %>
+        <div class="column is-8">
+          <% @myreviews.includes(:store).each do |myreview| %>
             <div class="card">
               <header class="card-header">
                 <p class="card-header-title">
@@ -115,7 +118,6 @@
               </td>
             </div>
           <% end %>
-          
         </div>
     </div>
   </div>

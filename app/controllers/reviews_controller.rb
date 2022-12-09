@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def index
+
     @store = Store.find(params[:store_id])
     @reviews = @store.reviews.order(updated_at: :desc)
   end
@@ -49,7 +50,7 @@ class ReviewsController < ApplicationController
   end
 
   def search
-    @q = Review.ransack(params[:q])
+    @q = Review.includes(:store, :user).ransack(params[:q])
     @reviews = @q.result.order(updated_at: :desc)
   end
 

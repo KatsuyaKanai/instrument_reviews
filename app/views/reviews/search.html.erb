@@ -1,13 +1,12 @@
-
 <section class="section">
-<h1 class="title">
-  <p class="has-text-weight-bold has-text-centered">
-    検索結果 <%= @reviews.count %>件見つかりました
-  </p>
-</h1>
-  <div class="container mb-6">
+  <div class="container mb-3">
+    <h1 class="title">
+      <p class="has-text-weight-bold has-text-centered">
+        検索結果 <%= @reviews.count %>件見つかりました
+      </p>
+    </h1>
     <div class="columns is-centered">
-      <div class="column is-10">
+      <div class="column is-8">
         <% @reviews.each do |review| %>
           <div class="card mt-6">
             <header class="card-header">

@@ -10,15 +10,12 @@
     <script src="https://kit.fontawesome.com/ffbd556839.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
   </head>
-
   <body class="Site">
     <%= render "layouts/header" %>
     <main class="Site-content">
       <%= yield %>
     </main>
     <%= render "layouts/footer" %>
-
-    
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

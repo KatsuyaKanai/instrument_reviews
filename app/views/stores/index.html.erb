@@ -18,7 +18,7 @@
               </select>
             </div>
             <ul class="stores">
-              <% @stores.each do |store| %>
+              <% @stores.includes(:reviews).each do |store| %>
                 <div class="card">
                   <header class="card-header">
                     <p class="card-header-title store-name">
