@@ -66,3 +66,7 @@ gem 'ransack'
 gem 'rails-erd'
 gem 'high_voltage'
 gem 'bullet'
+
+group :production do
+  gem 'unicorn', '5.4.1'
+end
