@@ -1,0 +1,103 @@
+<% content_for(:title, "Stores") %>
+<div class="wrapper">
+  <section class="section">
+    <div class="container">  
+      <div class="main-content">    
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="has-text-centered mb-3">
+              <p class="is-size-4"><%= @stores.count %>件見つかりました</p>
+              <!--ソート機能https://qiita.com/akkie/items/9d09d21a0e8ee47a1691
+              -->
+              <select class="ui fluid dropdown" name= "stores_sort" onChange="location.href=value;">
+                <option value="">並び替え</option>
+                <option value="<%= sort_by_sort_url(sort_url(@q, :created_at), 'created_at+desc')%>">店の登録の新着順</option>
+                <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_created_at), 'reviews_created_at+desc')%>">レビューの新着順</option>
+                <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_avg_score), 'reviews_avg_score+desc')%>">評価が高い順</option>
+                <option value="<%= sort_by_sort_url(sort_url(@q, :reviews_count), 'reviews_count+desc')%>">レビューが多い順</option>
+              </select>
+            </div>
+            <ul class="stores">
+              <% @stores.includes(:reviews).each do |store| %>
+                <div class="card">
+                  <header class="card-header">
+                    <p class="card-header-title store-name">
+                      <span class="icon">
+                        <i class="fas fa-city"></i>
+                      </span>
+                      <%= store.name %>
+                    </p>
+                    <p class="card-header-title">
+                      <span class="icon">
+                        <i class="fas fa-location-arrow"></i>
+                      </span>
+                      <%= store.address %>
+                    </p>
+                    <p class="card-header-title">
+                      <span class="icon">
+                        <i class="fas fa-train"></i>
+                      </span>
+                      <%= store.nearest_station %>
+                    </p>
+                  </header>
+                  <div class="card-content">
+                    <div class="content">
+                      <div class="content average-score">
+                        <div class="star-rating mb-2">
+                          <div class="star-rating-front" style="width: <%= store.reviews_score_percentage %>%">★★★★★</div>
+                          <div class="star-rating-back">★★★★★</div>
+                        </div>
+                        <div class="average-score-display ml-3 pt-2">
+                          <%= store.avg_score %>点（<%= store.reviews.count %>件のレビュー）
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <footer class="card-footer">
+                    <%= link_to store_reviews_path(store), class: "button card-footer-item" do %>
+                      レビューを見る
+                    <% end %>
+                    <%= link_to store_path(store), class: "button card-footer-item" do %>
+                      レビューを書く
+                    <% end %>
+                  </footer>
+                </div>
+                <div class="has-text-right p-3 mb-4">
+                  <% if user_signed_in? %>
+                    <% if store.user_id == current_user.id %>
+                      <td>
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <%= link_to "店の情報の編集", edit_store_path(store.id) %>
+                      </td>
+                      <td>
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        <%= link_to "この店を削除", "/stores/#{store.id}", data: { confirm: 'この店情報を削除しますか？'}, method: :delete, id: "delete_button" %>
+                      </td>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+            </ul>
+          </div>
+          <div class="side-content">
+            <form class="level-right box">
+              <div class="has-text-centered">  
+                <p class="level-item has-text-weight-bold mt-3">絞り込み検索</p>
+                  <div class="box m-3">
+                    <%= search_form_for @q, url: stores_path, class:"m-3 level-item" do |f| %>
+                      <%= f.label :name_or_address_cont, "店名または都道府県を入力してください" %><br>
+                      <%= f.search_field :name_or_address_cont %><br>
+                      <%= f.submit '検索' %>
+                    <% end %>
+                  </div>
+                <div class="m-3 level-item" id="new_store">
+                  <%= link_to "口コミを投稿したい店がない場合", new_store_path %>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

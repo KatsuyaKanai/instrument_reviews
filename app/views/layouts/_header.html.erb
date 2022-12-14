@@ -1,0 +1,67 @@
+<% if flash[:notice] %>
+  <div class="notification is-info">
+    <p class="notice"><%= notice %></p>
+  </div>
+<% end %>
+<% if flash[:alert] %>
+  <div class="notification is-danger">
+    <p class="alert"><%= alert %></p>
+  </div>
+<% end %>
+<div id="app">
+  <nav class="navbar has-background-white" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <p class="navbar-item" id="title">
+        <%= link_to root_path do %>
+          <strong class="is-size-3" style="font-family: cursive; color: black;">Wind Musical Instrument Review Please</strong>
+        <% end %>
+      </p>
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" @click="isOpen = !isOpen" v-bind:class="{'is-active': isOpen}">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="navbarBasicExample" class="navbar-menu" v-bind:class="{'is-active': isOpen}">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <%= link_to stores_path, class: "navbar-item has-text-black" do %>
+            楽器店一覧
+          <% end %>
+        </div>
+        <div class="navbar-item">
+          <% if user_signed_in? %>
+            <%= link_to users_path, class: "navbar-item has-text-black", id: "user_name" do %>
+              ようこそ <%= current_user.name %> さん
+            <% end %>
+          <% end %>
+          <div class="buttons"> 
+            <% if user_signed_in? %>
+              <%= link_to destroy_user_session_path, class: "button" do %>
+                ログアウト
+              <% end %>
+            <% else %>
+              <%= link_to new_user_session_path, class: "button" do %>
+                ログイン
+              <% end %>
+              <%= link_to new_user_registration_path, class: "button" do %>
+                新規登録
+              <% end %>
+              <%= link_to users_guest_sign_in_path, method: :post, class: "button" do %>
+                ゲストログイン
+              <% end %>
+            <% end %>
+          </div>
+        </div> 
+      </div>
+    </div>  
+  </nav>
+</div>
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        isOpen: false
+    }
+})
+</script>

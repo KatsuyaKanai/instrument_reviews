@@ -1,8 +1,9 @@
-# README
+# 楽器店口コミ投稿サイト(Wind_Instrument_Reviews_Please)
 
-** 楽器店口コミ投稿サイト
+
 
 * Ruby version
+* 2.7.6
 
 * System dependencies
 
