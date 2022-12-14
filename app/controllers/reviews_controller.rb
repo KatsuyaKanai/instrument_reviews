@@ -48,10 +48,10 @@ class ReviewsController < ApplicationController
     redirect_back fallback_location: store_reviews_path(@review.store_id)
   end
 
-  # def search
-  #   @q = Review.includes(:store, :user).ransack(params[:q])
-  #   @reviews = @q.result.order(updated_at: :desc)
-  # end
+  def search
+    @q = Review.includes(:store, :user).ransack(params[:q])
+    @reviews = @q.result.order(updated_at: :desc)
+  end
 
   private
 
