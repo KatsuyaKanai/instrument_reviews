@@ -2,6 +2,9 @@ class Store < ApplicationRecord
   has_many :reviews, dependent: :destroy
   belongs_to :user, optional: true
 
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
+
   validates :name, presence: true, uniqueness: true
   validates :address, presence: true
   validates :nearest_station, presence: true

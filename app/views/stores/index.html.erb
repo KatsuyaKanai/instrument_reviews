@@ -31,7 +31,7 @@
                       <span class="icon">
                         <i class="fas fa-location-arrow"></i>
                       </span>
-                      <%= store.address %>
+                      <%= store.address.match(/.*[区市]/) %>
                     </p>
                     <p class="card-header-title">
                       <span class="icon">

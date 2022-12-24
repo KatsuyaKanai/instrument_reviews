@@ -65,7 +65,7 @@
                   <span class="icon">
                     <i class="fas fa-location-arrow"></i>
                   </span>
-                  <%= review.store.address %>
+                  <%= review.store.address.match(/.*[都道府県]/) %>
                 </p>
               </header>
               <div class="card-content">
@@ -170,7 +170,7 @@
                 <span class="icon">
                   <i class="fas fa-location-arrow"></i>
                 </span>
-                <%= store.address %>
+                <%= store.address.match(/.*[都道府県]/) %>
               </p>
             </header>
             <div class="card-content">

@@ -1,6 +1,8 @@
 <% content_for(:title, @store.name) %>
 <section class="section">
   <div class="container mt-6">
+    <%= @store.image %>
+    <!-- 店画像 -->
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="card mb-6">
@@ -11,12 +13,14 @@
               </span>
               <%= @store.name %>
             </p>
+            <!--
             <p class="card-header-title">
               <span class="icon">
                 <i class="fas fa-location-arrow"></i>
               </span>
               <%= @store.address %>
             </p>
+            -->
             <p class="card-header-title">
               <span class="icon">
                 <i class="fas fa-train"></i>
@@ -25,6 +29,48 @@
             </p>
           </header>
           <div class="card-content">
+            <div class="content">
+            <!-- google mapの住所情報 -->
+
+
+              <script type="text/javascript">
+                function initMap() {
+                  var test = {lat: <%= @store.latitude %>, lng: <%= @store.longitude %>};
+                  var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 15, 
+                            center: test
+                            });
+                  var transitLayer = new google.maps.TransitLayer();
+                  transitLayer.setMap(map);
+                  var contentString = '住所:<%= @store.address %>';
+                  var infowindow = new google.maps.InfoWindow({
+                    content: contentString
+                  });
+                  var marker = new google.maps.Marker({
+                                position:test,
+                                map: map,
+                                title: contentString
+                              });
+                  marker.addListener('click', function() {
+                    infowindow.open(map, marker);
+                  });
+                }
+              </script>
+              <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap">
+              </script>
+              <style type="text/css">
+                #map { height: 200px;
+                      width: 100%;}
+              </style>
+              <div id="map"></div>
+            </div>
+            <div class="content has-text-centered m-3">
+              <span class="icon">
+                <i class="fas fa-location-arrow"></i>
+              </span>
+              <%= @store.address %>
+            </div>
             <div class="content average-score">
               <div class="star-rating mb-2">
                 <div class="star-rating-front" style="width: <%= @store.reviews_score_percentage %>%">★★★★★</div>

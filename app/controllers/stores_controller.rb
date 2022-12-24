@@ -57,10 +57,10 @@ class StoresController < ApplicationController
   end
 
   def stores_params
-    params.permit(:user_id, :store_id, :name, :address, :instrument_name, :nearest_station)
+    params.permit(:user_id, :store_id, :name, :address, :instrument_name, :nearest_station, :latitude, :longitude)
   end
 
   def edit_store_params
-    params.require(:store).permit(:user_id, :name, :address, :nearest_station)
+    params.require(:store).permit(:user_id, :name, :address, :nearest_station, :latitude, :longitude)
   end
 end

@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_09_223536) do
+ActiveRecord::Schema.define(version: 2022_12_24_004006) do
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "content", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "homes", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -36,6 +43,9 @@ ActiveRecord::Schema.define(version: 2022_12_09_223536) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["name"], name: "index_stores_on_name", unique: true
   end
 
@@ -48,6 +58,7 @@ ActiveRecord::Schema.define(version: 2022_12_09_223536) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
