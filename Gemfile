@@ -72,6 +72,7 @@ gem 'rails-erd'
 gem 'high_voltage'
 gem 'bullet'
 gem 'geocoder'
+gem 'rails_admin', '~> 2.0.0.beta'
 
 group :production do
   gem 'unicorn', '5.4.1'
