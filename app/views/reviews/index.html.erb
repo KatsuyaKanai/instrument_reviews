@@ -1,10 +1,13 @@
 <% content_for(:title, @store.name) %>
 <section class="section">
-  <div class="container mt-6">
-    <%= @store.image %>
-    <!-- 店画像 -->
+  <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">
+        <div class="store-image is-centered mb-3">
+          <figure class="image is-16by9">
+            <%= image_tag rails_blob_path(@store.image.attachment), alt: "店画像" %>
+          </figure>
+        </div>
         <div class="card mb-6">
           <header class="card-header">
             <p class="card-header-title">
@@ -13,14 +16,6 @@
               </span>
               <%= @store.name %>
             </p>
-            <!--
-            <p class="card-header-title">
-              <span class="icon">
-                <i class="fas fa-location-arrow"></i>
-              </span>
-              <%= @store.address %>
-            </p>
-            -->
             <p class="card-header-title">
               <span class="icon">
                 <i class="fas fa-train"></i>
@@ -31,8 +26,6 @@
           <div class="card-content">
             <div class="content">
             <!-- google mapの住所情報 -->
-
-
               <script type="text/javascript">
                 function initMap() {
                   var test = {lat: <%= @store.latitude %>, lng: <%= @store.longitude %>};
@@ -59,10 +52,6 @@
               <script async defer
                         src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap">
               </script>
-              <style type="text/css">
-                #map { height: 200px;
-                      width: 100%;}
-              </style>
               <div id="map"></div>
             </div>
             <div class="content has-text-centered m-3">
