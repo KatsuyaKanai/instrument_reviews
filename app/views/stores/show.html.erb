@@ -3,6 +3,11 @@
   <div class="container mt-6">
     <div class="columns is-centered">
       <div class="column is-8">
+        <div class="store-image is-centered mb-3">
+          <figure class="image is-16by9">
+            <%= image_tag rails_blob_path(@store.image.attachment), alt: "店画像" %>
+          </figure>
+        </div>
         <div class="card mb-6">
           <header class="card-header">
             <p class="card-header-title">

@@ -76,13 +76,4 @@ RSpec.describe "Stores", type: :request do
       expect(response.body).to include store.avg_score.to_s
     end
   end
-
-  # describe "stores#new" do
-  #   it "storeの新規登録画面にアクセスできること" do
-  #     sign_in(user)
-  #     get new_store_path
-  #     expect(response).to have_http_status(200)
-  #   end
-  #   # ⬆︎system_specに書く？
-  # end
 end
