@@ -17,11 +17,12 @@ topページ下部
 stores_index_path
 <img width="1165" alt="portfolio 店情報一覧" src="https://user-images.githubusercontent.com/98877481/207737827-253b3d35-d770-45ef-aad3-aea2639242d1.png">
 stores_reviews_index_path(store,review)
-<img width="1165" alt="portfolio review_index" src="https://user-images.githubusercontent.com/98877481/207738091-57957be4-2a6a-46af-ad0a-4e814477eff8.png">
+<img width="1211" alt="portfolio_review_index" src="https://user-images.githubusercontent.com/98877481/211174430-b9823890-6509-4c73-95f0-c671758914a1.png">
+
 
 # 使い方
 * ログインしてください。(ゲストログインでも構いません)
-* レビューしたい楽器店を「楽器店一覧」のリンクかtopページの「検索」で選んでください。もしレビューしたい楽器店がない場合、楽器店の新規登録をしてください。
+* レビューしたい楽器店を「楽器店一覧」のリンクかtopページの「検索」で選んでください。もしレビューしたい楽器店がない場合、お問い合わせから楽器店お新規登録をしてください。
 * 「レビューを書く」をクリックしてレビューを書いてください。
 
 # ER図
