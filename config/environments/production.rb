@@ -121,15 +121,14 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'http://18.178.16.221/' }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = true
   # Gmail の場合
   config.action_mailer.smtp_settings = {
-  :enable_starttls_auto => true,
   :address => "smtp.gmail.com",
   :port => 587,
   :domain => 'gmail.com',
   :user_name => ENV['ACTION_MAILER_USER'],
   :password => ENV['ACTION_MAILER_KEY_SECOND'],
-  :authentication => :plain
+  :authentication => :plain,
+  :enable_starttls_auto => true
 }
 end
