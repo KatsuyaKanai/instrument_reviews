@@ -20,6 +20,5 @@ Rails.application.routes.draw do
   get 'homes/index'
   resources :users
   get 'message', to: 'messages#index', as: 'message'
-  post 'confirm' => 'messages#confirm'
   post 'done' => 'messages#done'
 end
