@@ -68,6 +68,74 @@ RSpec.describe "Homes", type: :system do
         expect(page).to have_content "プライバシーポリシー"
       end
     end
+
+    describe "お問い合わせ" do
+      before do
+        visit message_path
+      end
+
+      scenario "お問い合わせにアクセスできる" do
+        within("#message") do
+          expect(page).to have_content "お問い合わせ"
+        end
+      end
+
+      scenario "お問い合わせができる" do
+        fill_in '名前', with: "a"
+        fill_in 'Email', with: 'a@bc.ef'
+        select 'このサイトに関するお問い合わせ', from: 'ジャンル'
+        fill_in 'お問い合わせ内容', with: 'お問い合わせ内容'
+        click_button '送信'
+        expect(current_path).to eq done_path
+      end
+
+      context "お問合せの入力に不備がある場合" do
+        scenario "名前の欄が空欄でエラーが出る" do
+          fill_in '名前', with: ""
+          fill_in 'Email', with: 'a@bc.ef'
+          select 'このサイトに関するお問い合わせ', from: 'ジャンル'
+          fill_in 'お問い合わせ内容', with: 'お問い合わせ内容'
+          click_button '送信'
+          expect(page).to have_content "名前を入力してください"
+        end
+
+        scenario "Emailが空欄でエラーが出る" do
+          fill_in '名前', with: 'a'
+          fill_in 'Email', with: ""
+          select 'このサイトに関するお問い合わせ', from: 'ジャンル'
+          fill_in 'お問い合わせ内容', with: 'お問い合わせ内容'
+          click_button '送信'
+          expect(page).to have_content "Emailを入力してください"
+        end
+
+        scenario "Emailに@の後に.がなく不正な値としてエラーが出る" do
+          fill_in '名前', with: 'a'
+          fill_in 'Email', with: 'a@k'
+          select 'このサイトに関するお問い合わせ', from: 'ジャンル'
+          fill_in 'お問い合わせ内容', with: 'お問い合わせ内容'
+          click_button '送信'
+          expect(page).to have_content "Emailは不正な値です"
+        end
+
+        scenario "ジャンルが選択されてなくエラーが出る" do
+          fill_in '名前', with: 'a'
+          fill_in 'Email', with: 'a@bc.ef'
+          select "▼選択してください", from: 'ジャンル'
+          fill_in 'お問い合わせ内容', with: 'お問い合わせ内容'
+          click_button '送信'
+          expect(page).to have_content "ジャンルを入力してください"
+        end
+
+        scenario "お問い合わせ内容が空欄でエラーが出る" do
+          fill_in '名前', with: 'a'
+          fill_in 'Email', with: 'a@bc.ef'
+          select 'このサイトに関するお問い合わせ', from: 'ジャンル'
+          fill_in 'お問い合わせ内容', with: ""
+          click_button '送信'
+          expect(page).to have_content "お問い合わせ内容を入力してください"
+        end
+      end
+    end
   end
 
   describe "topページのレビューの編集、削除" do

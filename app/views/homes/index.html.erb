@@ -25,7 +25,7 @@
           <div class="columns is-centered has-text-white">
             <div class="column has-text-weight-bold has-text-centered">
               <%= search_form_for @q, url: stores_path, method: :get, local: true do |f| %>
-                <%= f.label :name_or_address_cont, "店名または都道府県を入力してください" %>
+                <%= f.label :name_or_address_cont, "店名または住所を入力してください" %>
                 <%= f.search_field :name_or_address_cont %>
                 <%= f.submit '検索' %>
               <% end %>
@@ -147,7 +147,6 @@
     </div>
   </div>
 </section>
-
 <section class="section">
   <h1 class="title">
     <p class="has-text-weight-bold has-text-centered">

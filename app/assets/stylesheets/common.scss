@@ -9,7 +9,6 @@
   margin: 10px;
 }
 .top{
-  /*background-image: url(/assets/IMG_0048.JPG);*/
   background-size: cover;
   width: 100%;
   height: 650px;
@@ -59,4 +58,9 @@ table td{
 
 .Site-content {
   flex: 1;
+}
+
+#map { 
+  height: 200px;
+  width: 100%;
 }

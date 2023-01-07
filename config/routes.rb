@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :stores do
     resources :reviews
   end
@@ -18,4 +19,7 @@ Rails.application.routes.draw do
   root to: 'homes#index'
   get 'homes/index'
   resources :users
+  get 'message', to: 'messages#index', as: 'message'
+  post 'confirm' => 'messages#confirm'
+  post 'done' => 'messages#done'
 end

@@ -64,7 +64,7 @@
                 </div>
                 <div class="has-text-right p-3 mb-4">
                   <% if user_signed_in? %>
-                    <% if store.user_id == current_user.id %>
+                    <% if current_user == @user || current_user.admin? %>
                       <td>
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         <%= link_to "店の情報の編集", edit_store_path(store.id) %>
@@ -85,13 +85,13 @@
                 <p class="level-item has-text-weight-bold mt-3">絞り込み検索</p>
                   <div class="box m-3">
                     <%= search_form_for @q, url: stores_path, class:"m-3 level-item" do |f| %>
-                      <%= f.label :name_or_address_cont, "店名または都道府県を入力してください" %><br>
+                      <%= f.label :name_or_address_cont, "店名または住所を入力してください" %><br>
                       <%= f.search_field :name_or_address_cont %><br>
                       <%= f.submit '検索' %>
                     <% end %>
                   </div>
                 <div class="m-3 level-item" id="new_store">
-                  <%= link_to "口コミを投稿したい店がない場合", new_store_path %>
+                  <%= link_to "口コミを投稿したい店がない場合", message_path %>
                 </div>
               </div>
             </form>
