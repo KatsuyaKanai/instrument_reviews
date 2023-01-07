@@ -118,14 +118,19 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+  config.action_mailer.default_url_options = { host: 'http://18.178.16.221/' }
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default :charset => "utf-8"
+  # Gmail の場合
   config.action_mailer.smtp_settings = {
-      :address => "smtp.gmail.com",
-      :port => 587,
-      :domain => "gmail.com",
-      :user_name => ENV['ACTION_MAILER_USER'],
-      :password => ENV['ACTION_MAILER_KEY_SECOND'],
-      :authentication => :plain,
-      :enable_starttls_auto => true
-  }
+  :enable_starttls_auto => true,
+  :address => "smtp.gmail.com",
+  :port => 587,
+  :domain => 'gmail.com',
+  :user_name => ENV['ACTION_MAILER_USER'],
+  :password => ENV['ACTION_MAILER_KEY_SECOND'],
+  :authentication => :plain
+}
 end
