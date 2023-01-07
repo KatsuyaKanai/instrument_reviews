@@ -96,7 +96,7 @@ RSpec.describe "Homes", type: :system do
           select 'このサイトに関するお問い合わせ', from: 'ジャンル'
           fill_in 'お問い合わせ内容', with: 'お問い合わせ内容'
           click_button '送信'
-          expect(page).to have_content "Nameを入力してください"
+          expect(page).to have_content "名前を入力してください"
         end
 
         scenario "Emailが空欄でエラーが出る" do
@@ -123,7 +123,7 @@ RSpec.describe "Homes", type: :system do
           select "▼選択してください", from: 'ジャンル'
           fill_in 'お問い合わせ内容', with: 'お問い合わせ内容'
           click_button '送信'
-          expect(page).to have_content "Genreを入力してください"
+          expect(page).to have_content "ジャンルを入力してください"
         end
 
         scenario "お問い合わせ内容が空欄でエラーが出る" do
@@ -132,7 +132,7 @@ RSpec.describe "Homes", type: :system do
           select 'このサイトに関するお問い合わせ', from: 'ジャンル'
           fill_in 'お問い合わせ内容', with: ""
           click_button '送信'
-          expect(page).to have_content "Contentを入力してください"
+          expect(page).to have_content "お問い合わせ内容を入力してください"
         end
       end
     end
