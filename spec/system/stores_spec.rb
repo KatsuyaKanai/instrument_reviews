@@ -28,6 +28,7 @@ RSpec.describe "Stores", type: :system do
     before do
       sign_in(user)
     end
+
     describe "Store#show" do
       before do
         visit stores_path

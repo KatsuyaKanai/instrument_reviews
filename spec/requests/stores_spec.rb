@@ -8,7 +8,7 @@ RSpec.describe "Stores", type: :request do
   let!(:store2) { create(:store, id: 2, name: "test_store2", address: "埼玉県所沢市くすのき台") }
   let!(:review) { create(:review, reviews_title: "その他", score: 4, store_price: 9999, instrument_name: "Horn", store_reviews: "test") }
   let!(:review2) { create(:review, user_id: 2, reviews_title: "楽器修理", score: 5, store_price: 8888, instrument_name: "Fagot", store_reviews: "test") }
-  
+
   describe "stores#index" do
     before do
       get stores_path
@@ -23,7 +23,7 @@ RSpec.describe "Stores", type: :request do
       expect(response.body).to include store2.name
     end
 
-    #↓できているかわかりません
+    # ↓できているかわかりません
     it "住所がレスポンスに含まれること" do
       expect(response.body).to match(/.*[区市]/)
       expect(response.body).to match(/.*[区市]/)

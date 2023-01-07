@@ -42,7 +42,7 @@ RSpec.describe "Reviews", type: :request do
       expect(response.body).to include store.avg_score.to_s
     end
 
-    #↓テストを通すためだけのテストになっている？
+    # ↓テストを通すためだけのテストになっている？
     it "レビューされている楽器店の画像が表示されるされていること" do
       expect(store.image.filename.to_s).to eq "image.jpg"
     end
