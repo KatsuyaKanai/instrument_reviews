@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: ENV['ACTION_MAILER_USER']
+  default from: 'testinstrument_reviews@bar.com'
   layout 'mailer'
 end
