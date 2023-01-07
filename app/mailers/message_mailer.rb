@@ -1,5 +1,5 @@
 class MessageMailer < ApplicationMailer
-  default to: Rails.application.credentials.g_mail[:g_mail]
+  default to: ENV['ACTION_MAILER_USER']
 
   def received_email(message)
     @message = message
