@@ -49,3 +49,9 @@ https://pikawaka.com/rails/ec2_deploy#%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81
 を参考にしました。自動デプロイについても
 https://pikawaka.com/rails/capistrano
 を参考にしました。
+* お問い合わせフォームは
+https://qiita.com/shimpex/items/0f9e9f9dfff648631c89
+を参考にしました。
+* 迷惑メール対策は
+https://halkyo.com/post/web/protect-from-spam-rails-modify
+を参考にしました。
