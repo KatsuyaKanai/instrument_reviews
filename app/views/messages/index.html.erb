@@ -34,6 +34,8 @@
           <div class="field">
             <%= f.label :content, "お問い合わせ内容" %>
             <p class="control">
+              <!-- これは罠です-->
+              <%= f.text_field :message, id: "message" %>
               <%= f.text_area :content, placeholder: '楽器店の新規登録の場合、楽器店名、最寄駅、住所の詳細を記入してください', class: "textarea" %>
             </p>
           </div>
