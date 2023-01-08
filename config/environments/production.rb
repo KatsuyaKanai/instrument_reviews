@@ -127,7 +127,7 @@ Rails.application.configure do
     :port => '587',
     :domain => 'smtp.gmail.com',
     :authentication => 'plain',
-    :user_name => 'portfoliotestrudolf@gmail.com',
-    :password => 'mavybqvdxnpgrwil'
+    :user_name => Rails.application.credentials.gmail[:user_name],
+    :password => Rails.application.credentials.gmail[:password]
   }
 end
