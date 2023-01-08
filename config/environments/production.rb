@@ -126,8 +126,8 @@ Rails.application.configure do
   :address => "smtp.gmail.com",
   :port => 587,
   :domain => 'gmail.com',
-  :user_name => ENV['ACTION_MAILER_USER'],
-  :password => ENV['ACTION_MAILER_KEY_SECOND'],
+  :user_name => 'portfoliotestrudolf@gmail.com',
+  :password => 'mavybqvdxnpgrwil',
   :authentication => :plain,
   :enable_starttls_auto => true
 }
