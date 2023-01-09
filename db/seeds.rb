@@ -7,7 +7,7 @@ require "csv"
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create!(name: "管理者", email: "test@example", password: "testpass")
+User.create!(name: "test", email: "test@example", password: "testpass")
 Store.create!(user_id: 1, name: "株式会社ダク", address: "東京都新宿区百人町2-8-9", nearest_station: "新大久保駅",
   image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/dac.jpg"),filename: "dac.jpg"))
 Store.create!(user_id: 1, name: "株式会社グローバル", address: "東京都新宿区百人町2-17-7", nearest_station: "新大久保駅",
