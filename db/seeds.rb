@@ -7,7 +7,7 @@ require "csv"
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create!(name: "test", email: "test@example", password: "testpass")
+User.create!(name: "管理者", email: "test@example", password: "testpass")
 Store.create!(user_id: 1, name: "株式会社ダク", address: "東京都新宿区百人町2-8-9", nearest_station: "新大久保駅",
   image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/dac.jpg"),filename: "dac.jpg"))
 Store.create!(user_id: 1, name: "株式会社グローバル", address: "東京都新宿区百人町2-17-7", nearest_station: "新大久保駅",
@@ -54,8 +54,3 @@ Review.create!(store_id: 5, user_id: 1, reviews_title: "その他", instrument_n
   score: 4, store_reviews: "ボーカル購入。ついでにメトロノームとチューナが一体化したKORGのTM-60-BKを購入")
 Review.create!(store_id: 3, user_id: 1, reviews_title: "楽器売却", instrument_name: "Tuba", store_price: 600000,
   score: 4, store_reviews: "Tuba88にて楽器売却。委託販売になるので、売れたらお金が入ってくる。チューバ専門店であり、主に中古チューバ、中古マウスピースの品揃えが良い。ホームページをチェックしていると掘り出し物がある時があり、そういうものはすぐ売れてしまう。")
-  
-
-  
-  
-    
