@@ -75,7 +75,7 @@ RSpec.describe "Homes", type: :system do
       end
 
       scenario "お問い合わせにアクセスできる" do
-        within("#message") do
+        within("#otoiawase") do
           expect(page).to have_content "お問い合わせ"
         end
       end
