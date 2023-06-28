@@ -73,7 +73,7 @@ gem 'high_voltage'
 gem 'bullet'
 gem 'geocoder'
 gem 'rails_admin', '~> 2.0.0.beta'
-gem 'aws-sdk-s3'
+# gem 'aws-sdk-s3'
 
 group :production do
   gem 'unicorn', '5.4.1'
