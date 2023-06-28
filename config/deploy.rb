@@ -11,7 +11,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bund
 # SSH接続設定
 set :ssh_options, {
   auth_methods: ['publickey'],
-  keys: ['~/.ssh/4port.pem'],
+  keys: ['~/.ssh/6port.pem'],
 }
 
 # 保存しておく世代の設定
@@ -29,18 +29,23 @@ set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
 
 # Unicornを再起動するための記述
+# after 'deploy:publishing', 'deploy:restart'
+# namespace :deploy do
+#   desc 'db_seed'
+#   task :db_seed do
+#     on roles(:db) do |host|
+#       with rails_env: fetch(:rails_env) do
+#         within current_path do
+#           execute :bundle, :exec, :rake, 'db:seed'
+#         end
+#       end
+#     end
+#   end
+#   task :restart do
+#     invoke 'unicorn:restart'
+#   end
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
-  desc 'db_seed'
-  task :db_seed do
-    on roles(:db) do |host|
-      with rails_env: fetch(:rails_env) do
-        within current_path do
-          execute :bundle, :exec, :rake, 'db:seed'
-        end
-      end
-    end
-  end
   task :restart do
     invoke 'unicorn:restart'
   end
