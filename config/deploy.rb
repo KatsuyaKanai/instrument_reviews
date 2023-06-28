@@ -46,6 +46,18 @@ set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
 #   end
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
+  # 以下を追加
+  desc 'db_seed'
+  task :db_seed do
+    on roles(:db) do |host|
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rake, 'db:seed'
+        end
+      end
+    end
+  end
+  # ここまでが追加分
   task :restart do
     invoke 'unicorn:restart'
   end
