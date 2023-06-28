@@ -64,3 +64,4 @@ namespace :deploy do
 end
 
 append :linked_files, 'config/master.key'
+set :linked_files, %w{config/master.key}
